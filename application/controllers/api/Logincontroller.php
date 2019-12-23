@@ -16,18 +16,33 @@ function __construct() {
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
     }
+    public function resultRespone($data)
+	{
+		$respone = array(
+			'data'=>$data->result(),
+			'row'=>$data->num_rows(),
+			'success'=>true,
+		);
+		echo json_encode($respone);
+	}
+	public function failedRespone()
+	{
+		$respone = array(
+			'success'=>false,
+			'msg'=>'Gagal',
+		);
+		echo json_encode($respone);
+	}
 	public function apilogin()
 	{
 		$user = $this->input->get('id_kop');
 		$query = $this->db->get_where('anggota',array('no_anggota'=>$user));
 		if ($query->num_rows() > 0) {
-			$json = array('success'=>true,'id'=>$query->row()->no_anggota,'nama'=>$query->row()->nama);
+			$q = $this->resultRespone($query);
 		}else{
-			$json = array('success'=>false);
+			$q = $this->failedRespone();
 		}
-		echo json_encode($json);
 	}
-
 }
 
 /* End of file Logincontroller.php */
