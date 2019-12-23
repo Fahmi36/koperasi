@@ -78,10 +78,14 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
+<<<<<<< HEAD
 	'database' => 'pkk_simpan',
 	// 'username' => 'u7168789_remote',
 	// 'password' => '$.PL$C}Z6#,Y',
 	// 'database' => 'u7168789_simpan_pinjam',
+=======
+	'database' => '',
+>>>>>>> 173d89dcc8ec715530c9af91b225444fb2a8f8cd
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
