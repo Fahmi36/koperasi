@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/notika-custom-icon.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/main.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/style.css">
+    <link rel="stylesheet" href="<?=base_url('/')?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -37,9 +38,7 @@
     <!-- Main Menu area End-->
 
     <!-- Form Element area Start-->
-    <?php $this->load->view($link_view);?>
-    <!-- Form Element area End-->
-
+    <?php $this->load->view($link_view) ?>
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -48,40 +47,46 @@
                     <div class="footer-copy-right">
                         <p>Copyright © 2018 
                         . All rights reserved</p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Footer area-->
-        <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/jquery-price-slider.js"></script>
-        <script src="<?=base_url('/')?>assets/js/owl.carousel.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/jquery.scrollUp.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/meanmenu/jquery.meanmenu.js"></script>
-        <script src="<?=base_url('/')?>assets/js/counterup/jquery.counterup.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/counterup/waypoints.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/counterup/counterup-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/sparkline/jquery.sparkline.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/sparkline/sparkline-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/flot/jquery.flot.js"></script>
-        <script src="<?=base_url('/')?>assets/js/flot/jquery.flot.resize.js"></script>
-        <script src="<?=base_url('/')?>assets/js/flot/flot-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/knob/jquery.knob.js"></script>
-        <script src="<?=base_url('/')?>assets/js/knob/jquery.appear.js"></script>
-        <script src="<?=base_url('/')?>assets/js/knob/knob-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/icheck/icheck.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/icheck/icheck-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/chat/jquery.chat.js"></script>
-        <script src="<?=base_url('/')?>assets/js/todo/jquery.todo.js"></script>
-        <script src="<?=base_url('/')?>assets/js/wave/waves.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/wave/wave-active.js"></script>
-        <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
-        <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
-        <script src="<?=base_url('/')?>assets/js/main.js"></script>
-        <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
-    </body>
-    </html>
+    </div>
+    <!-- End Footer area-->
+    <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/jquery-price-slider.js"></script>
+    <script src="<?=base_url('/')?>assets/js/owl.carousel.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/jquery.scrollUp.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/meanmenu/jquery.meanmenu.js"></script>
+    <script src="<?=base_url('/')?>assets/js/counterup/jquery.counterup.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/counterup/waypoints.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/counterup/counterup-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/sparkline/sparkline-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/flot/jquery.flot.js"></script>
+    <script src="<?=base_url('/')?>assets/js/flot/jquery.flot.resize.js"></script>
+    <script src="<?=base_url('/')?>assets/js/flot/flot-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/knob/jquery.knob.js"></script>
+    <script src="<?=base_url('/')?>assets/js/knob/jquery.appear.js"></script>
+    <script src="<?=base_url('/')?>assets/js/knob/knob-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/icheck/icheck.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/icheck/icheck-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/chat/jquery.chat.js"></script>
+    <script src="<?=base_url('/')?>assets/js/todo/jquery.todo.js"></script>
+    <script src="<?=base_url('/')?>assets/js/data-table/jquery.dataTables.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/wave/waves.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/wave/wave-active.js"></script>
+    <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
+    <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
+    <script src="<?=base_url('/')?>assets/js/main.js"></script>
+    <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#data-table-basic").dataTables();
+        });
+    </script>
+</body>
+</html>
