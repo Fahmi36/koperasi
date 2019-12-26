@@ -109,48 +109,25 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li><a href="#"><i class="notika-icon notika-house"></i> Home</a>
-                    </li>
-                    <li class="active"><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Forms</a>
-                    </li>
-                    <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> App views</a>
-                    </li>
-                    <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
-                    </li>
+                    <li class="active"><a href="<?php echo site_url(''); ?>"><i class="notika-icon notika-house"></i> Beranda</a></li>
+                    <li><a data-toggle="tab" href="#simpanan"><i class="notika-icon notika-dollar"></i> Simpanan</a></li>
+                    <li><a data-toggle="tab" href="#pinjaman"><i class="notika-icon notika-credit-card"></i> Pinjaman</a></li>
+                    <li><a href="<?php echo site_url('setoran'); ?>"><i class="notika-icon notika-credit-card"></i> Setoran</a></li>
+                    <!-- <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a></li> -->
                 </ul>
                 <div class="tab-content custom-menu-content">
-                    <div id="Forms" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                    <div id="simpanan" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="form-elements.html">Form Elements</a>
-                            </li>
-                            <li><a href="form-components.html">Form Components</a>
-                            </li>
-                            <li><a href="form-examples.html">Form Examples</a>
-                            </li>
+                            <li><a href="form-elements.html">Pokok</a></li>
+                            <li><a href="form-components.html">Wajib</a></li>
+                            <li><a href="form-examples.html">Sukarela</a></li>
                         </ul>
                     </div>
-                    <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="notification.html">Notifications</a>
-                            </li>
-                            <li><a href="alert.html">Alerts</a>
-                            </li>
-                            <li><a href="modals.html">Modals</a>
-                            </li>
-                            <li><a href="buttons.html">Buttons</a>
-                            </li>
-                            <li><a href="tabs.html">Tabs</a>
-                            </li>
-                            <li><a href="accordion.html">Accordion</a>
-                            </li>
-                            <li><a href="dialog.html">Dialogs</a>
-                            </li>
-                            <li><a href="popovers.html">Popovers</a>
-                            </li>
-                            <li><a href="tooltips.html">Tooltips</a>
-                            </li>
-                            <li><a href="dropdown.html">Dropdowns</a>
-                            </li>
+                            <li><a href="<?php echo site_url('pinjaman'); ?>">Bayar Dalam 3 Bulan</a></li>
+                            <li><a href="<?php echo site_url('pinjaman'); ?>">Bayar Dalam 6 Bulan</a></li>
+                            <li><a href="<?php echo site_url('pinjaman'); ?>">Bayar Dalam 12 Bulan</a></li>
                         </ul>
                     </div>
                     <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">

@@ -9,7 +9,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="header-top-menu">
                     <ul class="nav navbar-nav notika-top-nav">
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search"></i></span></a>
                             <div role="menu" class="dropdown-menu search-dd animated flipInX">
                                 <div class="search-input">
@@ -17,7 +17,12 @@
                                     <input type="text" />
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
+                        <?php error_reporting(0); 
+                        if (empty($this->session->userdata('id'))){ ?>
+                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;">Masuk</a></li>
+                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;">Daftar</a></li>
+                        <?php }else{ ?>
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
@@ -43,39 +48,6 @@
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Jonathan Morris</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/4.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>Fredric Mitchell</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/1.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>David Belle</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/2.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>Glenn Jecobs</h3>
                                                 <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
                                             </div>
                                         </div>
@@ -114,45 +86,13 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/4.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>Fredric Mitchell</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/1.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>David Belle</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/2.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>Glenn Jecobs</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </div>
                                 <div class="hd-mg-va">
                                     <a href="#">View All</a>
                                 </div>
                             </div>
                         </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

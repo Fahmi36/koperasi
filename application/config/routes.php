@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'action';
 $route['404_override'] = 'page_not_found';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['pinjaman'] = 'action/pinjaman';
+$route['setoran'] = 'action/setoran';
