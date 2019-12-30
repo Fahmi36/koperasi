@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MPokok extends CI_Model {
+class MSimpan extends CI_Model {
 
-	private $tbl = 'pokok';
+	private $tbl = 'anggota_setoran';
 	public $slt = '*';
 
 	public function insert($array)
@@ -33,7 +33,7 @@ class MPokok extends CI_Model {
 			$query = $this->db->get($this->tbl);
 		}
 		return $query;	
-
+	}
 }
 
 /* End of file MPokok.php */
