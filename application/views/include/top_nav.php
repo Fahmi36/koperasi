@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="logo-area" style="padding: 8px 0;">
-                    <a href="#"><img src="<?php echo base_url('assets/img/logo/logo.png'); ?>" alt="" width="305"/></a>
+                    <a href="#"><img src="<?php echo base_url('assets/img/logo/logo_.png'); ?>" alt="" width="305"/></a>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -18,11 +18,8 @@
                                 </div>
                             </div>
                         </li> -->
-                        <?php error_reporting(0); 
-                        if (empty($this->session->userdata('id'))){ ?>
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;">Masuk</a></li>
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;">Daftar</a></li>
-                        <?php }else{ ?>
+                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
+                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
@@ -92,7 +89,6 @@
                                 </div>
                             </div>
                         </li>
-                        <?php } ?>
                     </ul>
                 </div>
             </div>

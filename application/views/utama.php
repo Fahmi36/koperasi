@@ -29,16 +29,16 @@
 </head>
 
 <body>
-    <!-- Start Header Top Area -->
-    <?php $this->load->view('include/top_nav');?>
-    <!-- End Header Top Area -->
-    
-    <!-- Main Menu area start-->
-    <?php $this->load->view('include/menu');?>
-    <!-- Main Menu area End-->
+    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
+    <?php }else{ ?>
+        <?php $this->load->view('include/top_nav');?>
+        <?php $this->load->view('include/menu');?>
+    <?php } ?>
 
-    <!-- Form Element area Start-->
     <?php $this->load->view($link_view) ?>
+
+    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
+    <?php }else{ ?>
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -53,6 +53,8 @@
         </div>
     </div>
     <!-- End Footer area-->
+    <?php } ?>
+
     <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
@@ -83,10 +85,12 @@
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
     <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#data-table-basic").dataTables();
         });
     </script>
+    
 </body>
 </html>

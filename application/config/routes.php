@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['pinjaman'] = 'action/pinjaman';
 $route['setoran'] = 'action/setoran';
+$route['login'] = 'action/login';
+$route['register'] = 'action/register';
