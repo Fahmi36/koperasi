@@ -44,16 +44,16 @@ class SimpanController extends CI_Controller {
 	public function Simpanan()
 	{
 		try {
-			$this->db->select('saldo_akhir');
-			$this->db->from('anggota_setoran');
-			$this->db->where('id_anggota', $this->session->userdata('id'));
-			$this->db->order_by('saldo_akhir', 'desc');
-			$get= $this->db->get()->row();
 			if ($this->input->post('noanggota') == null) {
 				$session = $this->session->userdata('id');
 			}else{
 				$session = $this->input->post('noanggota');
 			}
+			$this->db->select('saldo_akhir');
+			$this->db->from('anggota_setoran');
+			$this->db->where('id_anggota', $session);
+			$this->db->order_by('saldo_akhir', 'desc');
+			$get= $this->db->get()->row();
 			$data = array(
 				'id_anggota'=>$session,
 				'tipe_transaksi'=>'1',

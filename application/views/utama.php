@@ -91,7 +91,7 @@
     <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#data-table-basic").dataTables();
+            $("#datatransaksi").dataTable();
 
         });
         function pilihsimpan() {

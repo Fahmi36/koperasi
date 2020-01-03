@@ -32,7 +32,7 @@
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                     <div class="website-traffic-ctn">
                         <h2>Rp. <span class="counter">1000</span></h2>
-                        <p>Total Bersih</p>
+                        <p>Total Simpanan</p>
                     </div>
                     <div class="sparkline-bar-stats4"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
                 </div>
@@ -50,15 +50,34 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="data-table-list">
                                     <div class="table-responsive">
-                                        <table id="data-table-basic" class="table table-striped">
-                                            <tbody>
+                                        <table id="datatransaksi" class="table table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <td>Nama Anggota</td>
-                                                    <td>Jenis Simpan</td>
-                                                    <td>Total</td>
-                                                    <td>Angsuran</td>
+                                                    <th>Nama Anggota</th>
+                                                    <th>Jenis Simpan</th>
+                                                    <th>Jenis Transaksi</th>
+                                                    <th>Total</th>
+                                                    <th>Tanggal Transaksi</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($simpanan as $key): ?>
+                                                    
+                                                <tr>
+                                                    <td><?=$key->nama?></td>
+                                                    <td><?=$key->jenis_setoran?></td>
+                                                    <?php if ($key->tipe_transaksi == 0){ ?> 
+                                                    <td>Penarikan</td>
+                                                    <?php }else{ ?>
+                                                    <td>Simpanan</td>
+
+                                                    <?php }?>
+                                                    <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
+                                                    <td><?=$key->tgl_transaksi?></td>
                                                     <td>Aksi</td>
                                                 </tr>
+                                                <?php endforeach ?>
                                             </tbody>
                                         </table>
                                     </div>
