@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PinjamController extends CI_Controller {
 
-    $this->load->model('MPinjam', 'mp');
+    $this->load->model('MSimpan', 'ms');
     $this->load->model('MCicil', 'mc');
 
 	public function resultRespone($data)
@@ -51,7 +51,7 @@ class PinjamController extends CI_Controller {
 				'total'=>$this->input->post('total'),
 				'cicil'=> $this->input->post('cicil'),
 			);
-			$query = $this->mp->insert($data);
+			$query = $this->ms->insert($data);
 			if ($query == true) {
 				$msg = 'Data Berhasil di Simpan';
 				$json = $this->successRespone($msg);

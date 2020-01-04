@@ -20,7 +20,7 @@ function __construct() {
 	{
 		$respone = array(
 			'data'=>$data->result(),
-			'row'=>$data->num_rows(),
+			'row'=>$data->row(),
 			'success'=>true,
 		);
 		echo json_encode($respone);
@@ -36,7 +36,9 @@ function __construct() {
 	public function apilogin()
 	{
 		$user = $this->input->get('id_kop');
-		$query = $this->db->get_where('anggota',array('no_anggota'=>$user));
+		$this->db->select('no_anggota,nama');
+		$this->db->from('anggota');
+		$query = $this->db->get_where('anggota',array('no_anggota'=>$user,'status'=>'1'));
 		if ($query->num_rows() > 0) {
 			$q = $this->resultRespone($query);
 		}else{

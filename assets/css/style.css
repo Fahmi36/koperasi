@@ -2758,6 +2758,9 @@ hr {
 #data-table-basic_filter label, #data-table-basic_length label{
 	margin-bottom: 0px;
 }
+.no-gutters{
+    margin-right: 0;
+}
 /*----------------------------------------*/
 /*  35.  Form Element CSS
 /*----------------------------------------*/

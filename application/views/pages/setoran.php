@@ -35,7 +35,8 @@
 					</div>
 					<hr> 
 					<br>
-					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Setoran</h4>
+					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Pembayaran Pinjaman</h4>
+					<form method="post" action="javascript:void(0)" id="formbayarpinjam">
 					<div class="form-example-int form-horizental">
 						<div class="form-group">
 							<div class="row">
@@ -50,6 +51,7 @@
 							</div>
 						</div>
 					</div>
+					<?php if ($this->session->userdata('username') != null): ?>
 					<div class="form-example-int form-horizental">
 						<div class="form-group">
 							<div class="row">
@@ -64,6 +66,7 @@
 							</div>
 						</div>
 					</div>
+					<?php endif ?>
 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
 							<div class="row">
@@ -78,49 +81,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Pokok :</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="number" name="pokok" class="form-control input-sm" placeholder="Masukkan Simpanan Pokok">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-example-int form-horizental mg-t-15">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Wajib :</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="number" name="wajib" class="form-control input-sm" placeholder="Masukkan Simpanan Wajib">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-example-int form-horizental mg-t-15">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Sukarela :</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="number" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-example-int form-horizental mg-t-15">
+					<div class="form-example-int form-horizental mg-t-15" id="angsuranpokok">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -134,7 +95,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15">
+					<div class="form-example-int form-horizental mg-t-15" id="jasapokok">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -148,7 +109,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15">
+<!-- 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -161,7 +122,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-example-int mg-t-15">
 						<div class="row">
 							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -171,6 +132,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -1,224 +1,245 @@
-<style type="text/css">
-	body {
-		background-color: #ffffff;
-		color: #444444;
-		font-family: 'Roboto', sans-serif;
-		font-size: 16px;
-		font-weight: 300;
-		margin: 0;
-		padding: 0;
-	}
-	.wizard-content-left {
-		background-blend-mode: darken;
-		background-color: rgba(0, 0, 0, 0.45);
-		background-image: url("https://i.ibb.co/X292hJF/form-wizard-bg-2.jpg");
-		background-position: center center;
-		background-size: cover;
-		height: 100vh;
-		padding: 30px;
-	}
-	.wizard-content-left h1 {
-		color: #ffffff;
-		font-size: 38px;
-		font-weight: 600;
-		padding: 12px 20px;
-		text-align: center;
-	}
+    <!-- Main css -->
+    <link rel="stylesheet" href="https://colorlib.com/etc/bwiz/colorlib-wizard-11/css/style.css">
+    <link rel="stylesheet" href="https://colorlib.com/etc/bwiz/colorlib-wizard-11/fonts/themify-icons/themify-icons.css">
+    <style type="text/css">
+        body{
+            background-color: #faf7f2;
+            font-family: 'Roboto', sans-serif;
+        }
+        .current .title {
+            background-color: #3a53c4;
+        }
+        .actions ul li a {
+            background-color: #3a53c4;
+        }
+        .span_pseudo, .chiller_cb span:before, .chiller_cb span:after {
+          content: "";
+          display: inline-block;
+          background: #fff;
+          width: 0;
+          height: 0.2rem;
+          position: absolute;
+          transform-origin: 0% 0%;
+      }
 
-	/***** Top content *****/
-
-.top-content { padding: 40px 0 170px 0; }
-
-.top-content .text { color: #fff; }
-.top-content .text h1 { color: #fff; }
-.top-content .description { margin: 20px 0 10px 0; }
-.top-content .description p { opacity: 0.8; }
-.top-content .description a { color: #fff; }
-.top-content .description a:hover, 
-.top-content .description a:focus { border-bottom: 1px dotted #fff; }
-
-.form-box { padding-top: 40px; }
-
-.f1 {
-	padding: 25px; background: #fff;
-	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-}
-.f1 h3 { margin-top: 0; margin-bottom: 5px; text-transform: uppercase; }
-
-.f1-steps { overflow: hidden; position: relative; margin-top: 20px; }
-
-.f1-progress { position: absolute; top: 24px; left: 0; width: 100%; height: 1px; background: #ddd; }
-.f1-progress-line { position: absolute; top: 0; left: 0; height: 1px; background: #f35b3f; }
-
-.f1-step { position: relative; float: left; width: 33.333333%; padding: 0 5px; }
-
-.f1-step-icon {
-	display: inline-block; width: 40px; height: 40px; margin-top: 4px; background: #ddd;
-	font-size: 16px; color: #fff; line-height: 40px;
-	-moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
-}
-.f1-step.activated .f1-step-icon {
-	background: #fff; border: 1px solid #f35b3f; color: #f35b3f; line-height: 38px;
-}
-.f1-step.active .f1-step-icon {
-	width: 48px; height: 48px; margin-top: 0; background: #f35b3f; font-size: 22px; line-height: 48px;
-}
-
-.f1-step p { color: #ccc; }
-.f1-step.activated p { color: #f35b3f; }
-.f1-step.active p { color: #f35b3f; }
-
-.f1 fieldset { display: none; text-align: left; }
-
-.f1-buttons { text-align: right; }
-
-.f1 .input-error { border-color: #f35b3f; }
-
-
-input[type="text"], 
-input[type="password"], 
-textarea, 
-textarea.form-control {
-	height: 44px;
-    margin: 0;
-    padding: 0 20px;
-    vertical-align: middle;
-    background: #fff;
-    border: 1px solid #ddd;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 44px;
-    color: #888;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+      .chiller_cb {
+          position: relative;
+          height: 2rem;
+          display: flex;
+          align-items: center;
+      }
+      .chiller_cb input {
+          display: none;
+      }
+      .chiller_cb input:checked ~ span {
+          background: #fd2727;
+          border-color: #fd2727;
+      }
+      .chiller_cb input:checked ~ span:before {
+          width: 1rem;
+          height: 0.15rem;
+          transition: width 0.1s;
+          transition-delay: 0.3s;
+      }
+      .chiller_cb input:checked ~ span:after {
+          width: 0.4rem;
+          height: 0.15rem;
+          transition: width 0.1s;
+          transition-delay: 0.2s;
+      }
+      .chiller_cb input:disabled ~ span {
+          background: #ececec;
+          border-color: #dcdcdc;
+      }
+      .chiller_cb input:disabled ~ label {
+          color: #dcdcdc;
+      }
+      .chiller_cb input:disabled ~ label:hover {
+          cursor: default;
+      }
+      .chiller_cb label {
+          padding-left: 2rem;
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          margin-bottom:0;
+      }
+      .chiller_cb span {
+          display: inline-block;
+          width: 1.2rem;
+          height: 1.2rem;
+          border: 2px solid #ccc;
+          position: absolute;
+          left: 0;
+          transition: all 0.2s;
+          z-index: 1;
+          box-sizing: content-box;
+      }
+      .chiller_cb span:before {
+          transform: rotate(-55deg);
+          top: 1rem;
+          left: 0.37rem;
+      }
+      .chiller_cb span:after {
+          transform: rotate(35deg);
+          bottom: 0.35rem;
+          left: 0.2rem;
+      }
+      .signup-form {
+    padding: 32px 65px 40px;
 }
 
-textarea, 
-textarea.form-control {
-	height: 90px;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	line-height: 30px;
-}
+  </style>
+  <div class="main">
+    <div class="container">
+        <h2>Form Pendaftaran Menjadi Anggota <br>Koperasi PKK Melati Jaya</h2>
+        <form method="POST" id="signup-form" class="signup-form">
+            <h3>
+                <span class="icon"><i class="ti-user"></i></span>
+                <span class="title_text">Personal</span>
+            </h3>
+            <fieldset>
+                <legend>
+                    <span class="step-heading">Personal Informaltion: </span>
+                    <span class="step-number">Step 1 / 3</span>
+                </legend>
+                <div class="form-group">
+                    <label for="nama_lengkap" class="form-label required">Nama Lengkap</label>
+                    <input type="text" name="nama_lengkap" id="nama_lengkap" />
+                </div>
 
-input[type="text"]:focus, 
-input[type="password"]:focus, 
-textarea:focus, 
-textarea.form-control:focus {
-	outline: 0;
-	background: #fff;
-    border: 1px solid #ccc;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-}
+                <div class="form-group">
+                    <label for="tempat_lahir" class="form-label required">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" id="tempat_lahir" />
+                </div>
 
-input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder, 
-textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
+                <div class="form-row">
+                    <div class="form-date">
+                        <label for="tanggal_lahir" class="form-label required">Tanggal Lahir</label>
+                        <div class="form-date-group">
+                            <div class="form-date-item">
+                                <select id="birth_date" name="birth_date"></select>
+                                <span class="select-icon"><i class="ti-angle-down"></i></span>
+                            </div>
+                            <div class="form-date-item">
+                                <select id="birth_month" name="birth_month"></select>
+                                <span class="select-icon"><i class="ti-angle-down"></i></span>
+                            </div>
+                            <div class="form-date-item">
+                                <select id="birth_year" name="birth_year"></select>
+                                <span class="select-icon"><i class="ti-angle-down"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, 
-textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Pekerjaan</label>
+                    <div class="chiller_cb">
+                        <input id="peng_rptra" type="checkbox">
+                        <label for="peng_rptra">Pengelola RPTRA, Kelurahan</label>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="no_ktp" id="isi_peke1" disabled/>
+                    </div>
 
-input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, 
-textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
+                    <div class="chiller_cb">
+                        <input id="peng_pkk" type="checkbox">
+                        <label for="peng_pkk">Tim Penggerak/Pengelola PKK, Kelurahan</label>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="no_ktp" id="isi_peke2" disabled/>
+                    </div>
 
-label { font-weight: 300; }
+                    <div class="chiller_cb">
+                        <input id="lainnya" type="checkbox">
+                        <label for="lainnya">Lainnya</label>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="no_ktp" id="isi_peke3" disabled/>
+                    </div>
+                </fieldset>
 
+                <h3>
+                    <span class="icon"><i class="ti-email"></i></span>
+                    <span class="title_text">Contact</span>
+                </h3>
+                <fieldset>
+                    <legend>
+                        <span class="step-heading">Contact Informaltion: </span>
+                        <span class="step-number">Step 2 / 3</span>
+                    </legend>
+                    <div class="form-group">
+                        <label for="alamat" class="form-label required">Alamat Lengkap</label>
+                        <input type="text" name="alamat" id="alamat"/>
+                    </div>
 
-button.btn {
-	min-width: 105px;
-	height: 40px;
-    margin: 0;
-    padding: 0 20px;
-    vertical-align: middle;
-    border: 0;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 40px;
-    color: #fff;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-    text-shadow: none;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
-}
+                    <div class="form-group">
+                        <label for="no_ktp" class="form-label required">Nomor Identitas (KTP/SIM)</label>
+                        <input type="text" name="no_ktp" id="no_ktp" />
+                    </div>
 
-button.btn:hover { opacity: 0.6; color: #fff; }
-button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
-button.btn:focus,
-button.btn:active:focus,
-button.btn.active:focus { outline: 0; opacity: 0.6; color: #fff; }
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="no_rumah" class="form-label">No Telpon (Rumah)</label>
+                            <input type="number" name="no_rumah" id="no_rumah" />
+                        </div>
 
-button.btn.btn-next,
-button.btn.btn-next:focus,
-button.btn.btn-next:active:focus, button.btn.btn-next.active:focus { background: #f35b3f; }
+                        <div class="form-group">
+                            <label for="no_hp" class="form-label required">No Telpon (Handphone)</label>
+                            <input type="number" name="no_hp" id="no_hp" />
+                        </div>
+                    </div>
+                </fieldset>
 
-button.btn.btn-submit,
-button.btn.btn-submit:focus,
-button.btn.btn-submit:active:focus, button.btn.btn-submit.active:focus { background: #f35b3f; }
+                <h3>
+                    <span class="icon"><i class="ti-star"></i></span>
+                    <span class="title_text">Offical</span>
+                </h3>
+                <fieldset>
+                    <legend>
+                        <span class="step-heading">Offical Informaltion: </span>
+                        <span class="step-number">Step 3 / 3</span>
+                    </legend>
+                    <p>Dengan ini mengajukan permohonan unutuk menjadi anggota Koperasi PKK MELATI JAYA. Saya bersedia mentaati Anggaran Dasar, Anggaran Rumah Tangga, Kebijakan Pengurus serta peraturan lainnya yang belaku pada koperasi PKK MELATI JAYA dengan penuh tanggung jawab.</p>
+                    <h5>Bersama Formulir permohonan ini, saya sertakan :</h5>
 
-button.btn.btn-previous,
-button.btn.btn-previous:focus,
-button.btn.btn-previous:active:focus, button.btn.btn-previous.active:focus { background: #bbb; }
+                    <div class="form-group">
+                        <label for="file_fotocopy" class="form-label required">Fotocopy KTP/SIM</label>
+                        <input type="file" name="file_fotocopy" id="file_fotocopy" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foto_1" class="form-label required">Foto Berwarna 3x4</label>
+                            <input type="file" name="foto_1" id="foto_1" />
+                        </div>
 
-/***** Media queries *****/
+                        <div class="form-group">
+                            <label for="foto_2" class="form-label required">Foto Berwarna 2x3</label>
+                            <input type="file" name="foto_2" id="foto_2" />
+                        </div>
+                    </div>
 
-@media (min-width: 992px) and (max-width: 1199px) {}
+                    <div class="form-group">
+                        <label for="department" class="form-label required">Department</label>
+                        <input type="text" name="department" id="department" />
+                    </div>
 
-@media (min-width: 768px) and (max-width: 991px) {}
+                    <div class="form-group">
+                        <label for="work_hours" class="form-label required">Working hours</label>
+                        <input type="text" name="work_hours" id="work_hours" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
 
-@media (max-width: 767px) {
-	
-	.navbar { padding-top: 0; }
-	.navbar.navbar-no-bg { background: #333; background: rgba(51, 51, 51, 0.9); }
-	.navbar-brand { height: 60px; margin-left: 15px; }
-	.navbar-collapse { border: 0; }
-	.navbar-toggle { margin-top: 12px; }
-	
-	.top-content { padding: 40px 0 110px 0; }
+    </div>
+    <div class="footer">
 
-}
+    </div>
 
-@media (max-width: 415px) {
-	
-	h1, h2 { font-size: 32px; }
-	
-	.f1 { padding-bottom: 20px; }
-	.f1-buttons button { margin-bottom: 5px; }
-
-}
-
-	@keyframes click-radio-wave {
-		0% {
-			width: 25px;
-			height: 25px;
-			opacity: 0.35;
-			position: relative;
-		}
-		100% {
-			width: 60px;
-			height: 60px;
-			margin-left: -15px;
-			margin-top: -15px;
-			opacity: 0.0;
-		}
-	}
-	@media screen and (max-width: 767px) {
-		.wizard-content-left {
-			height: auto;
-		}
-	}
-
-</style>
-<section class="wizard-section">
-	<div class="row no-gutters">
-		<div class="col-lg-6 col-md-6">
-			<div class="wizard-content-left d-flex justify-content-center align-items-center">
-				<h1>Create Your Bank Account</h1>
-			</div>
-		</div>
-		<div class="col-lg-6 col-md-6">
-			
-		</div>
-	</div>
-</section>
+    <!-- JS -->
+    

@@ -4,11 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class SimpanController extends CI_Controller {
 
 
-    $this->load->model('MPokok', 'mp');
-    $this->load->model('MWajib', 'mw');
-    $this->load->model('MSuka', 'ms');
-    $this->load->model('MCicil', 'mc');
-
+	function __construct() {
+		parent::__construct();
+		$this->load->model('MSimpan', 'ms');
+	}
 	public function resultRespone($data)
 	{
 		$respone = array(
@@ -42,58 +41,28 @@ class SimpanController extends CI_Controller {
 		);
 		echo json_encode($respone);
 	}
-	public function SimpnanPokok()
+	public function Simpanan()
 	{
 		try {
-			$data = array(
-				'nama'=>$this->session->userdata('nama'),
-				'jenisSimpanan'=>$this->input->post('jenis'),
-				'jumlah'=>$this->input->post('jumlah'),
-				'angsuran'=>$this->input->post('angsuran'),
-				'jasa'=>$this->input->post('jasa'),
-				'total'=>$this->input->post('total'),
-			);
-			$query = $this->mp->insert($data);
-			if ($query == true) {
-				$msg = 'Data Berhasil di Simpan';
-				$json = $this->successRespone($msg);
+			if ($this->input->post('noanggota') == null) {
+				$session = $this->session->userdata('id');
 			}else{
-				$json = $this->failedRespone();
+				$session = $this->input->post('noanggota');
 			}
-		} catch (Exception $e) {
-			$this->failedFecthData($e);
-		}
-	}
-	public function simpananWajib()
-	{
-		try {
+			$this->db->select('saldo_akhir');
+			$this->db->from('anggota_setoran');
+			$this->db->where('id_anggota', $session);
+			$this->db->order_by('saldo_akhir', 'desc');
+			$get= $this->db->get()->row();
 			$data = array(
-				'nama'=>$this->session->userdata('nama'),
-				'jenisSimpanan'=>$this->input->post('jenis'),
-				'jumlah'=>$this->input->post('jumlah'),
-				'jenisBayar'=>$this->input->post('jenisBayar'),
-				'total'=>$this->input->post('total'),
-			);
-			$query = $this->mw->insert($data);
-			if ($query == true) {
-				$msg = 'Data Berhasil di Simpan';
-				$json = $this->successRespone($msg);
-			}else{
-				$json = $this->failedRespone();
-			}
-		} catch (Exception $e) {
-			$this->failedFecthData($e);
-		}
-
-	}
-	public function simpananSukarela()
-	{
-		try {
-			$data = array(
-				'nama'=>$this->session->userdata('nama'),
-				'jumlah'=>$this->input->post('jumlah'),
-				'jenisBayar'=>$this->input->post('jenisBayar'),
-				'total'=>$this->input->post('total'),
+				'id_anggota'=>$session,
+				'tipe_transaksi'=>'1',
+				'id_jenis_setoran'=>$this->input->post('jenis_setoran'),
+				'jumlah_transaksi'=>$this->input->post('jumlah'),
+				'tgl_transaksi'=>$this->input->post('set-tanggal'),
+				'saldo_akhir'=> ($get->saldo_akhir+$this->input->post('jumlah')),
+				'metode_bayar'=>$this->input->post('sistem_bayar'),
+				'id_petugas'=>$this->input->post('idpetugas'),
 			);
 			$query = $this->ms->insert($data);
 			if ($query == true) {
