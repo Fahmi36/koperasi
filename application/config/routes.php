@@ -55,6 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['pinjaman'] = 'action/pinjaman';
 $route['setoran'] = 'action/setoran';
+$route['login'] = 'action/login';
+$route['register'] = 'action/register';
 $route['simpanan'] = 'action/sim_pokok';
 $route['sim_wajib'] = 'action/sim_wajib';
 $route['sim_suka'] = 'action/sim_suka';

@@ -47,7 +47,7 @@
         <div class="row" style="margin-top: 30px;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="invoice-wrap">
-                    <div class="invoice-img" style="padding: 30px 0;">
+                    <div class="invoice-img" style="padding: 30px 0;background-color: #3a53c4;">
                         <h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Selamat Datang</h3>
                     </div>
                     <div class="row">

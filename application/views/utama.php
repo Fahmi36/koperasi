@@ -26,37 +26,39 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <!-- Start Header Top Area -->
-    <?php $this->load->view('include/top_nav');?>
-    <!-- End Header Top Area -->
-    
-    <!-- Main Menu area start-->
-    <?php $this->load->view('include/menu');?>
-    <!-- Main Menu area End-->
+    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
+    <?php }else{ ?>
+        <?php $this->load->view('include/top_nav');?>
+        <?php $this->load->view('include/menu');?>
+    <?php } ?>
 
-    <!-- Form Element area Start-->
     <?php $this->load->view($link_view) ?>
-    <!-- Start Footer area-->
-    <div class="footer-copyright-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="footer-copy-right">
-                        <p>Copyright © 2018 
-                        . All rights reserved</p>
+
+    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
+    <?php }else{ ?>
+        <!-- Start Footer area-->
+        <div class="footer-copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2018 
+                            . All rights reserved</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        var BASE_URL = '<?=site_url('/')?>';
-    </script>
-    <!-- End Footer area-->
+        <script type="text/javascript">
+            var BASE_URL = '<?=site_url('/')?>';
+        </script>
+        <!-- End Footer area-->
+    <?php } ?>
+
     <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
@@ -89,6 +91,12 @@
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
     <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
+    <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/minimalist-picker/dobpicker.js"></script>
+    <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#datatransaksi").dataTable();
@@ -124,35 +132,47 @@
                 $("#petugas").attr('style', 'display:none;');
             }
         }
-                    $('#nama_petugas').select2({
-                        placeholder: "Pilih Petugas...",
-                        minimumResultsForSearch: 2,
-                        minimumInputLength: 3,
-                        ajax: {
-                          url: BASE_URL + 'action/getPetugas',
-                          dataType: 'json',
-                          data: function (params) {
-                              var query = {
-                                search: params.term,
-                            }
-                            return query;
-                        },
-                        processResults: function (data) {
-                            return {
-                              results: data
-                          };
-                      },
-                      cache: false,
-                    },
-                });
-              $('#nama_petugas').on('select2:select', function(event) {
-                $("#idpetugas").val(event.params.data.id);
-                $("#namapetugas").val(event.params.data.text);
-              });
-              $('#nama_petugas').on('change.select2', function(event) {
-                $("#idpetugas").val("");
-                $("#namapetugas").val("");
-              });
+        $('#nama_petugas').select2({
+            placeholder: "Pilih Petugas...",
+            minimumResultsForSearch: 2,
+            minimumInputLength: 3,
+            ajax: {
+              url: '<?= site_url('action/getPetugas')?>',
+              dataType: 'json',
+              data: function (params) {
+                  var query = {
+                    search: params.term,
+                }
+                return query;
+            },
+            processResults: function (data) {
+                return {
+                  results: data
+              };
+          },
+          cache: false,
+      },
+  });
+        $('#nama_petugas').on('select2:select', function(event) {
+            $("#idpetugas").val(event.params.data.id);
+            $("#namapetugas").val(event.params.data.text);
+        });
+        $('#nama_petugas').on('change.select2', function(event) {
+            $("#idpetugas").val("");
+            $("#namapetugas").val("");
+        });
     </script>
+    <script type="text/javascript">
+        document.getElementById('peng_rptra').onchange = function() {
+            document.getElementById('isi_peke1').disabled = !this.checked;
+        };
+        document.getElementById('peng_pkk').onchange = function() {
+            document.getElementById('isi_peke2').disabled = !this.checked;
+        };
+        document.getElementById('lainnya').onchange = function() {
+            document.getElementById('isi_peke3').disabled = !this.checked;
+        };
+    </script>
+    
 </body>
 </html>

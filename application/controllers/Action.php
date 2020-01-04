@@ -32,6 +32,18 @@ class Action extends CI_Controller {
 		$data['link_view'] = 'pages/setoran';
 		$this->load->view('utama',$data);
 	}
+	public function login()
+	{
+		$data['title'] = 'Masuk - Selamat Datang di Koperasi Simpan Pinjam';
+		$data['link_view'] = 'pages/user/login';
+		$this->load->view('utama',$data);
+	}
+	public function register()
+	{
+		$data['title'] = 'Daftar - Selamat Datang di Koperasi Simpan Pinjam';
+		$data['link_view'] = 'pages/user/register';
+		$this->load->view('utama',$data);
+	}
 	public function sim_pokok()
 	{
 		$data['title'] = 'Simpanan Poko - Selamat Datang di Koperasi Simpan Pinjam';
