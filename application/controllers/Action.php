@@ -13,10 +13,11 @@ class Action extends CI_Controller {
 		$data['title'] = 'Home - Selamat Datang di Koperasi Simpan Pinjam';
 		$data['link_view'] = 'pages/home';
 		$data['simpanan'] = $this->mm->getSimpananAnggota();
-		$data['totalsimpan'] = $this->mm->getSimpananAnggota();
-		$data['totalprofit'] = $this->mm->getSimpananAnggota();
-		$data['belumbayar'] = $this->mm->getSimpananAnggota();
-		$data['totalpengeluaran'] = $this->mm->getSimpananAnggota();
+		$data['totalsimpan'] = $this->mm->getTotalSimpan();
+		$data['totalprofit'] = $this->mm->getProfit();
+		$data['belumbayar'] = $this->mm->getBelumbayar();
+		$data['totalpengeluaran'] = $this->mm->getPengeluran();
+		$data['totalpengeluaranpinjam'] = $this->mm->getPengeluranPinjaman();
 		$this->load->view('utama',$data);
 	}
 	public function pinjaman()
@@ -71,5 +72,9 @@ class Action extends CI_Controller {
         }
         // var_dump($this->db->last_query());
         echo json_encode($data);
+	}
+	public function actLogin()
+	{
+		
 	}
 }

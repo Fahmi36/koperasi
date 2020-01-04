@@ -4,7 +4,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2>Rp. <span class="counter">50,000</span></h2>
+                        <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalpengeluaranpinjam->pinjam+$totalpengeluaran->simpan)),3)))?></span></h2>
                         <p>Total Pengeluaran</p>
                     </div>
                     <div class="sparkline-bar-stats1"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
@@ -13,7 +13,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2>Rp. <span class="counter">90,000</span></h2>
+                        <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalprofit->profit)),3)))?></span></h2>
                         <p>Profit</p>
                     </div>
                     <div class="sparkline-bar-stats2"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
@@ -22,7 +22,12 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2>Rp. <span class="counter">40,000</span></h2>
+                        <?php if ($belumbayar->nunggak == null){
+                            $nunggak = 0;
+                        }else{
+                            $nunggak = $belumbayar->nunggak;
+                        } ?>
+                        <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($nunggak)),3)))?></span></h2>
                         <p>Total Uang Mengendap</p>
                     </div>
                     <div class="sparkline-bar-stats3"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
@@ -31,7 +36,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2>Rp. <span class="counter">1000</span></h2>
+                        <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
                         <p>Total Simpanan</p>
                     </div>
                     <div class="sparkline-bar-stats4"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
