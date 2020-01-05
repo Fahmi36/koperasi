@@ -54,13 +54,22 @@ class SimpanController extends CI_Controller {
 			$this->db->where('id_anggota', $session);
 			$this->db->order_by('saldo_akhir', 'desc');
 			$get= $this->db->get()->row();
+
+			if ($this->input->post('jumlah_pokok') == null AND $this->input->post('jumlah_wajib') == null) {
+				$jumlahnya = $this->input->post('jumlah_suka');
+			}else if ($this->input->post('jumlah_suka')== null AND $this->input->post('jumlah_pokok') == null) {
+				$jumlahnya = $this->input->post('jumlah_wajib');
+			}else if ($this->input->post('jumlah_suka') == null AND $this->input->post('jumlah_wajib')== null) {
+				$jumlahnya = $this->input->post('jumlah_pokok');
+			}
+
 			$data = array(
 				'id_anggota'=>$session,
 				'tipe_transaksi'=>'1',
 				'id_jenis_setoran'=>$this->input->post('jenis_setoran'),
-				'jumlah_transaksi'=>$this->input->post('jumlah'),
+				'jumlah_transaksi'=>$jumlahnya,
 				'tgl_transaksi'=>$this->input->post('set-tanggal'),
-				'saldo_akhir'=> ($get->saldo_akhir+$this->input->post('jumlah')),
+				'saldo_akhir'=> ($get->saldo_akhir+$jumlahnya),
 				'metode_bayar'=>$this->input->post('sistem_bayar'),
 				'id_petugas'=>$this->input->post('idpetugas'),
 			);

@@ -70,7 +70,7 @@ class MMain extends CI_Model {
 	public function getSimpananAnggota()
 	{
 		if ($this->session->userdata('level')=='anggota') {
-			$this->db->select('anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi');
+			$this->db->select('anggota_setoran.id,anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.jumlah_transaksi as saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi,anggota_setoran.status');
 			$this->db->from('anggota_setoran');
 			$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'left');
 			$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'left');
@@ -78,7 +78,7 @@ class MMain extends CI_Model {
 			$this->db->order_by('tgl_transaksi', 'desc');
 			$query = $this->db->get();
 		}else{
-			$this->db->select('anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi');
+			$this->db->select('anggota_setoran.id,anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.jumlah_transaksi as saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi,anggota_setoran.status');
 			$this->db->from('anggota_setoran');
 			$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'left');
 			$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'left');
@@ -92,12 +92,15 @@ class MMain extends CI_Model {
 	public function login()
 	{
 		$no = $this->input->post('noanggota');
+		$this->db->select('*');
+		$this->db->from('anggota');
 		$this->db->where('status !=', '2');
 		$this->db->where('no_anggota', $no);
-		$cek = $this->db->get('anggota');
+		$cek = $this->db->get();
 		$row = $cek->row();
-		if ($cek->num_rows() == 0 ) {
-			$cekpassanggota = password_verify(''.$this->input->post('pass').'', ''.$row->password.'');
+		// var_dump(password_hash($this->input->post('password'), PASSWORD_DEFAULT));
+		if ($cek->num_rows() != 0 ) {
+			$cekpassanggota = password_verify(''.$this->input->post('password').'', ''.$row->password.'');
 			if ($cekpassanggota == true) {
 				$session1 = array('id'=> $row->no_anggota,'nohp'=>$row->no_hp,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
 				$this->session->set_userdata($session1);
@@ -106,12 +109,14 @@ class MMain extends CI_Model {
 				$val = array('success'=>false,'msg'=>'Nomor Anggota Atau Password Salah');
 			}
 		}else{
+			$this->db->select('*');
+			$this->db->from('akun_user');
 			$this->db->where('status !=', '2');
 			$this->db->where('username', $no);
-			$admin = $this->db->get('akun_user');
+			$admin = $this->db->get();
 			$rowadmin = $admin->row();
-			if ($admin->num_rows() == 0 ) {
-				$cekpassadmin = password_verify(''.$this->input->post('pass').'', ''.$rowadmin->password.'');
+			if ($admin->num_rows() != 0 ) {
+				$cekpassadmin = password_verify(''.$this->input->post('password').'', ''.$rowadmin->password.'');
 				if ($cekpassadmin == true) {
 					$session2 = array('id'=> $rowadmin->id,'nohp'=>$rowadmin->no_hp,'username' => $rowadmin->username,'nama' => $rowadmin->nama,'level'=>$rowadmin->level);
 					$this->session->set_userdata($session2);
@@ -119,9 +124,33 @@ class MMain extends CI_Model {
 				}else{
 					$val = array('success'=>false,'msg'=>'Username Atau Password Salah');
 				}
+			}else{
+				$val = array('success'=>false,'msg'=>'data tidak ada');
 			}
 		}
 		echo json_encode($val);
+	}
+	public function getKelompok()
+	{
+		$this->db->select('master_kelompok.kelompok,anggota.no_hp,anggota.no_rek');
+		$this->db->from('anggota');
+		$this->db->join('master_kelompok', 'anggota.id_kelompok = master_kelompok.id', 'left');
+		$this->db->where('master_kelompok.id', $this->session->userdata('kelompok'));
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getAngsuran($id='')
+	{
+		if ($id == null) {
+			redirect('/');
+		}else{
+			$this->db->select('id_angsuran,jasa,jumlah_bayar,tgl_tempo');
+			$this->db->from('cicil');
+			$this->db->where('id_angsuran', $id);
+			$this->db->where('tipe_cicil',1);
+			$query = $this->db->get();
+			return $query->result();
+		}
 	}
 	public function register()
 	{

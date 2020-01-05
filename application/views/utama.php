@@ -30,16 +30,13 @@
 </head>
 
 <body>
-    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
-    <?php }else{ ?>
+    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1) != 'register'){ ?>
         <?php $this->load->view('include/top_nav');?>
         <?php $this->load->view('include/menu');?>
     <?php } ?>
-
     <?php $this->load->view($link_view) ?>
 
-    <?php if ($this->uri->segment(1) == 'login' or 'register'){ ?>
-    <?php }else{ ?>
+    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register'){ ?>
         <!-- Start Footer area-->
         <div class="footer-copyright-area">
             <div class="container">
@@ -53,12 +50,12 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            var BASE_URL = '<?=site_url('/')?>';
-        </script>
         <!-- End Footer area-->
     <?php } ?>
 
+        <script type="text/javascript">
+            var BASE_URL = '<?=site_url('/')?>';
+        </script>
     <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
@@ -162,7 +159,7 @@
             $("#namapetugas").val("");
         });
     </script>
-    <script type="text/javascript">
+<!--     <script type="text/javascript">
         document.getElementById('peng_rptra').onchange = function() {
             document.getElementById('isi_peke1').disabled = !this.checked;
         };
@@ -172,7 +169,7 @@
         document.getElementById('lainnya').onchange = function() {
             document.getElementById('isi_peke3').disabled = !this.checked;
         };
-    </script>
+    </script> -->
     
 </body>
 </html>

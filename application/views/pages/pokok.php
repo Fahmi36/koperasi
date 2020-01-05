@@ -103,7 +103,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Pokok">
+										<input type="number" name="jumlah_pokok" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Pokok">
 									</div>
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
+										<input type="number" name="jumlah_wajib" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
 									</div>
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
+										<input type="number" name="jumlah_suka" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
 									</div>
 								</div>
 							</div>

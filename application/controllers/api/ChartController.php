@@ -9,7 +9,7 @@ class ChartController extends CI_Controller {
 	}
 	public function profitPinjam()
 	{
-
+		
 	}
 	public function profitSukarela()
 	{

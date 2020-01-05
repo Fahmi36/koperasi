@@ -1,4 +1,110 @@
+	function lanjutPinjam(id) {
+		$.ajax({
+			url: BASE_URL + 'PinjamController/LanjutkanPinjam',
+			type: 'post',
+			data: {id: id},
+			success:function(response) {
+				location.reload();
+			}
+		})
+		
+	}
+	function batalPinjam(id) {
+		$.ajax({
+			url: BASE_URL + 'PinjamController/BatalPinjam',
+			type: 'POST',
+			data: {id: id},
+			success:function() {
+				location.reload();
+			}
+		})
+		
+	}
 (function ($) {
+
+	$("#formpinjam").submit(function (event) {
+		var data = new FormData($(this)[0]);
+		Swal.fire({
+			title: 'Data Sudah benar ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/pinjamUang',
+					type: "POST",
+					dataType:'json',
+					data: data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend:function(argument) {
+						$(".loader-overlay").removeAttr('style');
+					},
+					success: function (response) {
+						if (response.success == false) {
+							Swal.fire(
+								''+response.msg+'',
+								);
+						}else{
+							$.ajax({
+								url: BASE_URL + 'Action/ModalPinjam',
+								type: 'POST',
+								dataType: 'html',
+								data: {id: response.msg},
+								success: function (respon) {
+									$("#wadahmodal").html(respon);
+									$("#modalreview").modal('show');
+								}
+							});
+						}
+
+					},
+					error: function () {
+						Swal.fire(
+							'"'+response.msg+'"',
+							'Hubungi Tim Terkait',
+							);
+					}
+				});
+			}
+		});
+	});
+	$("#fromlogin").submit(function (event) {
+		var data = new FormData($(this)[0]);
+		$.ajax({
+			url: BASE_URL + 'Action/actLogin',
+			type: "POST",
+			dataType:'json',
+			data: data,
+			contentType: false,
+			cache: false,
+			processData: false,
+			beforeSend:function(argument) {
+				$(".loader-overlay").removeAttr('style');
+			},
+			success: function (response) {
+				if (response.success == false) {
+					Swal.fire(
+						''+response.msg+'',
+						);
+				}else{
+					window.location.href= BASE_URL;
+				}
+				
+			},
+			error: function () {
+				Swal.fire(
+					'"'+response.msg+'"',
+					'Hubungi Tim Terkait',
+					);
+			}
+		});
+	});
 	$("#formsimpan").submit(function (event) {
 		var data = new FormData($(this)[0]);
 		Swal.fire({
@@ -15,6 +121,7 @@
 					url: BASE_URL + 'SimpanController/Simpanan',
 					type: "POST",
 					data: data,
+					dataType:'json',
 					contentType: false,
 					cache: false,
 					processData: false,
@@ -23,7 +130,7 @@
 					},
 					success: function (response) {
 						Swal.fire(
-							'Data berhasil di ubah',
+							''+response.msg+'',
 							);
 						$("#formsimpan")[0].reset();
 						location.reload();

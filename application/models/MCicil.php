@@ -10,6 +10,11 @@ class MCicil extends CI_Model {
 	{
 		return $this->db->insert($this->tbl, $array);
 	}
+	public function insertid($array)
+	{
+		 $this->db->insert($this->tbl, $array);
+		 return $this->db->insert_id();
+	}
 	public function update($array,$where)
 	{
 		return $this->db->update($this->tbl, $array,$where);
@@ -33,7 +38,7 @@ class MCicil extends CI_Model {
 			$query = $this->db->get($this->tbl);
 		}
 		return $query;
-
+	}
 }
 
 /* End of file MCicil.php */

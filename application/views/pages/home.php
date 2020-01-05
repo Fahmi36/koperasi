@@ -61,6 +61,7 @@
                                                     <th>Nama Anggota</th>
                                                     <th>Jenis Simpan</th>
                                                     <th>Jenis Transaksi</th>
+                                                    <th>Status</th>
                                                     <th>Total</th>
                                                     <th>Tanggal Transaksi</th>
                                                     <th>Aksi</th>
@@ -68,27 +69,44 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($simpanan as $key): ?>
-                                                    
-                                                <tr>
-                                                    <td><?=$key->nama?></td>
-                                                    <td><?=$key->jenis_setoran?></td>
-                                                    <?php if ($key->tipe_transaksi == 0){ ?> 
-                                                    <td>Penarikan</td>
-                                                    <?php }else{ ?>
-                                                    <td>Simpanan</td>
 
-                                                    <?php }?>
-                                                    <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
-                                                    <td><?=$key->tgl_transaksi?></td>
-                                                    <td>Aksi</td>
+                                                    <tr>
+                                                        <td><?=$key->nama?></td>
+                                                        <td><?=$key->jenis_setoran?></td>
+                                                        <?php if ($key->tipe_transaksi == 0){ ?> 
+                                                            <td>Penarikan</td>
+                                                        <?php }else{ ?>
+                                                            <td>Simpanan</td>
+                                                        <?php }?>
+                                                        <?php if ($key->status == 0){ ?> 
+                                                            <td>Belum Di ACC Pembayaran</td>
+                                                        <?php }else if ($key->status == 1){ ?>
+                                                            <td>Sudah Masuk</td>
+                                                        <?php }else if ($key->status == 2){  ?>
+                                                            <td>Di Tolak</td>
+                                                        <?php }?>
+                                                        <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
+                                                        <td><?=$key->tgl_transaksi?></td>
+                                                        <?php if($this->session->userdata('username') == null){ ?>
+                                                            <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button></td>
+                                                        <?php }else{ ?>
+                                                            <td>
+                                                             <?php if ($key->status == 0){ ?> 
+                                                                <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-menus"></i></button>
+                                                                <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-menus"></i></button>
+                                                            <?php }else{ ?>
+                                                                <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                            <?php } ?>
+                                                        </td>
+                                                    <?php } ?>
                                                 </tr>
-                                                <?php endforeach ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <?php endforeach ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
  <!--                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="invoice-ds-int">
                                 <h2>Remarks</h2>

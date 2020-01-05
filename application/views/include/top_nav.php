@@ -18,9 +18,12 @@
                                 </div>
                             </div>
                         </li> -->
+                        <?php if ($this->session->userdata('id') == null): ?>
+                            
                         <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
                         <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
-                        <li class="nav-item dropdown">
+                        <?php endif ?>
+<!--                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
                                 <div class="hd-mg-tt">
@@ -54,8 +57,9 @@
                                     <a href="#">View All</a>
                                 </div>
                             </div>
-                        </li>
-                        <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>3</span></div></a>
+                        </li> -->
+                        <li class="nav-item nc-al">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
                                 <div class="hd-mg-tt">
                                     <h2>Notification</h2>
@@ -68,17 +72,6 @@
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>David Belle</h3>
-                                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-message-img">
-                                                <img src="img/post/2.jpg" alt="" />
-                                            </div>
-                                            <div class="hd-mg-ctn">
-                                                <h3>Jonathan Morris</h3>
                                                 <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
                                             </div>
                                         </div>
