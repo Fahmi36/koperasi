@@ -86,11 +86,82 @@
           left: 0.2rem;
       }
       .signup-form {
-    padding: 32px 65px 40px;
-}
+        padding: 32px 65px 40px;
+    }
 
-  </style>
-  <div class="main">
+    .funkyradio div {
+      clear: both;
+      overflow: hidden;
+  }
+
+  .funkyradio label {
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid #D1D3D4;
+      font-weight: normal;
+  }
+
+  .funkyradio input[type="radio"]:empty {
+      display: none;
+  }
+
+  .funkyradio input[type="radio"]:empty ~ label {
+      position: relative;
+      line-height: 2.5em;
+      text-indent: 3.25em;
+      /*margin-top: 2em;*/
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  .funkyradio input[type="radio"]:empty ~ label:before {
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      width: 2.5em;
+      background: #D1D3D4;
+      border-radius: 3px 0 0 3px;
+  }
+
+  .funkyradio input[type="radio"]:hover:not(:checked) ~ label {
+      color: #888;
+  }
+
+  .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before{
+      content: '\2714';
+      text-indent: .9em;
+      color: #C2C2C2;
+  }
+
+  .funkyradio input[type="radio"]:checked ~ label {
+      color: #777;
+  }
+
+  .funkyradio input[type="radio"]:checked ~ label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #333;
+      background-color: #ccc;
+  }
+
+  .funkyradio input[type="radio"]:focus ~ label:before {
+      box-shadow: 0 0 0 3px #999;
+  }
+
+  .funkyradio-danger input[type="radio"]:checked ~ label:before {
+      color: #fff;
+      background-color: #fd2727;
+  }
+
+</style>
+<center><a href="<?php echo site_url(''); ?>"><img class="img-logo" src="<?php echo base_url('assets/img/logo/logo_.png'); ?>" alt="" width="370" style="margin-top: 20px;"/></a></center>
+<div class="main">
     <div class="container">
         <h2>Form Pendaftaran Menjadi Anggota <br>Koperasi PKK Melati Jaya</h2>
         <form method="POST" id="signup-form" class="signup-form">
@@ -136,30 +207,30 @@
                 <div class="form-group">
                     <label for="pekerjaan" class="form-label required">Pekerjaan</label>
                     <div class="chiller_cb">
-                        <input id="peng_rptra" type="checkbox">
+                        <input id="peng_rptra" name="pekerjaan" type="checkbox">
                         <label for="peng_rptra">Pengelola RPTRA, Kelurahan</label>
                         <span></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="no_ktp" id="isi_peke1" disabled/>
+                        <input type="text" name="pengelola" id="isi_peke1" disabled/>
                     </div>
 
                     <div class="chiller_cb">
-                        <input id="peng_pkk" type="checkbox">
+                        <input id="peng_pkk" name="pekerjaan" type="checkbox">
                         <label for="peng_pkk">Tim Penggerak/Pengelola PKK, Kelurahan</label>
                         <span></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="no_ktp" id="isi_peke2" disabled/>
+                        <input type="text" name="tim_penggerak" id="isi_peke2" disabled/>
                     </div>
 
                     <div class="chiller_cb">
-                        <input id="lainnya" type="checkbox">
+                        <input id="lainnya" name="pekerjaan" type="checkbox">
                         <label for="lainnya">Lainnya</label>
                         <span></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="no_ktp" id="isi_peke3" disabled/>
+                        <input type="text" name="lainnya" id="isi_peke3" disabled/>
                     </div>
                 </fieldset>
 
@@ -179,7 +250,7 @@
 
                     <div class="form-group">
                         <label for="no_ktp" class="form-label required">Nomor Identitas (KTP/SIM)</label>
-                        <input type="text" name="no_ktp" id="no_ktp" />
+                        <input type="number" name="no_ktp" id="no_ktp" />
                     </div>
 
                     <div class="form-row">
@@ -224,13 +295,38 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="department" class="form-label required">Department</label>
-                        <input type="text" name="department" id="department" />
+                        <label for="sim_sukarela" class="form-label required">Penyetoran pertama anggota baru yang terdiri dari :</label>
+                        <label for="department" class="form-label">- Simpanan Pokok : Rp 1.000.000 (dibayar 1x selama menjadi anggota)</label>
+                        <label for="department" class="form-label">- Simpanan Wajib : Rp 25.000 (dibayar perbulan)</label>
+                        <label for="department" class="form-label">- Simpanan Sukarela : Rp 25.000 (dibayar perbulan minimal Rp 10.000)</label>
+                        <input type="number" name="sim_sukarela" id="sim_sukarela" placeholder="Simpanan Sukarela" />
                     </div>
-
                     <div class="form-group">
-                        <label for="work_hours" class="form-label required">Working hours</label>
-                        <input type="text" name="work_hours" id="work_hours" />
+                        <label for="pembayaran" class="form-label required">Yang sudah dibayarkan secara :</label>
+                        <div class="funkyradio">
+                            <div class="funkyradio-danger">
+                                <input type="radio" name="pembayaran" id="lunas"/>
+                                <label for="lunas">Lunas</label>
+                            </div>
+                            <div class="funkyradio-danger">
+                                <input type="radio" name="pembayaran" id="cicil" />
+                                <label for="cicil">Cicil</label>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="metode_pem" class="form-label required">Metode pembayaran melalui :</label>
+                        <div class="funkyradio">
+                            <div class="funkyradio-danger">
+                                <input type="radio" name="metode_pem" id="petugas"/>
+                                <label for="petugas">Petugas unit simpan pinjam</label>
+                            </div>
+                            <div class="funkyradio-danger">
+                                <input type="radio" name="metode_pem" id="transfer" />
+                                <label for="transfer">Transfer ke <b>Bank DKI dengan No Rekening 108-13-17099-8</b></label>
+                            </div>
+                        </div>
+                        <input type="number" name="sebesar" id="sebesar" placeholder="Sebesar" />
                     </div>
                 </fieldset>
             </form>
