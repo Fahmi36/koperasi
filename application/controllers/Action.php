@@ -82,6 +82,13 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function profile()
+	{
+		
+			$data['title'] = 'Profile - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/user/profile';
+			$this->load->view('utama',$data);
+	}
 	public function sim_pokok()
 	{
 		if ($this->session->userdata('id')==null) {

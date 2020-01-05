@@ -5,57 +5,50 @@
         errorPlacement: function errorPlacement(error, element) {
              element.before(error); 
         },
-        // rules: {
-        //     nama_lengkap : {
-        //         required: true,
-        //     },
-        //     tempat_lahir : {
-        //         required: true,
-        //     },
-        //     tanggal_lahir : {
-        //         required: true,
-        //     },
-        //     alamat : {
-        //         required: true,
-        //     },
-        //     no_ktp : {
-        //         required: true,
-        //     },
-        //     no_hp : {
-        //         required: true,
-        //     },
-        //     pekerjaan : {
-        //         required: true,
-        //     },
-        //     address: {
-        //         required: true,
-        //     },
-        //     employee_id : {
-        //         required: true,
-        //     },
-        //     designation: {
-        //         required: true,
-        //     },
-        //     department: {
-        //         required: true,
-        //     },
-        //     work_hours: {
-        //         required: true,
-        //     },
-        //     bank_name: {
-        //         required: true,
-        //     },
-        //     holder_name: {
-        //         required: true,
-        //     },
-        //     card_number: {
-        //         required: true,
-        //         number: true,
-        //     },
-        //     cvc: {
-        //         required: true,
-        //     },
-        // },
+        rules: {
+            nama_lengkap : {
+                required: true,
+            },
+            tempat_lahir : {
+                required: true,
+            },
+            tanggal_lahir : {
+                required: true,
+            },
+            alamat : {
+                required: true,
+            },
+            no_ktp : {
+                required: true,
+            },
+            no_hp : {
+                required: true,
+            },
+            pekerjaan : {
+                required: true,
+            },
+            file_fotocopy : {
+                required: true,
+            },
+            foto_1 : {
+                required: true,
+            },
+            foto_2: {
+                required: true,
+            },
+            sim_sukarela : {
+                required: true,
+            },
+            pembayaran : {
+                required: true,
+            },
+            metode_pem : {
+                required: true,
+            },
+            sebesar : {
+                required: true,
+            },
+        },
         onfocusout: function(element) {
             $(element).valid();
         },
