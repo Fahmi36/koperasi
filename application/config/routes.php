@@ -58,5 +58,8 @@ $route['setoran'] = 'action/setoran';
 $route['login'] = 'action/login';
 $route['register'] = 'action/register';
 $route['simpanan'] = 'action/sim_pokok';
+$route['bayar/pinjaman'] = 'action/bayarpinjam';
+
+//Nggak di pakai Biarin aja ya
 $route['sim_wajib'] = 'action/sim_wajib';
 $route['sim_suka'] = 'action/sim_suka';

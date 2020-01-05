@@ -43,20 +43,105 @@ class MMain extends CI_Model {
 		$query = $this->db->get();
 		return $query->row();
 	}	
-	function getDataAsetHari()
+	public function getTotalSimpanhari()
 	{
-		$q = $this->db->query("SELECT count(*) as jml FROM aset WHERE tanggal = date(NOW())");
-		return $q;	
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',1);
+		$this->db->where('tgl_transaksi',date(NOW()));
+		$query = $this->db->get();
+		return $query->row();
 	}
-	function getDataAsetMinggu()
+	public function getProfithari()
 	{
-		$q = $this->db->query("SELECT count(*) as jml FROM aset WHERE YEARWEEK(tanggal)=YEARWEEK(NOW())");
-		return $q;	
+		$this->db->select('SUM(biaya_jasa) as profit');
+		$this->db->from('anggota_pinjaman');
+		$this->db->where('status_pinjaman', 3);
+		$this->db->where('tgl_pengajuan_pinjaman', date(NOW()));
+		$query = $this->db->get();
+		return $query->row();
 	}
-	function getDataAsetBulan()
+	public function getBelumbayarhari()
 	{
-		$q = $this->db->query("SELECT CONCAT(YEAR(tanggal),'/',MONTH(tanggal)) AS jml, COUNT(*) AS jml FROM aset WHERE CONCAT(YEAR(tanggal),'/',MONTH(tanggal))=CONCAT(YEAR(NOW()),'/',MONTH(NOW()))");
-		return $q;
+		$this->db->select('SUM(bayar_jasa + jumlah_angsuran) as nunggak');
+		$this->db->from('anggota_pinjaman_angsuran');
+		$this->db->where('status', 0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getPengeluranhari()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',0);
+		$query = $this->db->get();
+		return $query->row();
+	}	
+	public function getTotalSimpanminggu()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',1);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getProfitminggu()
+	{
+		$this->db->select('SUM(biaya_jasa) as profit');
+		$this->db->from('anggota_pinjaman');
+		$this->db->where('status_pinjaman', 3);
+		$this->db->where('YEARWEEK(tgl_pengajuan_pinjaman)', YEARWEEK(NOW()));
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getBelumbayarminggu()
+	{
+		$this->db->select('SUM(bayar_jasa + jumlah_angsuran) as nunggak');
+		$this->db->from('anggota_pinjaman_angsuran');
+		$this->db->where('status', 0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getPengeluranminggu()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+		public function getTotalSimpanbulan()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',1);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getProfitbulan()
+	{
+		$this->db->select('SUM(biaya_jasa) as profit');
+		$this->db->from('anggota_pinjaman');
+		$this->db->where('status_pinjaman', 3);
+		$this->db->where('CONCAT(YEAR(tgl_pengajuan_pinjaman),'/',MONTH(tgl_pengajuan_pinjaman))', CONCAT(YEAR(NOW()),'/',MONTH(NOW())));
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getBelumbayarbulan()
+	{
+		$this->db->select('SUM(bayar_jasa + jumlah_angsuran) as nunggak');
+		$this->db->from('anggota_pinjaman_angsuran');
+		$this->db->where('status', 0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getPengeluranbulan()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',0);
+		$query = $this->db->get();
+		return $query->row();
 	}
 	public function getPengeluranPinjaman()
 	{
@@ -151,6 +236,17 @@ class MMain extends CI_Model {
 			$query = $this->db->get();
 			return $query->result();
 		}
+	}
+	public function getDetailSimpanan()
+	{
+		$this->db->select('anggota_setoran.id,anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.jumlah_transaksi, anggota_setoran.saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi,anggota_setoran.status,anggota_setoran.metode_bayar,anggota_setoran.bukti_transfer,anggota_setoran.id_petugas');
+			$this->db->from('anggota_setoran');
+			$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'left');
+			$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'left');
+			$this->db->where('anggota_setoran.id', $this->input->post('id'));
+			$this->db->order_by('tgl_transaksi', 'desc');
+			$query = $this->db->get();
+			return $query->result();
 	}
 	public function register()
 	{

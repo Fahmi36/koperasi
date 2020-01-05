@@ -22,9 +22,9 @@
                         <?php $i = 1; foreach ($angsuran as $key): ?>
                             <tr>
                                 <td><?=$i++?></td>
-                                <td><?=$key->jasa?></td>
-                                <td><?=$key->jumlah_bayar?></td>
-                                <td><?=$key->tgl_tempo?></td>
+                                <td><?=number_format($key->jasa,0,',','.')?></td>
+                                <td><?=number_format($key->jumlah_bayar,0,',','.')?></td>
+                                <td><?=date('d F, Y',strtotime($key->tgl_tempo))?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

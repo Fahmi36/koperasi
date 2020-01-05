@@ -45,6 +45,17 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function bayarpinjam()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Bayar Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['cicil'] = $this->mm->getDetailCicil();
+			$data['link_view'] = 'pages/bayarpinjam';
+			$this->load->view('utama',$data);
+		}
+	}
 	public function login()
 	{
 		if ($this->session->userdata('id')!=null) {
@@ -123,6 +134,14 @@ class Action extends CI_Controller {
         // return var_dump($this->input->post('id'));
         $data['angsuran'] = $this->mm->getAngsuran($this->input->post('id'));
         $json = $this->load->view('pages/modalpinjam',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function InfoSimpan()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['simpan'] = $this->mm->getDetailSimpanan($this->input->post('id'));
+        $json = $this->load->view('pages/modalsimpan',$data);
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
