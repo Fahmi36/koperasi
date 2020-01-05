@@ -17,56 +17,12 @@
 					<hr> 
 					<br>
 					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Simpanan</h4>
-					<form method="post" action="javascript:void(0)" id="formsimpan" enctype="multipart/form-data" accept-charset="utf-8">
-					<div class="form-example-int form-horizental">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Nama :</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="text" name="nama" value="<?= $this->session->userdata('nama'); ?>" readonly class="form-control input-sm" placeholder="Masukkan Nama">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<?php if ($this->session->userdata('username') != null): ?>
-						<div class="form-example-int form-horizental">
-							<div class="form-group">
-								<div class="row">
-									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-										<label class="hrzn-fm">Nama :</label>
-									</div>
-									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-										<div class="nk-int-st">
-											<input type="text" name="nama" class="form-control input-sm" placeholder="Masukkan Nama">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-example-int form-horizental">
-							<div class="form-group">
-								<div class="row">
-									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-										<label class="hrzn-fm">No. Anggota :</label>
-									</div>
-									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-										<div class="nk-int-st">
-											<input type="text" name="noanggota" class="form-control input-sm" placeholder="Masukkan No. Anggota">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					<?php endif ?>
+					<form method="post" action="javascript:void(0)" id="formbayarpinjam" enctype="multipart/form-data" accept-charset="utf-8">
 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Setoran Tanggal :</label>
+									<label class="hrzn-fm">Bayar Tanggal :</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
@@ -76,76 +32,57 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15">
+					<div class="form-example-int form-horizental mg-t-15" id="simpanpokok">
 						<div class="form-group">
 							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Pilih Simpanan :</label>
+					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+									<label class="hrzn-fm">Angsuran Ke :</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<select class="form-control" name="jenis_setoran" id="pilihsimpanan" onchange="pilihsimpan()">
-											<option selected disabled>Pilih Jenis Simpanan</option>
-											<?php foreach ($jenis_setor as $key): ?>	
-												<option value="<?=$key->id?>"><?=$key->jenis_setoran?></option>
-											<?php endforeach ?>
-										</select>
+										<input type="text" readonly value="<?=($cicil->angsuran+1)?>" name="angsuran" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15" id="simpanpokok" style="display: none;">
+					<div class="form-example-int form-horizental mg-t-15" id="simpanwajib">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Pokok :</label>
+									<label class="hrzn-fm">Jasa Yang Harus di Bayar :</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_pokok" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Pokok">
+										<input type="number" value="<?= number_format($cicil->jasa,0,',','.')?>" readonly name="jumlah_wajib" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15" id="simpanwajib" style="display: none;">
+					<div class="form-example-int form-horizental mg-t-15" id="simpansuka">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Wajib :</label>
+									<label class="hrzn-fm">Bulanan Yang Harus di Bayar:</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_wajib" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
+										<input type="text" value="<?= number_format($cicil->jumlah_bayar,0,',','.')?>" readonly name="bulanan" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-example-int form-horizental mg-t-15" id="simpansuka" style="display: none;">
+					<div class="form-example-int form-horizental mg-t-15" id="simpansuka" >
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Sukarela :</label>
+									<label class="hrzn-fm">Tanggal Jatuh Tempo :</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_suka" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-example-int form-horizental mg-t-15" id="simpansuka" style="display: none;">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Simpanan Sukarela :</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="number" name="jumlah" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
+										<input type="text" value="<?=date('d F, Y',strtotime($cicil->tgl_tempo))?>" readonly name="tgl_tempo" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -204,7 +141,7 @@
 							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
 							</div>
 							<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-								<button class="btn btn-success notika-btn-success waves-effect">Submit</button>
+								<button class="btn btn-success notika-btn-success waves-effect">Kirim</button>
 							</div>
 						</div>
 					</div>

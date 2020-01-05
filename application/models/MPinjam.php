@@ -3,12 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MPinjam extends CI_Model {
 
-	private $tbl = 'pinjam';
+	private $tbl = 'anggota_pinjaman';
 	public $slt = '*';
 
 	public function insert($array)
 	{
 		return $this->db->insert($this->tbl, $array);
+	}
+	public function insertid($array)
+	{
+		 $this->db->insert($this->tbl, $array);
+		 return $this->db->insert_id();
 	}
 	public function update($array,$where)
 	{
@@ -36,7 +41,9 @@ class MPinjam extends CI_Model {
 	}
 	public function profitPinjam()
 	{
-		
+		$this->input->post('tahun');
+		$this->db->select('year(created_at) as tahun ,MONTHNAME(created_at) as bulan, sum(jumlah) as total');
+		$this->db->from('cicil');
 	}
 }
 

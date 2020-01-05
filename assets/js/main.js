@@ -1,8 +1,40 @@
-(function ($) {
-	$("#formsimpan").submit(function (event) {
-		var data = new FormData($(this)[0]);
+	function lanjutPinjam(id) {
+		$.ajax({
+			url: BASE_URL + 'PinjamController/LanjutkanPinjam',
+			type: 'post',
+			data: {id: id},
+			success:function(response) {
+				location.reload();
+			}
+		})
+		
+	}
+	function batalPinjam(id) {
+		$.ajax({
+			url: BASE_URL + 'PinjamController/BatalPinjam',
+			type: 'POST',
+			data: {id: id},
+			success:function() {
+				location.reload();
+			}
+		})
+		
+	}
+	function infosimpan(id) {
+		$.ajax({
+			url: BASE_URL + 'Action/InfoSimpan',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalsimpan").html(respon);
+				$("#showmodalsimpan").modal('show');
+			}
+		});
+	}
+	function tolaksimpan(id) {
 		Swal.fire({
-			title: 'Data Sudah benar ?',
+			title: 'Apakah Anda Yakin Ingin Menolak Data Ini ?',
 			text: "Klik Ya",
 			type: 'success',
 			buttonsStyling: false,
@@ -12,9 +44,10 @@
 			confirmButtonText: 'Ya',
 			preConfirm: () => { 
 				$.ajax({
-					url: BASE_URL + 'SimpanController/Simpanan',
+					url: BASE_URL + 'SimpanController/AccSimpananAnggota',
 					type: "POST",
-					data: data,
+					dataType:'json',
+					data: {id:id,status:'2'},
 					contentType: false,
 					cache: false,
 					processData: false,
@@ -22,29 +55,186 @@
 						$(".loader-overlay").removeAttr('style');
 					},
 					success: function (response) {
-						Swal.fire(
-							'Data berhasil di ubah',
-							);
-						$("#formsimpan")[0].reset();
-						location.reload();
-					},
-					error: function () {
-						Swal.fire(
-							'"'+response.msg+'"',
-							'Hubungi Tim Terkait',
-							);
-					}
-				});
-				return false;
-			}
-		});
-	});
-	"use strict";
+						if (response.success == false) {
+							Swal.fire(
+								''+response.msg+'',
+								);
+						}else{
+							location.reload();	
+						}
 
-	$(".chosen")[0] && $(".chosen").chosen({
-		width: "100%",
-		allow_single_deselect: !0
-	});
+					}
+				})
+			}
+		})
+	}
+	function terimasimpan(argument) {
+		Swal.fire({
+			title: 'Apakah anda Menyetujui data ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'SimpanController/AccSimpananAnggota',
+					type: "POST",
+					dataType:'json',
+					data: {id:id,status:'1'},
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend:function(argument) {
+						$(".loader-overlay").removeAttr('style');
+					},
+					success: function (response) {
+						if (response.success == false) {
+							Swal.fire(
+								''+response.msg+'',
+								);
+						}else{
+							location.reload();						
+						}
+					}
+				})
+			}
+		})
+	}
+	(function ($) {
+
+		$("#formpinjam").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'PinjamController/pinjamUang',
+						type: "POST",
+						dataType:'json',
+						data: data,
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							if (response.success == false) {
+								Swal.fire(
+									''+response.msg+'',
+									);
+							}else{
+								$.ajax({
+									url: BASE_URL + 'Action/ModalPinjam',
+									type: 'POST',
+									dataType: 'html',
+									data: {id: response.msg},
+									success: function (respon) {
+										$("#wadahmodal").html(respon);
+										$("#modalreview").modal('show');
+									}
+								});
+							}
+
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+				}
+			});
+		});
+		$("#fromlogin").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			$.ajax({
+				url: BASE_URL + 'Action/actLogin',
+				type: "POST",
+				dataType:'json',
+				data: data,
+				contentType: false,
+				cache: false,
+				processData: false,
+				beforeSend:function(argument) {
+					$(".loader-overlay").removeAttr('style');
+				},
+				success: function (response) {
+					if (response.success == false) {
+						Swal.fire(
+							''+response.msg+'',
+							);
+					}else{
+						window.location.href= BASE_URL;
+					}
+
+				},
+				error: function () {
+					Swal.fire(
+						'"'+response.msg+'"',
+						'Hubungi Tim Terkait',
+						);
+				}
+			});
+		});
+		$("#formsimpan").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'SimpanController/Simpanan',
+						type: "POST",
+						data: data,
+						dataType:'json',
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							Swal.fire(
+								''+response.msg+'',
+								);
+							$("#formsimpan")[0].reset();
+							location.reload();
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+					return false;
+				}
+			});
+		});
+		"use strict";
+
+		$(".chosen")[0] && $(".chosen").chosen({
+			width: "100%",
+			allow_single_deselect: !0
+		});
 		/*--------------------------
 		 auto-size Active Class
 		 ---------------------------- */	
