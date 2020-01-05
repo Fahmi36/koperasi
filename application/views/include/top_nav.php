@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="#">
+                                    <a href="<?php echo site_url('action/keluar'); ?>">
                                         <div class="hd-message-sn">
                                             <div class="hd-mg-ctn">
                                                 <h3>Keluar</h3>

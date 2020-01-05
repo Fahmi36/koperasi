@@ -38,7 +38,7 @@
 
     <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register'){ ?>
         <!-- Start Footer area-->
-        <div class="footer-copyright-area">
+        <div class="footer-copyright-area" style="background-color: #3a53c4;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

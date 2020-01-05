@@ -51,7 +51,7 @@ class Action extends CI_Controller {
 			redirect('login');
 		}else{
 			$data['title'] = 'Bayar Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['cicil'] = $this->mm->getDetailCicil();
+			// $data['cicil'] = $this->mm->getDetailCicil();
 			$data['link_view'] = 'pages/bayarpinjam';
 			$this->load->view('utama',$data);
 		}
@@ -152,4 +152,10 @@ class Action extends CI_Controller {
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
+    public function keluar() {
+	    $this->session->unset_userdata('id');
+	    $this->session->unset_userdata('username');
+	    $this->session->unset_userdata('nama');
+	    redirect('/');
+	}
 }
