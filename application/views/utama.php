@@ -87,7 +87,6 @@
     <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
-    <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/additional-methods.min.js"></script>
@@ -97,6 +96,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#datatransaksi").dataTable();
+            $("#datapinjaman").dataTable();
 
         });
         function pilihsimpan() {
@@ -131,8 +131,7 @@
         }
         $('#nama_petugas').select2({
             placeholder: "Pilih Petugas...",
-            minimumResultsForSearch: 2,
-            minimumInputLength: 3,
+            minimumInputLength: 0,
             ajax: {
               url: '<?= site_url('action/getPetugas')?>',
               dataType: 'json',

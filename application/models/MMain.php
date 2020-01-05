@@ -248,6 +248,38 @@ class MMain extends CI_Model {
 			$query = $this->db->get();
 			return $query->result();
 	}
+	public function getDetailCicil()
+	{
+		$this->db->select('cicil.jasa,cicil.jumlah_bayar,cicil.angsuran,cicil.tgl_tempo');
+		$this->db->from('cicil');
+		$this->db->where('id_angsuran', $this->uri->segment(3));
+		$this->db->where('status', 2);
+		$this->db->or_where('id_petugas', 0);
+		$this->db->or_where('bukti_tf', null);
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getCicil()
+	{
+		$this->db->select('anggota_pinjaman.id,anggota_pinjaman.no_hp,anggota_pinjaman.tgl_pengajuan_pinjaman,anggota_pinjaman.besar_persetujuan_pinjaman,anggota_pinjaman.keperluan,anggota_pinjaman.status_pinjaman,anggota_pinjaman.biaya_jasa,anggota.nama');
+		$this->db->from('anggota_pinjaman');
+		$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
+		$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id'));
+		$this->db->where('anggota_pinjaman.status_pinjaman !=', '4');
+		$query = $this->db->get();
+		return $query->result();
+
+	}
+	public function getDetailPinjaman($id)
+	{
+		$this->db->select('anggota_pinjaman.id,anggota_pinjaman.no_hp,anggota_pinjaman.tgl_pengajuan_pinjaman,anggota_pinjaman.besar_persetujuan_pinjaman,anggota_pinjaman.keperluan,anggota_pinjaman.status_pinjaman,anggota_pinjaman.biaya_jasa,anggota.nama');
+		$this->db->from('anggota_pinjaman');
+		$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
+		$this->db->where('anggota_pinjaman.id', $id);
+		$this->db->where('anggota_pinjaman.status_pinjaman !=', '4');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	public function register()
 	{
 		$no = $this->input->post('nama_lengkap');

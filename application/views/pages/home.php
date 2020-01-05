@@ -51,7 +51,6 @@
                         <h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Selamat Datang</h3>
                     </div>
                     <div class="row">
-                        <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="data-table-list">
                                     <div class="table-responsive">
@@ -92,8 +91,9 @@
                                                         <?php }else{ ?>
                                                             <td>
                                                              <?php if ($key->status == 0){ ?> 
-                                                                <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-menus"></i></button>
-                                                                <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-menus"></i></button>
+                                                                <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
+                                                                <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
+                                                                <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
                                                             <?php }else{ ?>
                                                                 <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
                                                             <?php } ?>
@@ -106,7 +106,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
  <!--                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="invoice-ds-int">
                                 <h2>Remarks</h2>

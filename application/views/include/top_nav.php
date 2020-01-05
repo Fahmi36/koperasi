@@ -18,11 +18,13 @@
                                 </div>
                             </div>
                         </li> -->
-                        <?php if ($this->session->userdata('id') == null): ?>
-                            
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
-                        <?php endif ?>
+                        <?php if ($this->session->userdata('id') == null){ ?>
+
+                            <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
+                            <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
+                        <?php }else{ ?>
+                            <li class="nav-item"><a href="<?= site_url('logout') ?>" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Logout</a></li>
+                        <?php }?>
 <!--                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
