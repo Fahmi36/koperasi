@@ -75,7 +75,7 @@
                                                     <?php }?>
                                                     <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
                                                     <td><?=$key->tgl_transaksi?></td>
-                                                    <td>Aksi</td>
+                                                    <td><button class="btn btn-primary notika-btn-primary waves-effect"><i class="fa fa-info-circle"></i></button></td>
                                                 </tr>
                                                 <?php endforeach ?>
                                             </tbody>
