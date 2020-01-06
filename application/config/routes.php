@@ -60,8 +60,7 @@ $route['register'] = 'action/register';
 $route['simpanan'] = 'action/sim_pokok';
 $route['bayar/pinjaman'] = 'action/dataPinjam';
 $route['bayar/pinjaman/(:any)'] = 'action/bayarpinjam';
-$route['logout'] = 'action/logout';
-$route['bayar/pinjaman'] = 'action/bayarpinjam';
+$route['logout'] = 'action/logout';;
 $route['profile'] = 'action/profile';
 
 //Nggak di pakai Biarin aja ya
