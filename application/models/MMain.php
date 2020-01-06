@@ -15,7 +15,7 @@ class MMain extends CI_Model {
 	{
 		if ($this->session->userdata('username') == null) {
 			$this->db->from('anggota');
-			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->where('id_anggota', $this->session->userdata('id'));
 			$query = $this->db->get();
 		}else{
 			$this->db->from('akun_user');
