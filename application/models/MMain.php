@@ -11,6 +11,19 @@ class MMain extends CI_Model {
 		return $qyery->result();
 
 	}
+	public function getProfile()
+	{
+		if ($this->session->userdata('username') == null) {
+			$this->db->from('anggota');
+			$this->db->where('id', $this->session->userdata('id'));
+			$query = $this->db->get();
+		}else{
+			$this->db->from('akun_user');
+			$this->db->where('id', $this->session->userdata('id'));
+			$query = $this->db->get();
+		}
+		return $query->row();
+	}
 	public function getTotalSimpan()
 	{
 		$this->db->select('SUM(jumlah_transaksi) as simpan');
