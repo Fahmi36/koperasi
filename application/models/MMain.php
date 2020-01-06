@@ -282,14 +282,125 @@ class MMain extends CI_Model {
 	}
 	public function register()
 	{
-		$no = $this->input->post('nama_lengkap');
-		$no = $this->input->post('tempat_tgl');
-		$no = $this->input->post('alamat');
-		$no = $this->input->post('nik');
-		$no = $this->input->post('no_telp');
-		$no = $this->input->post('kerja');
-		$this->db->insert('anggota', array(
-			'nama'));
+		$cek = $this->db->get_where('anggota', array('nik'=>$this->input->post('no_ktp')));
+		if ($cek->num_rows() > 0) {
+			$val = array('success'=>false,'msg'=>'Data Sama');
+		}else{
+			$nama = $this->input->post('nama_lengkap');
+			$tmp = $this->input->post('tempat_lahir');
+			$tgl = $this->input->post('birth_date');
+			$bln = $this->input->post('birth_month');
+			$thn = $this->input->post('birth_year');
+
+			$rpeng = $this->input->post('radiopengrptra');
+			$peng = $this->input->post('pengelola');
+			$rpkk = $this->input->post('radiotpngpkk');
+			$pkk = $this->input->post('tim_penggerak');
+			$rlain = $this->input->post('radiolainnya');
+			$lain = $this->input->post('lainnya');
+			if ($peng!= null) {
+				$pekerjaan = $rpeng;
+				$tempatnya = $peng;
+			}else if ($pkk!= null) {
+				$pekerjaan = $rpkk;
+				$tempatnya = $pkk;
+			}else if ($lain!= null) {
+				$pekerjaan = $rlain;
+				$tempatnya = $lain;
+			}
+			$alamat = $this->input->post('alamat');
+			$ktp = $this->input->post('no_ktp');
+			$no_tlp = $this->input->post('no_rumah');
+			$no_hp = $this->input->post('no_hp');
+
+			$bayar = $this->input->post('pembayaran');
+
+			if ($bayar == 1) {
+				$status = '1';
+			}else{
+				$status = '2';
+			}
+
+			$methode = $this->input->post('metode_pem');
+			$jml = $this->input->post('sebesar');
+			$f_ktp = $this->input->post('file_fotocopy');
+			$f_warna = $this->input->post('foto_1');
+			$f_warna2 = $this->input->post('foto_2');
+			$buktitf = $this->input->post('foto_tf');
+			$sukarela = $this->input->post('sim_sukarela');
+
+			$gambarktp = $this->Uploadfoto($f_ktp);
+			$gambarfoto = $this->Uploadfoto($f_warna);
+			$gambarfoto2 = $this->Uploadfoto($f_warna2);
+			$gambartf = $this->Uploadfoto($buktitf);
+			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
+
+			$this->db->select('MAX(no_anggota) as jml');
+			$this->db->from('anggota');
+			$max = $this->db->get()->row()->jml;
+			$urut=substr($max,3,3)+1;
+			$depan = substr($max, 0,3);
+			$anggota= $depan.sprintf("%03s",$urut);
+		// return var_dump($anggota);
+			$query = $this->db->insert('anggota', array(
+				'no_anggota'=>$anggota,
+				'nama'=>$nama,
+				'tempat_lahir'=>$tmp,
+				'tgl_lahir'=>$tgl_lahir,
+				'nik'=>$ktp,
+				'alamat'=>$alamat,
+				'no_hp'=>$no_hp,
+				'status'=>'3',
+				'created_date'=>date('Y-m-d H:i:s'),
+				'pekerjaan'=>$pekerjaan.','.$tempatnya,
+				'password'=>password_hash('123456', PASSWORD_DEFAULT),
+			));
+			$id_anggota = $this->db->insert_id();
+			if ($query == true) {
+				$this->db->insert('syarat_foto', array(
+					'id_anggota'=>$id_anggota,
+					'f_ktp'=>$gambarktp,
+					'f_foto'=>$gambarfoto,
+					'f_foto2'=>$gambarfoto2,
+					'created_at'=>date('Y-m-d H:i:s'),
+				));
+				$this->db->insert('anggota_setoran', array(
+					'id_anggota'=>$id_anggota,
+					'tipe_transaksi'=>'1',
+					'id_jenis_setoran'=>'1',
+					'jumlah_transaksi'=>$jml,
+					'saldo_akhir'=>'0',
+					'tgl_transaksi'=>date('Y-m-d'),
+					'sistem_bayar'=>$bayar,
+					'metode_bayar'=>$methode,
+					'bukti_transfer'=>$gambartf,
+					'status'=>'Pending',
+				));
+				$val = array('success'=>true,'msg'=>'Menunggu Konfirmasi dari Petugas');
+			}else{
+				$val = array('success'=>false,'msg'=>'gagal');
+			}
+
+		}
+		echo json_encode($val);
+	}
+	public function Uploadfoto($param)
+	{
+		$config['upload_path'] = './assets/images/bukti/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 10024;
+		$config['encrypt_name']         = TRUE;
+		$config['remove_spaces']        = TRUE;
+
+		$this->load->library('upload', $config);
+		$upload = $this->upload->do_upload($param);
+		$data = $this->upload->data();
+		if (! $upload) {
+			$image = null;
+		}else{
+			$image = $data['file_name'];
+		}
+		return $image;
 	}
 }
 

@@ -44,11 +44,11 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top: 30px;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mg-tb-30">
                 <div class="invoice-wrap">
-                    <div class="invoice-img" style="padding: 30px 0;background-color: #3a53c4;">
-                        <h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Selamat Datang</h3>
+                    <div class="invoice-img" style="padding: 30px 0;background-color: #faf7f2;">
+                        <h3 style="text-transform: uppercase;color: #555;margin-bottom: 0;">Data Keseluruhan</h3>
                     </div>
                     <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -100,20 +100,54 @@
                                                     <?php } ?>
                                                 </tr>
                                             <?php endforeach ?>
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
- <!--                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="invoice-ds-int">
-                                <h2>Remarks</h2>
-                                <p>Ornare non tortor. Nam quis ipsum vitae dolor porttitor interdum. Curabitur faucibus erat vel ante fermentum lacinia. Integer porttitor laoreet suscipit. Sed cursus cursus massa ut pellentesque. Phasellus vehicula dictum arcu, eu interdum massa bibendum. Ornare non tortor. Nam quis ipsum vitae dolor porttitor interdum. Curabitur faucibus erat vel ante fermentum lacinia. Integer porttitor laoreet suscipit. Sed cursus cursus massa ut pellentesque. Phasellus vehicula dictum arcu, eu interdum massa bibendum. </p>
-                            </div>
-                            <div class="invoice-ds-int invoice-last">
-                                <h2>Notika For Your Business</h2>
-                                <p class="tab-mg-b-0">Ornare non tortor. Nam quis ipsum vitae dolor porttitor interdum. Curabitur faucibus erat vel ante fermentum lacinia. Integer porttitor laoreet suscipit. Sed cursus cursus massa ut pellentesque. Phasellus vehicula dictum arcu, eu interdum massa bibendum. Ornare non tortor. Nam quis ipsum vitae dolor porttitor interdum. Curabitur faucibus erat vel ante fermentum lacinia. Integer porttitor laoreet suscipit. Sed cursus cursus massa ut pellentesque. Phasellus vehicula dictum arcu, eu interdum massa bibendum. </p>
-                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
+                    <div class="past-day-statis">
+                        <h2>Data dalam 1 tahun</h2>
+                    </div>
+                    <div class="past-statistic-an">
+                        <div class="past-statistic-ctn">
+                            <h3><span class="counter">320,000</span></h3>
+                            <p>Perhari</p>
+                        </div>
+<!--                         <div class="past-statistic-graph">
+                            <div class="stats-bar"><canvas width="68" height="35"></canvas></div>
+                        </div> -->
+                    </div>
+                    <div class="past-statistic-an">
+                        <div class="past-statistic-ctn">
+                            <h3><span class="counter">103,000</span></h3>
+                            <p>Perminggu</p>
+                        </div>
+<!--                         <div class="past-statistic-graph">
+                            <div class="stats-line"><canvas width="68" height="35"></canvas></div>
+                        </div> -->
+                    </div>
+                    <div class="past-statistic-an">
+                        <div class="past-statistic-ctn">
+                            <h3><span class="counter">700,000</span></h3>
+                            <p>Perbulan</p>
+                        </div>
+                       <!--  <div class="past-statistic-graph">
+                            <div class="stats-bar-2"><canvas width="68" height="35"></canvas></div>
+                        </div> -->
+                    </div>
+                     <div class="past-statistic-an">
+                        <div class="past-statistic-ctn">
+                            <h3><span class="counter">1,400,000</span></h3>
+                            <p>Pertahun</p>
+                        </div>
+<!--                         <div class="past-statistic-graph">
+                            <div class="stats-line"><canvas width="68" height="35"></canvas></div>
                         </div> -->
                     </div>
                 </div>

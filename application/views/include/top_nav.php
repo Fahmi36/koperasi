@@ -23,21 +23,13 @@
                             <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
                             <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
                         <?php }else{ ?>
-                            <li class="nav-item"><a href="<?= site_url('logout') ?>" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Logout</a></li>
-                        <?php }?>
-<!--                         <li class="nav-item dropdown">
+                           
+                           <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
-=======
-                        <?php if ($this->session->userdata('id') == null): ?>
-                            
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
-                        <?php endif ?>
-                        <li class="nav-item nc-al">
+<!--                         <li class="nav-item nc-al">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
->>>>>>> 10402b5e05924ce07268b2ae8fcce21a9445fb82
                                 <div class="hd-mg-tt">
                                     <h2>Notification</h2>
                                 </div>
@@ -58,7 +50,7 @@
                                     <a href="#">View All</a>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-settings"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn" style="width: 170px;">
@@ -70,7 +62,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="#">
+                                    <a href="<?php echo site_url('action/keluar'); ?>">
                                         <div class="hd-message-sn">
                                             <div class="hd-mg-ctn">
                                                 <h3>Keluar</h3>
@@ -80,9 +72,10 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
+                    <?php }?>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 </div>

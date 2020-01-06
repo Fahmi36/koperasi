@@ -25,14 +25,14 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 20px;">
-			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<form action="">
 					<div class="form-example-wrap">
 						<div class="form-example-int">
 							<div class="form-group">
 								<label>Nama Lengkap</label>
 								<div class="nk-int-st">
-									<input type="text" name="nama" class="form-control input-sm">
+									<input type="text" name="nama" value="<?=$this->session->userdata('nama');?>" class="form-control input-sm">
 								</div>
 							</div>
 						</div>

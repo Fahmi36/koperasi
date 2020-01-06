@@ -53,7 +53,7 @@ class Action extends CI_Controller {
 			redirect('/');
 		}else{
 			$data['title'] = 'Bayar Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['cicil'] = $this->mm->getDetailCicil();
+			// $data['cicil'] = $this->mm->getDetailCicil();
 			$data['link_view'] = 'pages/bayarpinjam';
 			if ($data['cicil']!=null) {
 				$this->load->view('utama',$data);
@@ -87,6 +87,7 @@ class Action extends CI_Controller {
 		
 			$data['title'] = 'Profile - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/user/profile';
+			$data['profile'] = $this->mm->getProfile();
 			$this->load->view('utama',$data);
 	}
 	public function sim_pokok()
@@ -149,6 +150,14 @@ class Action extends CI_Controller {
 	{
 		try {
 			$this->mm->login();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function actRegis()
+	{
+		try {
+			$this->mm->register();
 		} catch (Exception $e) {
 			echo json_encode(array('success'=>false,'msg'=>$e));
 		}
