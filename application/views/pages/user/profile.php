@@ -25,14 +25,14 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 20px;">
-			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-				<form action="">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<form action="javascript:void(0);" method="post" id="ubahprofile">
 					<div class="form-example-wrap">
 						<div class="form-example-int">
 							<div class="form-group">
 								<label>Nama Lengkap</label>
 								<div class="nk-int-st">
-									<input type="text" name="nama" class="form-control input-sm">
+									<input type="text" name="nama" value="<?=$profile->nama?>" class="form-control input-sm">
 								</div>
 							</div>
 						</div>
@@ -40,7 +40,7 @@
 							<div class="form-group">
 								<label>Tempat Lahir</label>
 								<div class="nk-int-st">
-									<input type="text" name="tempat_lahir" class="form-control input-sm">
+									<input type="text" name="tempat_lahir" value="<?=$profile->tempat_lahir?>" class="form-control input-sm">
 								</div>
 							</div>
 						</div>
@@ -48,7 +48,7 @@
 							<div class="form-group">
 								<label>Tanggal Lahir</label>
 								<div class="nk-int-st">
-									<input type="text" name="tgl_lahir" class="form-control input-sm" data-mask="99/99/9999" placeholder="dd/mm/yyyy">
+									<input type="text" name="tgl_lahir" value="<?=$profile->tgl_lahir?>" class="form-control input-sm" data-mask="9999/99/99" placeholder="dd/mm/yyyy">
 								</div>
 							</div>
 						</div>

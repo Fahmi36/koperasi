@@ -107,7 +107,7 @@ class SimpanController extends CI_Controller {
 				'tgl_transaksi'=>$this->input->post('set-tanggal'),
 				'saldo_akhir'=> ($get->saldo_akhir),
 				'metode_bayar'=>$this->input->post('sistem_bayar'),
-				'bukti_transfer'=>
+				'bukti_transfer'=>$gambar,
 				'id_petugas'=>$this->input->post('idpetugas'),
 			);
 			$query = $this->ms->insert($data);

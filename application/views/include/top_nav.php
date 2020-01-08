@@ -18,12 +18,16 @@
                                 </div>
                             </div>
                         </li> -->
-                        <?php if ($this->session->userdata('id') == null): ?>
-                            
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
-                        <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
-                        <?php endif ?>
-                        <li class="nav-item nc-al">
+                        <?php if ($this->session->userdata('id') == null){ ?>
+
+                            <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
+                            <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
+                        <?php }else{ ?>
+                           
+                           <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
+                            <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+<!--                         <li class="nav-item nc-al">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
                                 <div class="hd-mg-tt">
@@ -46,9 +50,9 @@
                                     <a href="#">View All</a>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <li class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-settings"></i></span></a>
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><?php $this->session->userdata('username'); ?> <i class="notika-icon notika-settings"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn" style="width: 170px;">
                                 <div class="hd-message-info">
                                     <a href="<?php echo site_url('profile'); ?>">
@@ -58,7 +62,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="<?php echo site_url('action/keluar'); ?>">
+                                    <a href="<?php echo site_url('action/logout'); ?>">
                                         <div class="hd-message-sn">
                                             <div class="hd-mg-ctn">
                                                 <h3>Keluar</h3>
@@ -68,9 +72,10 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
+                    <?php }?>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 </div>

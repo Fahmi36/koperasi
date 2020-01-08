@@ -124,7 +124,120 @@ class PinjamController extends CI_Controller {
 			$json = $this->failedRespone();
 		}
 	}
+	public function bayarPinjaman()
+	{
+		$wheremc = array(
+			'tipe_cicil'=>1,
+			'id_angsuran'=>$this->input->post('id')
+		);
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
 
+		$datamc = array(
+			'status'=>'1'
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'1'
+		);
+
+		$this->mc->update($datamc,$wheremc);
+		$this->ms->update($datams,$wherems);
+	}
+	public function TerimaPinjaman()
+	{
+		$wheremc = array(
+			'tipe_cicil'=>1,
+			'id_angsuran'=>$this->input->post('id')
+		);
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$datamc = array(
+			'status'=>'2'
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'2'
+		);
+
+		$this->mc->update($datamc,$wheremc);
+		$this->ms->update($datams,$wherems);
+	}
+	public function TolakPinjaman()
+	{
+		$wheremc = array(
+			'tipe_cicil'=>1,
+			'id_angsuran'=>$this->input->post('id')
+		);
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$datamc = array(
+			'status'=>'4'
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'0'
+		);
+
+		$this->mc->update($datamc,$wheremc);
+		$this->ms->update($datams,$wherems);
+	}
+	public function BuktiBayarPinjaman()
+	{
+
+		$gambar = $this->Uploadfoto($this->input->post('filenya'));
+
+		$wheremc = array(
+			'tipe_cicil'=>1,
+			'id_angsuran'=>$this->input->post('id'),
+			'angsuran'=>($this->input->post('angsuran')-1),
+		);
+
+		$datamc = array(
+			'jenis_bayar'=>$this->input->post('jenis'),
+			'bukti_tf'=>$gambar,
+			'id_petugas'=>$this->input->post('idpetugas'),
+			'tgl_bayar'=>date('Y-m-d',strtotime($this->input->post('set-tanggal'))),
+		);
+
+		$this->mc->update($datamc,$wheremc);
+	}
+	public function AccPinjamanAdmin()
+	{
+		$wheremc = array(
+			'tipe_cicil'=>1,
+			'id_angsuran'=>$this->input->post('id')
+		);
+
+		$datamc = array(
+			'status'=>'4'
+		);
+
+		$this->mc->update($datamc,$wheremc);
+	}
+	public function Uploadfoto($param)
+	{
+		$config['upload_path'] = './assets/images/bukti/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size']             = 10024;
+		$config['encrypt_name']         = TRUE;
+		$config['remove_spaces']        = TRUE;
+
+		$this->load->library('upload', $config);
+		$upload = $this->upload->do_upload($param);
+		$data = $this->upload->data();
+		if (! $upload) {
+			$image = null;
+		}else{
+			$image = $data['file_name'];
+		}
+		return $image;
+	}
 }
 
 /* End of file PinjamController.php */

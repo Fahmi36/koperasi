@@ -49,11 +49,17 @@ class Action extends CI_Controller {
 	{
 		if ($this->session->userdata('id')==null) {
 			redirect('login');
+		}else if ($this->uri->segment(3) == null) {
+			redirect('/');
 		}else{
 			$data['title'] = 'Bayar Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
 			// $data['cicil'] = $this->mm->getDetailCicil();
 			$data['link_view'] = 'pages/bayarpinjam';
-			$this->load->view('utama',$data);
+			if ($data['cicil']!=null) {
+				$this->load->view('utama',$data);
+			}else{
+				redirect('/');
+			}
 		}
 	}
 	public function login()
@@ -81,6 +87,7 @@ class Action extends CI_Controller {
 		
 			$data['title'] = 'Profile - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/user/profile';
+			$data['profile'] = $this->mm->getProfile();
 			$this->load->view('utama',$data);
 	}
 	public function sim_pokok()
@@ -88,11 +95,22 @@ class Action extends CI_Controller {
 		if ($this->session->userdata('id')==null) {
 			redirect('login');
 		}else{
-		$data['title'] = 'Simpanan Poko - Selamat Datang di Koperasi Simpan Pinjam';
-		$data['link_view'] = 'pages/pokok';
-		$data['jenis_setor'] = $this->mm->getMasterSetoran();
-		$this->load->view('utama',$data);
+			$data['title'] = 'Simpanan Pokok - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/pokok';
+			$data['jenis_setor'] = $this->mm->getMasterSetoran();
+			$this->load->view('utama',$data);
+		}
 	}
+	public function dataPinjam()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Data Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/datapinjaman';
+			$data['cicilan'] = $this->mm->getCicil();
+			$this->load->view('utama',$data);
+		}
 	}
 	public function sim_wajib()
 	{
@@ -136,6 +154,14 @@ class Action extends CI_Controller {
 			echo json_encode(array('success'=>false,'msg'=>$e));
 		}
 	}
+	public function actRegis()
+	{
+		try {
+			$this->mm->register();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
 	public function ModalPinjam()
     {
         // return var_dump($this->input->post('id'));
@@ -152,10 +178,22 @@ class Action extends CI_Controller {
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
-    public function keluar() {
-	    $this->session->unset_userdata('id');
-	    $this->session->unset_userdata('username');
-	    $this->session->unset_userdata('nama');
-	    redirect('/');
-	}
+     public function InfoPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
+        $json = $this->load->view('pages/modalpinjaman',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function logout()
+    { 
+    	$this->session->unset_userdata('id');
+    	$this->session->unset_userdata('nohp');
+    	$this->session->unset_userdata('username');
+    	$this->session->unset_userdata('nama');
+    	$this->session->unset_userdata('level');
+    	$this->session->unset_userdata('kelompok');
+    	redirect('login');
+    }
 }

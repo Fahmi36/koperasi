@@ -16,7 +16,7 @@
 					</div>
 					<hr> 
 					<br>
-					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Simpanan</h4>
+					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Bayar Pinjaman</h4>
 					<form method="post" action="javascript:void(0)" id="formbayarpinjam" enctype="multipart/form-data" accept-charset="utf-8">
 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
@@ -35,12 +35,13 @@
 					<div class="form-example-int form-horizental mg-t-15" id="simpanpokok">
 						<div class="form-group">
 							<div class="row">
-					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
 									<label class="hrzn-fm">Angsuran Ke :</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
 										<input type="text" readonly value="<?=($cicil->angsuran+1)?>" name="angsuran" class="form-control input-sm">
+										<input type="hidden" readonly value="<?=$cicil->id?>" name="id" class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -54,7 +55,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" value="<?= number_format($cicil->jasa,0,',','.')?>" readonly name="jumlah_wajib" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
+										<input type="number" value="<?= number_format($cicil->jasa,0,',','.')?>" readonly class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
 									</div>
 								</div>
 							</div>
@@ -68,7 +69,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="text" value="<?= number_format($cicil->jumlah_bayar,0,',','.')?>" readonly name="bulanan" class="form-control input-sm">
+										<input type="text" value="<?= number_format($cicil->jumlah_bayar,0,',','.')?>" readonly class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -82,7 +83,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="text" value="<?=date('d F, Y',strtotime($cicil->tgl_tempo))?>" readonly name="tgl_tempo" class="form-control input-sm">
+										<input type="text" value="<?=date('d F, Y',strtotime($cicil->tgl_tempo))?>" readonly class="form-control input-sm">
 									</div>
 								</div>
 							</div>
@@ -96,7 +97,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<select class="form-control" name="sistem_bayar" id="sistem_bayar" onchange="pilihbayar()">
+										<select class="form-control" name="jenis" id="sistem_bayar" onchange="pilihbayar()">
 											<option selected disabled>Pilih Jenis Pembayaran</option>
 											<option value="1">Melalui Petugas</option>
 											<option value="2">Melalui Bank / Transfer</option>
@@ -114,7 +115,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<select id="nama_petugas" name="nama_petugas" class="form-control"></select>
+										<select id="nama_petugas" name="nama_petugas" class="form-control input-lg"></select>
                     					<input type="hidden" id="idpetugas" name="idpetugas">
                     					<input type="hidden" id="namapetugas" name="namapetugas">
 									</div>

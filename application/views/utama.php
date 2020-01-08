@@ -87,7 +87,6 @@
     <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
-    <script src="<?=base_url('/')?>assets/js/tawk-chat.js"></script>
     <script src="<?=base_url('/')?>assets/js/jasny-bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -97,7 +96,20 @@
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#besar_pinjam").keyup(function() {
+                var x = document.getElementById('suratPer');
+                if($(this).val() >= 20000000) {
+                    $("#suratPer").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan' required></div></div></div></div>");
+                } else {
+                    $("#suratPer").html("");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             $("#datatransaksi").dataTable();
+            $("#datapinjaman").dataTable();
 
         });
         function pilihsimpan() {
@@ -132,8 +144,7 @@
         }
         $('#nama_petugas').select2({
             placeholder: "Pilih Petugas...",
-            minimumResultsForSearch: 2,
-            minimumInputLength: 3,
+            minimumInputLength: 0,
             ajax: {
               url: '<?= site_url('action/getPetugas')?>',
               dataType: 'json',
@@ -160,17 +171,49 @@
             $("#namapetugas").val("");
         });
     </script>
-<!--     <script type="text/javascript">
-        document.getElementById('peng_rptra').onchange = function() {
-            document.getElementById('isi_peke1').disabled = !this.checked;
-        };
-        document.getElementById('peng_pkk').onchange = function() {
-            document.getElementById('isi_peke2').disabled = !this.checked;
-        };
-        document.getElementById('lainnya').onchange = function() {
-            document.getElementById('isi_peke3').disabled = !this.checked;
-        };
-    </script> -->
+    <script type="text/javascript">
+
+        $('#peng_rptra').on('click',function () {
+        if ($('#peng_rptra').is(':checked')) {
+            $('#isi_peke1').removeAttr('disabled');
+            $('#isi_peke2').attr('disabled', 'disabled');
+            $('#isi_peke3').attr('disabled', 'disabled');
+        }
+
+    });
+        $('#peng_pkk').on('click',function () {
+        if ($('#peng_pkk').is(':checked')) {
+            $('#isi_peke2').removeAttr('disabled');
+            $('#isi_peke1').attr('disabled', 'disabled');
+            $('#isi_peke3').attr('disabled', 'disabled');
+        }
+
+    });
+        $('#lainnya').on('click',function () {
+        if ($('#lainnya').is(':checked')) {
+            $('#isi_peke3').removeAttr('disabled');
+            $('#isi_peke1').attr('disabled', 'disabled');
+            $('#isi_peke2').attr('disabled', 'disabled');
+        }
+
+    });
+        $('#transfer').on('click',function () {
+        if ($('#transfer').is(':checked')) {
+            $('#buktitf').removeAttr('style');
+        }else{
+            $('#buktitf').attr('style', 'display:none;');
+        }
+
+    });
+        $('#petugas').on('click',function () {
+        if ($('#petugas').is(':checked')) {
+            $('#buktitf').attr('style', 'display:none;');
+        }
+
+    });
+
+        
+    </script>
     
 </body>
 </html>
