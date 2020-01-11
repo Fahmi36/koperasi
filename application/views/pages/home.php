@@ -87,6 +87,8 @@
             </div>
         <?php } ?>
         </div>
+    </div>
+</div>
 
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-tb-30">
@@ -185,7 +187,7 @@
                             <div class="stats-bar-2"><canvas width="68" height="35"></canvas></div>
                         </div>
                     </div>
-                     <div class="past-statistic-an">
+                    <div class="past-statistic-an">
                         <div class="past-statistic-ctn">
                             <h3><span class="counter">1,400,000</span></h3>
                             <p>Pertahun</p>

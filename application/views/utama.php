@@ -96,6 +96,18 @@
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#besar_pinjam").keyup(function() {
+                var x = document.getElementById('suratPer');
+                if($(this).val() >= 20000000) {
+                    $("#suratPer").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan' required></div></div></div></div>");
+                } else {
+                    $("#suratPer").html("");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             $("#datatransaksi").dataTable();
             $("#datapinjaman").dataTable();
 

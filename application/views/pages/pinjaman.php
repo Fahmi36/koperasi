@@ -37,7 +37,7 @@
 						</div>
 						<hr> 
 						<br>
-						<div class="form-example-int form-horizental">
+						<div class="form-example-int form-horizental mg-t-15">
 							<div class="form-group">
 								<div class="row">
 									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -45,7 +45,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="nama" value="<?=$this->session->userdata('nama')?>" class="form-control input-sm" placeholder="Masukkan Nama">
+											<input type="text" name="nama" value="<?=$this->session->userdata('nama')?>" class="form-control input-sm" placeholder="Masukkan Nama" required>
 										</div>
 									</div>
 								</div>
@@ -59,13 +59,18 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" value="<?=$kelompok->kelompok?>" name="Kelompok" class="form-control input-sm" placeholder="Masukkan Kelompok">
+											<select name="Kelompok" class="form-control input-sm" required>
+												<option selected disabled>Pilih Jenis Kelompok</option>
+												<option value="">Koperasi</option>
+												<option value="">PKT</option>
+												<option value="">PNS</option>
+											</select>
 										</div>
 									</div>
 								</div>
-							</div> 
+							</div>
 						</div>
-						<div class="form-example-int form-horizental">
+						<div class="form-example-int form-horizental mg-t-15">
 							<div class="form-group">
 								<div class="row">
 									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -73,7 +78,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="noanggota" value="<?=$this->session->userdata('id');?>" class="form-control input-sm" placeholder="Masukkan No. Anggota">
+											<input type="text" name="noanggota" value="<?=$this->session->userdata('id');?>" class="form-control input-sm" placeholder="Masukkan No. Anggota" required>
 										</div>
 									</div>
 								</div>
@@ -87,11 +92,14 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman">
+											<input type="number" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="form-example-int form-horizental" id="suratPer">
+							
 						</div>
 						<div class="form-example-int form-horizental mg-t-15">
 							<div class="form-group">
@@ -101,10 +109,10 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<select name="jml_angsuran" class="form-control input-sm" required>
-												<option selected disabled>Pilih Jumlah Angsuran</option>
-												<option value="3">3 Bulan</option>
-												<option value="6">6 Bulan</option>
+											<select name="jml_angsuran" class="form-control input-sm" required disabled>
+												<!-- <option selected disabled>Pilih Jumlah Angsuran</option> -->
+												<!-- <option value="3">3 Bulan</option> -->
+												<!-- <option value="6">6 Bulan</option> -->
 												<option value="10">10 Bulan</option>
 											</select>
 										</div>
@@ -112,7 +120,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-example-int form-horizental">
+						<div class="form-example-int form-horizental mg-t-15">
 							<div class="form-group">
 								<div class="row">
 									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -120,7 +128,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="telp" value="<?=$kelompok->no_hp?>" class="form-control input-sm" placeholder="Masukkan No. Telp">
+											<input type="number" name="telp" value="<?=$kelompok->no_hp?>" class="form-control input-sm" placeholder="Masukkan No. Telp" required>
 										</div>
 									</div>
 								</div>
@@ -134,7 +142,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="norek" value="<?=$kelompok->no_rek?>" class="form-control input-sm" placeholder="Masukkan No. Rekening">
+											<input type="number" name="norek" value="<?=$kelompok->no_rek?>" class="form-control input-sm" placeholder="Masukkan No. Rekening" required>
 										</div>
 									</div>
 								</div>
@@ -148,7 +156,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan">
+											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required>
 										</div>
 									</div>
 								</div>

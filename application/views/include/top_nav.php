@@ -52,7 +52,7 @@
                             </div>
                         </li> -->
                         <li class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-settings"></i></span></a>
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><?php $this->session->userdata('username'); ?> <i class="notika-icon notika-settings"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn" style="width: 170px;">
                                 <div class="hd-message-info">
                                     <a href="<?php echo site_url('profile'); ?>">
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="<?php echo site_url('action/keluar'); ?>">
+                                    <a href="<?php echo site_url('action/logout'); ?>">
                                         <div class="hd-message-sn">
                                             <div class="hd-mg-ctn">
                                                 <h3>Keluar</h3>
