@@ -123,6 +123,24 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label style="font-weight: normal;">No Rekening</label>
+									<div class="nk-int-st">
+										<input type="text" name="no_rumah" class="form-control input-sm">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label style="font-weight: normal;">Nama Bank</label>
+									<div class="nk-int-st">
+										<input type="text" name="no_hp" class="form-control input-sm">
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="form-example-int mg-t-15">
 							<button  type="submit" class="btn btn-success notika-btn-success waves-effect">Simpan</button>
 						</div>

@@ -11,10 +11,21 @@
                             <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>">
                                 <a href="<?php echo site_url('simpanan'); ?>">Simpanan</a>
                             </li>
+                            <?php if ($this->session->userdata('username') != null): ?>
+                            <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>">
+                                <a href="<?php echo site_url('new_user'); ?>">Data Pendaftar Baru</a>
+                            </li>
+                            <li class="<?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}?>">
+                                <a href="<?php echo site_url('data_pinjam'); ?>">Data Pembayaran Pinjaman</a>
+                            </li>
+                            <?php endif ?>
                             <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                                 <a data-toggle="collapse" data-target="#demoevent" href="#">Pinjaman</a>
                                 <ul id="demoevent" class="collapse dropdown-header-top">
-                                    <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
+
+                                    <?php if ($this->session->userdata('username') == null): ?>
+                                        <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
+                                    <?php endif ?>
                                     <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Bayar Pinjaman</a></li>
                                 </ul>
                             </li>
@@ -35,6 +46,8 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li class="<?php if($this->uri->segment(1)==""){echo "active";}?>"><a href="<?php echo site_url(''); ?>"><i class="notika-icon notika-house"></i> Beranda</a></li>
                     <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>"><a href="<?php echo site_url('simpanan'); ?>"><i class="notika-icon notika-dollar"></i> Simpanan</a></li>
+                    <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>"><a href="<?php echo site_url('new_user'); ?>"><i class="notika-icon notika-dollar"></i> Data Pendaftar Baru</a></li>
+                    <li class="<?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}?>"><a href="<?php echo site_url('data_pinjam'); ?>"><i class="notika-icon notika-dollar"></i> Data Pembayaran Pinjaman</a></li>
                     <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>"><a data-toggle="tab" href="#pinjaman"><i class="notika-icon notika-credit-card"></i> Pinjaman</a></li>
                     <!-- <li><a href="<?php echo site_url('setoran'); ?>"><i class="notika-icon notika-credit-card"></i> Setoran</a></li> -->
                     <!-- <li><a data-toggle="tab" href="#Page" ><i class="notika-icon notika-support"></i> Pages</a></li> -->

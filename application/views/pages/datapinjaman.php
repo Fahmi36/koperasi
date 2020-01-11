@@ -38,6 +38,8 @@
                                                             <td>Menunggu Persetujuan</td>
                                                         <?php }else if ($key->status_pinjaman == 2){ ?>
                                                             <td>Sudah di Setujui</td>
+                                                        <?php }else if ($key->status_pinjaman == 5){ ?>
+                                                            <td>Pinjaman Sudah di Transfer</td>
                                                         <?php }else{ ?>
                                                             <td>Sudah Lunas</td>
                                                         <?php } ?>
@@ -45,18 +47,21 @@
                                                             <td>
 
                                                              <?php if ($key->status_pinjaman == 2){ ?> 
-                                                                <a href="<?=site_url('bayar/pinjaman/'.$key->id)?>" target="_blank" class="btn btn-primary notika-btn-blue"><i class="notika-icon notika-next"></i></a>
+                                                                <a href="<?=site_url('bayar/pinjaman/'.$key->id)?>" target="_blank" data-toggle="tooltip" data-title="Bayar Pinjaman" class="btn btn-primary notika-btn-blue"><i class="notika-icon notika-next"></i></a>
                                                             <?php } ?>
-                                                                <button onclick="infopinjaman(<?=$key->id?>)" class="btn notika-btn-white"><i class="notika-icon notika-menus"></i></button>
+                                                                <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn notika-btn-white"><i class="notika-icon notika-menus"></i></button>
                                                             </td>
                                                         <?php }else{ ?>
                                                             <td>
                                                              <?php if ($key->status_pinjaman == 1){ ?> 
-                                                                <button onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
-                                                                <button onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
-                                                                <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                <button data-toggle="tooltip" data-title="Setujui Pinjaman" onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
+                                                                <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
+                                                                <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                            <?php }else if ($key->status_pinjaman == 2){ ?> 
+                                                                <button onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success" data-toggle="tooltip" data-title="Upload Bukti Transfer"><i class="notika-icon notika-checked"></i></button>
+                                                                <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>
                                                             <?php }else{ ?>
-                                                                <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>
                                                             <?php } ?>
                                                         </td>
                                                     <?php } ?>

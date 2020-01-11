@@ -160,7 +160,8 @@ class PinjamController extends CI_Controller {
 		);
 
 		$datams = array(
-			'status_pinjaman'=>'2'
+			'status_pinjaman'=>'2',
+			'id_petugas'=>$this->session->userdata('id'),
 		);
 
 		$this->mc->update($datamc,$wheremc);
