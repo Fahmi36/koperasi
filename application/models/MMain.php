@@ -182,6 +182,7 @@ class MMain extends CI_Model {
 			$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'left');
 			$this->db->where('anggota_setoran.tipe_transaksi', 1);
 			$this->db->where('anggota_setoran.id_jenis_setoran !=', 1);
+			$this->db->where('anggota_setoran.status', 1);
 			$this->db->order_by('tgl_transaksi', 'desc');
 			$query = $this->db->get();
 		}
