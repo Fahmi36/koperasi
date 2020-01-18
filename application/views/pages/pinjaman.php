@@ -7,17 +7,17 @@
 <div class="form-element-area">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-tb-40">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcomb-list">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<div class="breadcomb-wp">
 								<div class="breadcomb-icon">
-									<i class="notika-icon notika-form"></i>
+									<i class="notika-icon notika-credit-card"></i>
 								</div>
 								<div class="breadcomb-ctn">
-									<h2>Halaman Pinjaman</h2>
-									<p>PERMOHONAN PINJAMAN KOPERASI PKK MELATI JAYA</p>
+									<h2>Halaman Permohonan Pinjaman</h2>
+									<p>Permohonan Pinjaman KOPERASI PKK MELATI JAYA</p>
 								</div>
 							</div>
 						</div>

@@ -102,7 +102,7 @@ class Action extends CI_Controller {
 			redirect('login');
 		}else{
 			$data['title'] = 'Report - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/report';
+			$data['link_view'] = 'pages/admin/report';
 			$data['report'] = $this->mm->getSimpananAnggota();
 			$data['profile'] = $this->mm->getProfile();
 			$this->load->view('utama',$data);
@@ -125,7 +125,7 @@ class Action extends CI_Controller {
 			redirect('login');
 		}else{
 			$data['title'] = 'Data Pendaftar Baru - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/data_user';
+			$data['link_view'] = 'pages/admin/new_user';
 			$data['jenis_setor'] = $this->mm->getMasterSetoran();
 			$this->load->view('utama',$data);
 		}
