@@ -89,6 +89,7 @@ class PinjamController extends CI_Controller {
 		try {
 			$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();
 			$jasa = $bunga->bunga/100;
+			$surat = $this->Uploadfoto('surat_pernyataan');
 			$data = array(
 				'id_anggota'=>$this->session->userdata('id'),
 				'besar_pengajuan_pinjaman'=>$this->input->post('nominal'),
@@ -99,6 +100,7 @@ class PinjamController extends CI_Controller {
 				'keperluan'=>$this->input->post('keperluan'),
 				'status_pinjaman'=>'4',
 				'biaya_jasa'=>round($this->input->post('nominal')*$jasa),
+				'surat_pt' => $surat,
 			);
 			$query = $this->ms->insertid($data);
 			$tanggal = date('Y-m').'-06';
@@ -143,7 +145,12 @@ class PinjamController extends CI_Controller {
 		);
 
 		$this->mc->update($datamc,$wheremc);
-		$this->ms->update($datams,$wherems);
+		$query = $this->ms->update($datams,$wherems);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
 	}
 	public function TerimaPinjaman()
 	{
@@ -191,11 +198,10 @@ class PinjamController extends CI_Controller {
 	public function BuktiBayarPinjaman()
 	{
 
-		$gambar = $this->Uploadfoto($this->input->post('filenya'));
-
+		$gambar = $this->Uploadfoto('filenya');
 		$wheremc = array(
 			'tipe_cicil'=>1,
-			'id_angsuran'=>$this->input->post('id'),
+			'id'=>$this->input->post('id'),
 			'angsuran'=>($this->input->post('angsuran')-1),
 		);
 
@@ -203,10 +209,17 @@ class PinjamController extends CI_Controller {
 			'jenis_bayar'=>$this->input->post('jenis'),
 			'bukti_tf'=>$gambar,
 			'id_petugas'=>$this->input->post('idpetugas'),
-			'tgl_bayar'=>date('Y-m-d',strtotime($this->input->post('set-tanggal'))),
+			'status'=>2,
+			// 'tgl_bayar'=>date('Y-m-d',strtotime($this->input->post('set-tanggal'))),
+			'tgl_bayar'=>date('Y-m-d'),
 		);
 
-		$this->mc->update($datamc,$wheremc);
+		$query = $this->mc->update($datamc,$wheremc);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
 	}
 	public function AccPinjamanAdmin()
 	{
@@ -223,18 +236,18 @@ class PinjamController extends CI_Controller {
 	}
 	public function Uploadfoto($param)
 	{
+		$this->load->library('upload');
 		$config['upload_path'] = './assets/images/bukti/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['max_size']             = 10024;
 		$config['encrypt_name']         = TRUE;
 		$config['remove_spaces']        = TRUE;
 
-		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
 		$upload = $this->upload->do_upload($param);
-		$data = $this->upload->data();
 		if (! $upload) {
 			$image = null;
 		}else{
+			$data = $this->upload->data();
 			$image = $data['file_name'];
 		}
 		return $image;

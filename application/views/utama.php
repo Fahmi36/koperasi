@@ -96,6 +96,169 @@
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#resetPass").modal('show');
+        });
+        document.getElementById("next").disabled = true;
+        function cekPass() {
+            var katasandi = document.getElementById("katasandi").value;
+            var confirmPassword = document.getElementById("ulangsandi").value;
+            if (katasandi != confirmPassword) {
+                document.getElementById("next").disabled = true;
+                $('.pesan').html('<h5 class="text-danger"> Password tidak sesuai ! </h5>');
+                return false;
+            }else{
+                document.getElementById("next").disabled = false;
+                $('.pesan').html('<h5 class="text-success"> Password sesuai ! </h5>');
+                return true;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        const form = document.querySelector('.step-form')
+        const steps = form.querySelectorAll('.step-form__step')
+        const progress = form.querySelectorAll('.step-form__progress-step')
+
+        const next = form.querySelector('[data-action="next"]')
+        const prev = form.querySelector('[data-action="prev"]')
+        const submit = form.querySelector('[data-action="submit"]')
+
+        let currentStep = 0, totalSteps = steps.length
+
+        function showStep (index) {
+          steps[index].classList.add('step-form__step--active')
+
+          if (index !== 0){ 
+            prev.classList.add('step-form__button--active')
+            prev.setAttribute('aria-hidden', 'false')
+          } else {
+            prev.classList.remove('step-form__button--active')
+            prev.setAttribute('aria-hidden', 'true')
+          }
+
+          if (index === totalSteps - 1) {
+            next.classList.remove('step-form__button--active')
+            next.setAttribute('aria-hidden', 'true')
+            submit.classList.add('step-form__button--active')
+            submit.setAttribute('aria-hidden', 'false')
+            submit.addEventListener('click', stepInputValidation)
+          } else {
+            next.classList.add('step-form__button--active')
+            next.setAttribute('aria-hidden', 'false')
+            submit.classList.remove('step-form__button--active')
+            submit.setAttribute('aria-hidden', 'true')
+            submit.removeEventListener('click', stepInputValidation)
+          }
+
+          stepSetProgress(index)
+        }
+
+        function stepActionHandler (index) {
+          if (index === 1 && ! stepInputValidation()) return false
+
+          steps[currentStep].classList.remove('step-form__step--active')
+
+          currentStep = currentStep + index
+
+          showStep(currentStep)
+        }
+
+        function stepInputHandler (element) {
+          const input = element.querySelector('.step-form__input')
+
+          const focusHandler = event => {
+            if (event.type === 'blur') {
+              if (input.value === '')
+              element.classList.remove('step-form__step--focused')
+            }
+
+            if (event.type === 'focus') {
+              if (input.value === '')
+              element.classList.add('step-form__step--focused')
+            }
+          }
+
+          input.addEventListener('blur', focusHandler)
+          input.addEventListener('focus', focusHandler)
+        }
+
+        function stepInputValidation () {
+          const inputs = steps[currentStep].querySelectorAll('.step-form__input')
+          const norek = steps[currentStep].querySelectorAll('#norek')
+
+          let i, valid = true
+
+          for (i = 0; i < inputs.length; i++) {
+            if (inputs[i].value === '') {
+              steps[currentStep].classList.add('step-form__step--invalid')
+              valid = false
+            } else if (
+              norek.value !== '' &&
+              steps[currentStep].classList.remove('step-form__step--invalid')
+            ) {
+              steps[currentStep].classList.remove('step-form__step--invalid')
+            }
+          }
+
+          if (valid)
+            progress[currentStep].classList.add('step-form__progress-step--complete')
+
+          return valid
+        }
+
+        function stepSetProgress (index) {
+          for (let i = 0; i < progress.length; i++)
+            progress[i].classList.remove('step-form__progress-step--active')
+
+          progress[index].classList.add('step-form__progress-step--active')
+        }
+
+        showStep(currentStep)
+
+        steps.forEach(step => stepInputHandler(step))
+        next.addEventListener('click', () => stepActionHandler(1))
+        prev.addEventListener('click', () => stepActionHandler(-1))
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#daftarRek").click(function(){
+                $("#sudahPunya").hide();
+                $("#belumPunya").show();
+                $("#formNorek").html("");
+            });
+            $("#inputNorek").click(function(){
+                $("#sudahPunya").show();
+                $("#belumPunya").hide();
+                $("#formNorek").html("<div class='form-group' id='formNorek'><label style='float: left;'>Nomor Rekening</label><div class='nk-int-st'><input type='number' id='norek' class='form-control input-sm step-form__input' placeholder='Masukkan Nomor Rekening'></div></div>");
+            });
+        });
+        /*modal*/
+        $(document).on('ready', function(){
+            $modal = $('.modal-frame');
+            $overlay = $('.modal-overlay');
+            $sidenav = $('.js-side-nav-container');
+
+            $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+              if($modal.hasClass('state-leave')) {
+                $modal.removeClass('state-leave');
+            }
+        });
+
+            $('.close').on('click', function(){
+              $overlay.removeClass('state-show');
+              $modal.removeClass('state-appear').addClass('state-leave');
+          });
+
+            $('.open').on('click', function(){
+              $overlay.addClass('state-show');
+              $modal.removeClass('state-leave').addClass('state-appear');
+              $sidenav.removeClass('side-nav-visible');
+          });
+        });
+        /*end modal*/
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
             $("#besar_pinjam").keyup(function() {
                 var x = document.getElementById('suratPer');
                 if($(this).val() >= 20000000) {

@@ -17,10 +17,13 @@ class Action extends CI_Controller {
 			$data['link_view'] = 'pages/home';
 			$data['simpanan'] = $this->mm->getSimpananAnggota();
 			$data['totalsimpan'] = $this->mm->getTotalSimpan();
+			$data['simpananwajib'] = $this->mm->getSimpananWajib();
 			$data['totalprofit'] = $this->mm->getProfit();
 			$data['belumbayar'] = $this->mm->getBelumbayar();
 			$data['totalpengeluaran'] = $this->mm->getPengeluran();
 			$data['totalpengeluaranpinjam'] = $this->mm->getPengeluranPinjaman();
+			$data['tgltempo'] = $this->mm->getJatuhTempo();
+			$data['user'] = $this->mm->getUser();
 			$this->load->view('utama',$data);
 		}
 	}
@@ -53,7 +56,7 @@ class Action extends CI_Controller {
 			redirect('/');
 		}else{
 			$data['title'] = 'Bayar Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
-			// $data['cicil'] = $this->mm->getDetailCicil();
+			$data['cicil'] = $this->mm->getDetailCicil();
 			$data['link_view'] = 'pages/bayarpinjam';
 			if ($data['cicil']!=null) {
 				$this->load->view('utama',$data);
@@ -185,6 +188,14 @@ class Action extends CI_Controller {
         $json = $this->load->view('pages/modalpinjaman',$data);
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
+    }
+    public function tambahRek()
+    {
+    	try {
+    		$this->mm->tambahRek();
+    	} catch (Exception $e) {
+    		redirect('/');
+    	}
     }
     public function logout()
     { 

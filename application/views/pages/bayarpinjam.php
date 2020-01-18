@@ -18,7 +18,7 @@
 					<br>
 					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Bayar Pinjaman</h4>
 					<form method="post" action="javascript:void(0)" id="formbayarpinjam" enctype="multipart/form-data" accept-charset="utf-8">
-					<div class="form-example-int form-horizental mg-t-15">
+<!-- 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
@@ -31,7 +31,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-example-int form-horizental mg-t-15" id="simpanpokok">
 						<div class="form-group">
 							<div class="row">

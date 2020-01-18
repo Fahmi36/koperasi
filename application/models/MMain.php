@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MMain extends CI_Model {
 
+	public function getUser()
+	{
+		$row = $this->db->get_where('anggota',array('id_anggota'=>$this->session->userdata('id')));
+		return $row->row();
+	}
 	public function getMasterSetoran()
 	{
 		$this->db->select('jenis_setoran,id');
@@ -26,10 +31,18 @@ class MMain extends CI_Model {
 	}
 	public function getTotalSimpan()
 	{
-		$this->db->select('SUM(jumlah_transaksi) as simpan');
-		$this->db->from('anggota_setoran');
-		$this->db->where('tipe_transaksi',1);
-		$query = $this->db->get();
+		if ($this->session->userdata('username') == null) {
+			$this->db->select('SUM(jumlah_transaksi) as simpan');
+			$this->db->from('anggota_setoran');
+			$this->db->where('tipe_transaksi',1);
+			$this->db->where('id_anggota', $this->session->userdata('id'));
+			$query = $this->db->get();
+		}else{
+			$this->db->select('SUM(jumlah_transaksi) as simpan');
+			$this->db->from('anggota_setoran');
+			$this->db->where('tipe_transaksi',1);
+			$query = $this->db->get();
+		}
 		return $query->row();
 	}
 	public function getProfit()
@@ -42,20 +55,55 @@ class MMain extends CI_Model {
 	}
 	public function getBelumbayar()
 	{
-		$this->db->select('SUM(bayar_jasa + jumlah_angsuran) as nunggak');
-		$this->db->from('anggota_pinjaman_angsuran');
-		$this->db->where('status', 0);
-		$query = $this->db->get();
+		if ($this->session->userdata('username') != null) {
+			$this->db->select('SUM(cicil.jasa + cicil.jumlah_bayar) as nunggak');
+			$this->db->from('cicil');
+			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+			$this->db->where('cicil.status', 2);
+			$this->db->where('tgl_tempo <', date('Y-m-d'));
+			$query = $this->db->get();
+		}else{
+			$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
+			$this->db->from('cicil');
+			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+			$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id'));
+			$this->db->where_in('status', [2,4]);
+			$query = $this->db->get();
+		}
 		return $query->row();
 	}
 	public function getPengeluran()
-	{
+	{ 
 		$this->db->select('SUM(jumlah_transaksi) as simpan');
 		$this->db->from('anggota_setoran');
 		$this->db->where('tipe_transaksi',0);
 		$query = $this->db->get();
 		return $query->row();
-	}	
+	}
+	public function getSimpananWajib()
+	{
+		$this->db->select('SUM(jumlah_transaksi) as simpan');
+		$this->db->from('anggota_setoran');
+		$this->db->where('tipe_transaksi',1);
+		$this->db->where('id_jenis_setoran', 2);
+		$this->db->where('status', 1);
+		$this->db->where('id_anggota', $this->session->userdata('id'));
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function getJatuhTempo()
+	{
+		$this->db->select('tgl_tempo');
+		$this->db->from('cicil');
+		$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+		$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id'));
+		$this->db->where('cicil.tipe_cicil',1);
+		$this->db->where('cicil.status',2);
+		$this->db->group_by('cicil.status');
+		$this->db->order_by('cicil.tgl_tempo', 'ASC');
+		$query = $this->db->get();
+		return $query->row();
+	}
 	public function getTotalSimpanhari()
 	{
 		$this->db->select('SUM(jumlah_transaksi) as simpan');
@@ -160,8 +208,7 @@ class MMain extends CI_Model {
 	{
 		$this->db->select('SUM(besar_persetujuan_pinjaman + biaya_jasa) as pinjam');
 		$this->db->from('anggota_pinjaman');
-		$this->db->where('status_pinjaman !=',0);
-		$this->db->or_where('status_pinjaman !=',1);
+		$this->db->where_in('status_pinjaman',[2,3]);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -183,7 +230,7 @@ class MMain extends CI_Model {
 			$this->db->where('anggota_setoran.tipe_transaksi', 1);
 			$this->db->where('anggota_setoran.id_jenis_setoran !=', 1);
 			$this->db->where('anggota_setoran.status', 1);
-			$this->db->order_by('tgl_transaksi', 'desc');
+			$this->db->order_by('tgl_transaksi', 'desc'); 
 			$query = $this->db->get();
 		}
 		return $query->result();
@@ -201,7 +248,7 @@ class MMain extends CI_Model {
 		if ($cek->num_rows() != 0 ) {
 			$cekpassanggota = password_verify(''.$this->input->post('password').'', ''.$row->password.'');
 			if ($cekpassanggota == true) {
-				$session1 = array('id'=> $row->no_anggota,'nohp'=>$row->no_hp,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
+				$session1 = array('id'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
 				$this->session->set_userdata($session1);
 				$val = array('success'=>true,'msg'=>'success');
 			}else{
@@ -264,12 +311,10 @@ class MMain extends CI_Model {
 	}
 	public function getDetailCicil()
 	{
-		$this->db->select('cicil.jasa,cicil.jumlah_bayar,cicil.angsuran,cicil.tgl_tempo');
+		$this->db->select('cicil.id,cicil.jasa,cicil.jumlah_bayar,cicil.angsuran,cicil.tgl_tempo');
 		$this->db->from('cicil');
 		$this->db->where('id_angsuran', $this->uri->segment(3));
 		$this->db->where('status', 2);
-		$this->db->or_where('id_petugas', 0);
-		$this->db->or_where('bukti_tf', null);
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -337,16 +382,12 @@ class MMain extends CI_Model {
 
 			$methode = $this->input->post('metode_pem');
 			$jml = $this->input->post('sebesar');
-			$f_ktp = $this->input->post('file_fotocopy');
-			$f_warna = $this->input->post('foto_1');
-			$f_warna2 = $this->input->post('foto_2');
-			$buktitf = $this->input->post('foto_tf');
 			$sukarela = $this->input->post('sim_sukarela');
 
-			$gambarktp = $this->Uploadfoto($f_ktp);
-			$gambarfoto = $this->Uploadfoto($f_warna);
-			$gambarfoto2 = $this->Uploadfoto($f_warna2);
-			$gambartf = $this->Uploadfoto($buktitf);
+			$gambarktp = $this->Uploadfoto('file_fotocopy');
+			$gambarfoto = $this->Uploadfoto('foto_1');
+			$gambarfoto2 = $this->Uploadfoto('foto_2');
+			$gambartf = $this->Uploadfoto('foto_tf');
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
 			$this->db->select('MAX(no_anggota) as jml');
@@ -398,15 +439,44 @@ class MMain extends CI_Model {
 		}
 		echo json_encode($val);
 	}
+	public function tambahRek()
+	{
+		$rek = $this->input->post('norek');
+		$sandi = $this->input->post('sandi');
+		$ulang = $this->input->post('ulang_sandi');
+		$cek = $this->db->get_where('anggota', array('no_rek'=>$rek))->num_rows();
+		if ($cek > 0) {
+			$val = array('success'=>false,'msg'=>'No Rekening Sudah Terdaftar');
+		}else{
+			if ($rek == '') {
+				$val = array('success'=>false,'msg'=>'No Rekening Tidak Boleh Kosong');
+			}else if ($sandi != $ulang) {
+				$val = array('success'=>false,'msg'=>'Kata Sandi Tidak Sama');
+			}else{
+				$query = $this->db->update('anggota', array(
+					'no_rek'=>$rek,
+					'password'=>password_hash($sandi, PASSWORD_DEFAULT),
+				),array('id_anggota'=>$this->session->userdata('id')
+				));
+				if ($query == true) {
+					$val = array('success'=>true,'msg'=>'Berhasil Tambah Rekening');
+				}else{
+					$val = array('success'=>false,'msg'=>'Gagal Tambah Rekening dan Ganti Password');
+				}
+			}
+		}
+		echo json_encode($val);
+		
+	}
 	public function Uploadfoto($param)
 	{
+		$this->load->library('upload');
 		$config['upload_path'] = './assets/images/bukti/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['max_size']             = 10024;
 		$config['encrypt_name']         = TRUE;
 		$config['remove_spaces']        = TRUE;
 
-		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
 		$upload = $this->upload->do_upload($param);
 		$data = $this->upload->data();
 		if (! $upload) {

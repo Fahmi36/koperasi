@@ -7,7 +7,7 @@
 <div class="form-element-area">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-tb-40">
 				<div class="breadcomb-list">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -27,7 +27,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<form action="javascript:void(0)" method="post" id="formpinjam">
+				<form action="javascript:void(0)" method="post" id="formpinjam" accept-charset="utf-8" enctype="multipart/form-data">
 					<div class="form-example-wrap mg-t-30">
 						<div class="cmp-tb-hd cmp-int-hd text-center heading-h2">
 							<h2>Permohonan Pinjaman</h2>
@@ -109,7 +109,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<select name="jml_angsuran" class="form-control input-sm" required disabled>
+											<select name="jml_angsuran" class="form-control input-sm" required readonly>
 												<!-- <option selected disabled>Pilih Jumlah Angsuran</option> -->
 												<!-- <option value="3">3 Bulan</option> -->
 												<!-- <option value="6">6 Bulan</option> -->

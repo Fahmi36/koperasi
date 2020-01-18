@@ -48,6 +48,13 @@
 <!-- Main Menu area start-->
 <div class="main-menu-area mg-tb-40">
     <div class="container">
+<!--         <?php if ($this->session->userdata('no_rek') == null){ ?>
+            <div class="alert-list" style="margin-bottom: 20px;">
+                <div class="alert alert-danger alert-dismissible alert-mg-b-0" role="alert" style="background: linear-gradient(to bottom left, #ee5253 40%, #ff7675 100%);">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="notika-icon notika-close"></i></span></button> Silahkan masukan nomor Rekening Bank DKI Anda <a href="" class="alert-link">Disini!</a>
+                </div>
+            </div>
+        <?php } ?> -->
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">

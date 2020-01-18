@@ -143,7 +143,7 @@ $("#formbayarpinjam").submit(function (event) {
 				confirmButtonText: 'Ya',
 				preConfirm: () => { 
 					$.ajax({
-						url: BASE_URL + 'PinjamController/BayarPinjaman',
+						url: BASE_URL + 'PinjamController/BuktiBayarPinjaman',
 						type: "POST",
 						dataType:'json',
 						data: data,
@@ -299,8 +299,48 @@ $("#formbayarpinjam").submit(function (event) {
 				}
 			});
 		});
+		$("#ubahrekening").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'action/tambahRek',
+						type: "POST",
+						data: data,
+						dataType:'json',
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							Swal.fire(
+								''+response.msg+'',
+								);
+							$("#ubahrekening")[0].reset();
+							location.reload();
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+					return false;
+				}
+			});
+		});
 		"use strict";
-
 		$(".chosen")[0] && $(".chosen").chosen({
 			width: "100%",
 			allow_single_deselect: !0

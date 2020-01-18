@@ -98,7 +98,7 @@ class SimpanController extends CI_Controller {
 			}else if ($this->input->post('jumlah_suka') == null AND $this->input->post('jumlah_wajib')== null) {
 				$jumlahnya = $this->input->post('jumlah_pokok');
 			}
-			$gambar = $this->Uploadfoto($this->input->post('filenya'));
+			$gambar = $this->Uploadfoto('filenya');
 			$data = array(
 				'id_anggota'=>$session,
 				'tipe_transaksi'=>'1',
@@ -123,13 +123,13 @@ class SimpanController extends CI_Controller {
 	}
 	public function Uploadfoto($param)
 	{
+		$this->load->library('upload');
 		$config['upload_path'] = './assets/images/bukti/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['max_size']             = 10024;
 		$config['encrypt_name']         = TRUE;
 		$config['remove_spaces']        = TRUE;
 
-		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
 		$upload = $this->upload->do_upload($param);
 		$data = $this->upload->data();
 		if (! $upload) {
