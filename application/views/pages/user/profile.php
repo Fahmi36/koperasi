@@ -135,6 +135,17 @@
 					<section id="content1" class="tab-content">
 						<form action="javascript:void(0);" method="post" id="ubahprofile">
 							<div class="form-example-wrap">
+								<center>
+									<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" style="width: 200px;height: 200px;">
+		        					<h6 style="margin-top: 20px;">Ubah foto profile</h6>
+		        					<div class="form-example-int">
+										<div class="form-group">
+											<div class="nk-int-st">
+				        					<input type="file" name="avatar" class="text-center center-block file-upload">
+				        				</div>
+				        				</div>
+				        			</div>
+	        					</center>
 								<div class="form-example-int">
 									<div class="form-group">
 										<label>Nama Lengkap</label>
@@ -159,7 +170,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-example-int mg-t-15">
+								<!-- <div class="form-example-int mg-t-15">
 									<div class="form-group">
 										<label>Pekerjaan</label>
 										<div class="chiller_cb">
@@ -195,7 +206,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="form-example-int">
 									<div class="form-group">
 										<label>Alamat Lengkap</label>
@@ -204,14 +215,14 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-example-int mg-t-15">
+								<!-- <div class="form-example-int mg-t-15">
 									<div class="form-group">
 										<label>Nomor Identitas (KTP/SIM)</label>
 										<div class="nk-int-st">
 											<input type="text" name="ktp" class="form-control input-sm">
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 										<div class="form-group">
@@ -235,7 +246,7 @@
 										<div class="form-group">
 											<label style="font-weight: normal;">No Rekening</label>
 											<div class="nk-int-st">
-												<input type="text" name="no_rumah" class="form-control input-sm">
+												<input type="text" name="no_rumah" class="form-control input-sm" readonly="">
 											</div>
 										</div>
 									</div>
@@ -243,7 +254,7 @@
 										<div class="form-group">
 											<label style="font-weight: normal;">Nama Bank</label>
 											<div class="nk-int-st">
-												<input type="text" name="no_hp" class="form-control input-sm">
+												<input type="text" name="no_hp" class="form-control input-sm" readonly="">
 											</div>
 										</div>
 									</div>

@@ -95,6 +95,23 @@
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/minimalist-picker/dobpicker.js"></script>
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() {    
+            var readURL = function(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.avatar').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $(".file-upload").on('change', function(){
+                readURL(this);
+            });
+        });
+    </script>
+    <script type="text/javascript">
         document.getElementById("next").disabled = true;
         function cekPass() {
             var katasandi = document.getElementById("katasandi").value;
