@@ -72,7 +72,7 @@
                             <span class="select-icon"><i class="ti-angle-down"></i></span>
                         </div>
                     </div>
-                    <!-- <div class="chiller_cb">
+                    <div class="chiller_cb">
                         <input id="peng_rptra" name="radiopengrptra" value="Pengelola RPTRA" type="radio">
                         <label for="peng_rptra">Pengelola RPTRA, Kelurahan</label>
                         <span></span>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <input type="text" name="lainnya" id="isi_peke3" disabled/>
-                    </div> -->
+                    </div>
                 </fieldset>
 
                 <h3>

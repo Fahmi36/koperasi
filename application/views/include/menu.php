@@ -1,3 +1,5 @@
+
+
 <div class="mobile-menu-area">
     <div class="container">
         <div class="row">
@@ -30,6 +32,13 @@
 <!-- Main Menu area start-->
 <div class="main-menu-area mg-tb-40">
     <div class="container">
+        <?php if ($this->session->userdata('no_rek') == null){ ?>
+            <div class="alert-list" style="margin-bottom: 20px;">
+                <div class="alert alert-danger alert-dismissible alert-mg-b-0" role="alert" style="background: linear-gradient(to bottom left, #ee5253 40%, #ff7675 100%);">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="notika-icon notika-close"></i></span></button> Silahkan masukan nomor Rekening Bank DKI Anda <a href="" class="alert-link">Disini!</a>
+                </div>
+            </div>
+        <?php } ?>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
@@ -47,7 +56,7 @@
                             <li><a href="<?=site_url('sim_suka')?>">Sukarela</a></li>
                         </ul>
                     </div> -->
-                     <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
+                    <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
                             <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Bayar Pinjaman</a></li>

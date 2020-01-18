@@ -1,7 +1,27 @@
 <div class="form-element-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 40px;">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="notika-icon notika-bar-chart"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Halaman Beranda</h2>
+                                    <p>Beranda KOPERASI PKK MELATI JAYA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                     <div class="website-traffic-ctn">
                         <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalpengeluaranpinjam->pinjam+$totalpengeluaran->simpan)),3)))?></span></h2>
@@ -32,14 +52,37 @@
             </div>
             <div class="sparkline-bar-stats3"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
         </div>
-    </div>
+    </div> -->
     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
             <div class="website-traffic-ctn">
                 <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
                 <p>Total Simpanan</p>
             </div>
-            <div class="sparkline-bar-stats4"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+            <div class="website-traffic-ctn">
+                <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
+                <p>Simpanan Wajib</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+            <div class="website-traffic-ctn">
+                <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
+                <p>Total Sisa Hutang</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+            <div class="website-traffic-ctn">
+                <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
+                <p>Jatuh Tempo Pembayaran</p>
+            </div>
         </div>
     </div>
 </div>
@@ -68,47 +111,47 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($simpanan as $key): ?>
-                                    <tr>
-                                        <td><?=$key->nama?></td>
-                                        <td><?=$key->jenis_setoran?></td>
-                                        <?php if ($key->tipe_transaksi == 0){ ?> 
-                                        <td>Penarikan</td>
-                                        <?php }else{ ?>
-                                        <td>Simpanan</td>
-                                        <?php }?>
-                                        <?php if ($key->status == 0){ ?> 
-                                        <td>Belum Di ACC Pembayaran</td>
-                                        <?php }else if ($key->status == 1){ ?>
-                                        <td>Sudah Masuk</td>
-                                        <?php }else if ($key->status == 2){  ?>
-                                        <td>Di Tolak</td>
-                                        <?php }?>
-                                        <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
-                                        <td><?=$key->tgl_transaksi?></td>
-                                        <?php if($this->session->userdata('username') == null){ ?>
-                                        <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button></td>
-                                        <?php }else{ ?>
-                                        <td>
-                                           <?php if ($key->status == 0){ ?> 
-                                           <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-info notika-btn-success waves-effect"><i class="fa fa-check-square"></i></button>
-                                           <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-info notika-btn-danger waves-effect"><i class="fa fa-window-close"></i></button>
-                                           <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
-                                           <?php }else{ ?>
-                                           <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
-                                           <?php } ?>
-                                       </td>
-                                       <?php } ?>
-                                   </tr>
-                                   <?php endforeach ?>
-                               </tbody>
-                           </table>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
-   <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                                        <tr>
+                                            <td><?=$key->nama?></td>
+                                            <td><?=$key->jenis_setoran?></td>
+                                            <?php if ($key->tipe_transaksi == 0){ ?> 
+                                                <td>Penarikan</td>
+                                            <?php }else{ ?>
+                                                <td>Simpanan</td>
+                                            <?php }?>
+                                            <?php if ($key->status == 0){ ?> 
+                                                <td>Belum Di ACC Pembayaran</td>
+                                            <?php }else if ($key->status == 1){ ?>
+                                                <td>Sudah Masuk</td>
+                                            <?php }else if ($key->status == 2){  ?>
+                                                <td>Di Tolak</td>
+                                            <?php }?>
+                                            <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
+                                            <td><?=$key->tgl_transaksi?></td>
+                                            <?php if($this->session->userdata('username') == null){ ?>
+                                                <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button></td>
+                                            <?php }else{ ?>
+                                                <td>
+                                                 <?php if ($key->status == 0){ ?> 
+                                                     <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-info notika-btn-success waves-effect"><i class="fa fa-check-square"></i></button>
+                                                     <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-info notika-btn-danger waves-effect"><i class="fa fa-window-close"></i></button>
+                                                     <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
+                                                 <?php }else{ ?>
+                                                     <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
+                                                 <?php } ?>
+                                             </td>
+                                         <?php } ?>
+                                     </tr>
+                                 <?php endforeach ?>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
     <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
         <div class="past-day-statis">
             <h2>Data dalam 1 tahun</h2>

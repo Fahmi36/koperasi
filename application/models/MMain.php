@@ -200,7 +200,7 @@ class MMain extends CI_Model {
 		if ($cek->num_rows() != 0 ) {
 			$cekpassanggota = password_verify(''.$this->input->post('password').'', ''.$row->password.'');
 			if ($cekpassanggota == true) {
-				$session1 = array('id'=> $row->no_anggota,'nohp'=>$row->no_hp,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
+				$session1 = array('id'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
 				$this->session->set_userdata($session1);
 				$val = array('success'=>true,'msg'=>'success');
 			}else{
