@@ -468,6 +468,25 @@ class MMain extends CI_Model {
 		echo json_encode($val);
 		
 	}
+	public function getAnggotaBaru()
+	{
+		$this->db->select('*');
+		$this->db->from('anggota');
+		$this->db->where('status', 3);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function getBayarPinjam()
+	{
+		$this->db->select('*');
+		$this->db->from('cicil');
+		$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+		$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
+		$this->db->where('cicil.status',3);
+		$query = $this->db->get();
+		return $query;
+
+	}
 	public function Uploadfoto($param)
 	{
 		$this->load->library('upload');
