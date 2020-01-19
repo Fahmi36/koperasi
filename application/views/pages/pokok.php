@@ -8,6 +8,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="notika-icon notika-dollar"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Halaman Simpanan</h2>
+                                    <p>Simpanan KOPERASI PKK MELATI JAYA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="form-example-wrap mg-t-30">
 					<div class="cmp-tb-hd cmp-int-hd text-center heading-h2">
 						<h2>Koperasi PKK Melati Jaya</h2>

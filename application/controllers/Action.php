@@ -135,6 +135,18 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function report()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Report - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/report';
+			$data['report'] = $this->mm->getSimpananAnggota();
+			$data['profile'] = $this->mm->getProfile();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function sim_pokok()
 	{
 		if ($this->session->userdata('id')==null) {
@@ -142,6 +154,17 @@ class Action extends CI_Controller {
 		}else{
 			$data['title'] = 'Simpanan Pokok - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/pokok';
+			$data['jenis_setor'] = $this->mm->getMasterSetoran();
+			$this->load->view('utama',$data);
+		}
+	}
+	public function data_user()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Data Pendaftar Baru - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/new_user';
 			$data['jenis_setor'] = $this->mm->getMasterSetoran();
 			$this->load->view('utama',$data);
 		}

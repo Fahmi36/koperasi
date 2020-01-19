@@ -155,8 +155,8 @@
                                                     <?php }else{ ?>
                                                         <td>
                                                            <?php if ($key->status == 0){ ?> 
-                                                            <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-info notika-btn-success waves-effect"><i class="fa fa-check-square"></i></button>
-                                                            <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-info notika-btn-danger waves-effect"><i class="fa fa-window-close"></i></button>
+                                                            <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-success notika-btn-success waves-effect"><i class="fa fa-check-square"></i></button>
+                                                            <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-danger notika-btn-danger waves-effect"><i class="fa fa-window-close"></i></button>
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
                                                         <?php }else{ ?>
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
