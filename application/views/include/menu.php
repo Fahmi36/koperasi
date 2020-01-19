@@ -33,7 +33,7 @@
                                     <?php if ($this->session->userdata('username') == null): ?>
                                         <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
                                     <?php endif ?>
-                                    <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Bayar Pinjaman</a></li>
+                                    <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -60,7 +60,7 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li class="<?php if($this->uri->segment(1)==""){echo "active";}?>"><a href="<?php echo site_url(''); ?>"><i class="notika-icon notika-house"></i> Beranda</a></li>
                     <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>"><a href="<?php echo site_url('simpanan'); ?>"><i class="notika-icon notika-dollar"></i> Simpanan</a></li>
-                    <?php if ($this->session->userdata('username') == null): ?>
+                    <?php if ($this->session->userdata('username') != null): ?>
                     <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>"><a href="<?php echo site_url('new_user'); ?>"><i class="notika-icon notika-finance"></i> Data Pendaftar Baru</a></li>
                     <li class="<?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}?>"><a data-toggle="tab" href="#databayarweb"><i class="notika-icon notika-form"></i> Data Pembayaran</a></li>
                     <li class="<?php if($this->uri->segment(1)=="report"){echo "active";}?>">
@@ -82,7 +82,7 @@
                     <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
-                            <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Bayar Pinjaman</a></li>
+                            <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
                         </ul>
                     </div>
                     <div id="databayarweb" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}else if($this->uri->segment(1)=="data_simpan"){echo "active";} ?>">

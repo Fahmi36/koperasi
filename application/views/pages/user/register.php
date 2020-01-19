@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="chiller_cb">
-                        <input id="peng_rptra" name="radiopengrptra" value="Pengelola RPTRA" type="radio">
+                        <input id="peng_rptra" name="radiopengrptra[]" value="Pengelola RPTRA" type="radio">
                         <label for="peng_rptra">Pengelola RPTRA, Kelurahan</label>
                         <span></span>
                     </div>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="chiller_cb">
-                        <input id="peng_pkk" name="radiotpngpkk" value="Tim Penggerak/Pengelola PKK" type="radio">
+                        <input id="peng_pkk" name="radiopengrptra[]" value="Tim Penggerak/Pengelola PKK" type="radio">
                         <label for="peng_pkk">Tim Penggerak/Pengelola PKK, Kelurahan</label>
                         <span></span>
                     </div>
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="chiller_cb">
-                        <input id="lainnya" name="radiolainnya" value="lainnya" type="radio">
+                        <input id="lainnya" name="radiopengrptra[]" value="lainnya" type="radio">
                         <label for="lainnya">Lainnya</label>
                         <span></span>
                     </div>

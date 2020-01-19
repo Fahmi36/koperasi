@@ -226,7 +226,7 @@
 								''+response.msg+'',
 								);
 						}else{
-							console.log(response);	
+							location.reload();
 						}
 
 					}
@@ -259,7 +259,7 @@
 								''+response.msg+'',
 								);
 						}else{
-							console.log(response);					
+							location.reload();				
 						}
 					}
 				})
@@ -267,52 +267,7 @@
 		})
 	}
 	(function ($) {
-		$("#formuploadbuktipinjam").submit(function (event) {
-			var data = new FormData($(this)[0]);
-			Swal.fire({
-				title: 'Apakah Data Sudah benar ?',
-				text: "Klik Ya",
-				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
-					$.ajax({
-						url: BASE_URL + 'Action/actTfPinjam',
-						type: "POST",
-						dataType:'json',
-						data: data,
-						contentType: false,
-						cache: false,
-						processData: false,
-						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
-						},
-						success: function (response) {
-							if (response.success == false) {
-								Swal.fire(
-									''+response.msg+'',
-									);
-							}else{
-								Swal.fire(
-									'Upload Bukti Berhasil',
-									);
-								location.reload();
-							}
-
-						},
-						error: function () {
-							Swal.fire(
-								'"'+response.msg+'"',
-								'Hubungi Tim Terkait',
-								);
-						}
-					});
-				}
-			});
-		});
+		
 		$("#formbayarpinjam").submit(function (event) {
 			var data = new FormData($(this)[0]);
 			Swal.fire({
@@ -345,6 +300,92 @@
 								Swal.fire(
 									'Silakan Menunggu Konfirmasi dari petugas',
 									);
+							}
+
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+				}
+			});
+		});
+		$("#ubahpassword").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Yakin Ingin Mengubah Password ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'Action/UbahPassword',
+						type: "POST",
+						dataType:'json',
+						data: data,
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							if (response.success == false) {
+								Swal.fire(
+									''+response.msg+'',
+									);
+							}else{
+								location.reload();
+							}
+
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+				}
+			});
+		});
+		$("#ubahprofile").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Apakah Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'Action/Ubahprofile',
+						type: "POST",
+						dataType:'json',
+						data: data,
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							if (response.success == false) {
+								Swal.fire(
+									''+response.msg+'',
+									);
+							}else{
+								location.reload();
 							}
 
 						},

@@ -69,6 +69,23 @@ class PinjamController extends CI_Controller {
     	);
     	$queryms = $this->mc->update($datamc,$wheremc);
     	if ($queryms == true) {
+    		$cek = $this->db->get_where('cicil',array('angsuran'=>'9','status'=>'4','id'=>$this->input->post('id')));
+    		if ($cek->num_rows() > 0) {
+    			$row = $cek->row();
+    			$where = array(
+    				'id'=>$row->id_angsuran
+    			);
+    			$data = array(
+    				'status_pinjaman'=>'3',
+    			);
+    			$query = $this->ms->update($data,$where);
+    			if ($queryms == true) {
+    				$msg = "Berhasil";
+    				$json = $this->successRespone($query);
+    			}else{
+    				$json = $this->failedRespone();
+    			}
+    		}
     		$msg = "Berhasil";
     		$json = $this->successRespone($query);
     	}else{
@@ -139,47 +156,55 @@ class PinjamController extends CI_Controller {
 	public function pinjamUang()
 	{
 		try {
-			$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();
-			$jasa = $bunga->bunga/100;
-			$surat = $this->Uploadfoto('surat_pernyataan');
-			$data = array(
-				'id_anggota'=>$this->session->userdata('id'),
-				'besar_pengajuan_pinjaman'=>$this->input->post('nominal'),
-				'besar_persetujuan_pinjaman'=>$this->input->post('nominal'),
-				'tgl_pengajuan_pinjaman'=>date('Y-m-d H:i:s'),
-				'no_rek'=>$this->input->post('norek'),
-				'no_hp'=>$this->input->post('telp'),
-				'keperluan'=>$this->input->post('keperluan'),
-				'status_pinjaman'=>'4',
-				'biaya_jasa'=>round($this->input->post('nominal')*$jasa),
-				'surat_pt' => $surat,
-			);
-			$query = $this->ms->insertid($data);
-			$tanggal = date('Y-m').'-06';
-			for ($i=0; $i < $this->input->post('jml_angsuran'); $i++) {
-				$cicilan = array(
-				'tipe_cicil'=>'1',
-				'id_angsuran'=>$query,
-				'angsuran'=>$i,
-				'jumlah_bayar'=>round($this->input->post('nominal')/$this->input->post('jml_angsuran')),
-				'jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
-				'tgl_tempo'=>date('Y-m'.'-6',strtotime('+'.($i + 1).' month')),
-				'status'=>'0',
-				'created_at'=>date('Y-m-d H:i:s')
-			);
-				$cicil = $this->mc->insert($cicilan);
-			}
-			$angsuran = $this->db->insert('anggota_pinjaman_angsuran', array(
-				'id_pinjaman'=>$query,
-				'jumlah_angsuran'=>$this->input->post('nominal'),
-				'bayar_jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
-				'sisa_pinjaman'=>$this->input->post('nominal'),
-				'status'=>0,
-				));
-			if ($query == true) {
-				$json = $this->successRespone($query);
-			}else{
+			$this->db->where_in('status_pinjaman',[0,1,2,4]);
+			$this->db->where('id_anggota',$this->session->userdata('id'));
+			$gagal = $this->db->get('anggota_pinjaman');
+			if ($gagal->num_rows() > 0) {
 				$json = $this->failedRespone();
+			}else{
+				$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();
+				$jasa = $bunga->bunga/100;
+				$surat = $this->Uploadfoto('surat_pernyataan');
+				$data = array(
+					'id_anggota'=>$this->session->userdata('id'),
+					'besar_pengajuan_pinjaman'=>$this->input->post('nominal'),
+					'besar_persetujuan_pinjaman'=>$this->input->post('nominal'),
+					'tgl_pengajuan_pinjaman'=>date('Y-m-d H:i:s'),
+					'no_rek'=>$this->input->post('norek'),
+					'no_hp'=>$this->input->post('telp'),
+					'kelompok'=>$this->input->post('kelompok'),
+					'keperluan'=>$this->input->post('keperluan'),
+					'status_pinjaman'=>'4',
+					'biaya_jasa'=>round($this->input->post('nominal')*$jasa),
+					'surat_pt' => $surat,
+				);
+				$query = $this->ms->insertid($data);
+				$tanggal = date('Y-m').'-06';
+				for ($i=0; $i < $this->input->post('jml_angsuran'); $i++) {
+					$cicilan = array(
+						'tipe_cicil'=>'1',
+						'id_angsuran'=>$query,
+						'angsuran'=>$i,
+						'jumlah_bayar'=>round($this->input->post('nominal')/$this->input->post('jml_angsuran')),
+						'jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
+						'tgl_tempo'=>date('Y-m'.'-6',strtotime('+'.($i + 1).' month')),
+						'status'=>'0',
+						'created_at'=>date('Y-m-d H:i:s')
+					);
+					$cicil = $this->mc->insert($cicilan);
+				}
+				$angsuran = $this->db->insert('anggota_pinjaman_angsuran', array(
+					'id_pinjaman'=>$query,
+					'jumlah_angsuran'=>$this->input->post('nominal'),
+					'bayar_jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
+					'sisa_pinjaman'=>$this->input->post('nominal'),
+					'status'=>0,
+				));
+				if ($query == true) {
+					$json = $this->successRespone($query);
+				}else{
+					$json = $this->failedRespone();
+				}
 			}
 		} catch (Exception $e) {
 			$json = $this->failedRespone();
@@ -269,7 +294,7 @@ class PinjamController extends CI_Controller {
 			'jenis_bayar'=>$this->input->post('jenis'),
 			'bukti_tf'=>$gambar,
 			'id_petugas'=>$this->input->post('idpetugas'),
-			'status'=>2,
+			'status'=>3,
 			// 'tgl_bayar'=>date('Y-m-d',strtotime($this->input->post('set-tanggal'))),
 			'tgl_bayar'=>date('Y-m-d'),
 		);

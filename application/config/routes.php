@@ -66,6 +66,7 @@ $route['bayar/pinjaman'] = 'action/dataPinjam';
 $route['bayar/pinjaman/(:any)'] = 'action/bayarpinjam';
 $route['logout'] = 'action/logout';;
 $route['profile'] = 'action/profile';
+$route['setting'] = 'action/setting';
 
 //Nggak di pakai Biarin aja ya
 $route['sim_wajib'] = 'action/sim_wajib';

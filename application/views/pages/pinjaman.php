@@ -59,11 +59,11 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<select name="Kelompok" class="form-control input-sm" required>
+											<select name="kelompok" class="form-control input-sm" required>
 												<option selected disabled>Pilih Jenis Kelompok</option>
-												<option value="">Koperasi</option>
-												<option value="">PKT</option>
-												<option value="">PNS</option>
+												<?php foreach ($namakelompok as $key) { ?>
+													<option value="<?=$key->kelompok?>"><?=$key->kelompok?></option>
+												<?php } ?>
 											</select>
 										</div>
 									</div>

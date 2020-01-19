@@ -23,8 +23,8 @@
                             <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;text-transform: uppercase;">Masuk</a></li>
                             <li class="nav-item"><a href="" style="font-size: 16px;font-weight:bold;color: #FFC107;text-transform: uppercase;">Daftar</a></li>
                         <?php }else{ ?>
-                           
-                           <li class="nav-item dropdown">
+
+                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
 <!--                         <li class="nav-item nc-al">
@@ -55,13 +55,23 @@
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><?php $this->session->userdata('username'); ?> <i class="notika-icon notika-settings"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn" style="width: 170px;">
                                 <div class="hd-message-info">
-                                    <a href="<?php echo site_url('profile'); ?>">
-                                        <div class="hd-message-sn">
-                                            <div class="hd-mg-ctn">
-                                                <h3>Profile</h3>
+                                    <?php if ($this->session->userdata('username') == null){ ?>
+                                        <a href="<?php echo site_url('profile'); ?>">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Profile</h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    <?php }else{ ?>
+                                        <a href="<?php echo site_url('setting'); ?>">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Profile</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <?php }?>
                                     <a href="<?php echo site_url('action/logout'); ?>">
                                         <div class="hd-message-sn">
                                             <div class="hd-mg-ctn">
