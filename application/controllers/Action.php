@@ -135,18 +135,6 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
-	public function report()
-	{
-		if ($this->session->userdata('id')==null) {
-			redirect('login');
-		}else{
-			$data['title'] = 'Report - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/admin/report';
-			$data['report'] = $this->mm->getSimpananAnggota();
-			$data['profile'] = $this->mm->getProfile();
-			$this->load->view('utama',$data);
-		}
-	}
 	public function sim_pokok()
 	{
 		if ($this->session->userdata('id')==null) {
