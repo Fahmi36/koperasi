@@ -7,6 +7,7 @@ class PinjamController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('MPinjam', 'ms');
 		$this->load->model('MCicil', 'mc');
+		$this->load->model('MMain', 'mm');
 	}
 	public function resultRespone($data)
 	{
@@ -41,6 +42,57 @@ class PinjamController extends CI_Controller {
 		);
 		echo json_encode($respone);
 	}
+	public function TolakCicil()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modaltolakcicil',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+	public function InfoCicil()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['cicil'] = $this->mm->getCicil($this->input->post('id'));
+        $json = $this->load->view('pages/admin/modalinfocicil',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function TerimaCicil()
+    {
+    	$wheremc = array(
+    		'tipe_cicil'=>1,
+    		'id'=>$this->input->post('id')
+    	);
+    	$datamc = array(
+    		'status'=>'4',
+    	);
+    	$queryms = $this->mc->update($datamc,$wheremc);
+    	if ($queryms == true) {
+    		$msg = "Berhasil";
+    		$json = $this->successRespone($query);
+    	}else{
+    		$json = $this->failedRespone();
+    	}
+    }
+    public function actTolakCicil()
+    {
+    	$wheremc = array(
+    		'tipe_cicil'=>1,
+    		'id'=>$this->input->post('id')
+    	);
+    	$datamc = array(
+    		'status'=>'2',
+    		'keterangan'=>$this->input->post('alasan'),
+    	);
+    	$queryms = $this->mc->update($datamc,$wheremc);
+    	if ($queryms == true) {
+    		$msg = "Berhasil";
+    		$json = $this->successRespone($msg);
+    	}else{
+    		$json = $this->failedRespone();
+    	}
+    }
 	public function BatalPinjam()
 	{
 		$mc = array(
@@ -117,6 +169,13 @@ class PinjamController extends CI_Controller {
 			);
 				$cicil = $this->mc->insert($cicilan);
 			}
+			$angsuran = $this->db->insert('anggota_pinjaman_angsuran', array(
+				'id_pinjaman'=>$query,
+				'jumlah_angsuran'=>$this->input->post('nominal'),
+				'bayar_jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
+				'sisa_pinjaman'=>$this->input->post('nominal'),
+				'status'=>0,
+				));
 			if ($query == true) {
 				$json = $this->successRespone($query);
 			}else{
@@ -173,6 +232,7 @@ class PinjamController extends CI_Controller {
 
 		$this->mc->update($datamc,$wheremc);
 		$this->ms->update($datams,$wherems);
+
 	}
 	public function TolakPinjaman()
 	{

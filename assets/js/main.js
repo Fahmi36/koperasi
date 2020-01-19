@@ -1,23 +1,148 @@
-	function terimapinjaman(id) {
+	function terimacicilan(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Menerima Cicilan Ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/TerimaCicil',
+					type: 'post',
+					data: {id: id},
+					success:function(response) {
+						location.reload();
+					}
+				})
+			}
+		})
+	}
+	function tolakcicilan(id) {
 		$.ajax({
-			url: BASE_URL + 'PinjamController/TerimaPinjaman',
-			type: 'post',
+			url: BASE_URL + 'PinjamController/TolakCicil',
+			type: 'POST',
+			dataType: 'html',
 			data: {id: id},
-			success:function(response) {
-				location.reload();
+			success: function (respon) {
+				$("#modalcicil").html(respon);
+				$("#modaltolakcicil").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function infocicilan(id) {
+		$.ajax({
+			url: BASE_URL + 'PinjamController/InfoCicil',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalcicil").html(respon);
+				$("#showmodalcicil").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function terimaUser(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Pendaftar Ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'Action/TerimaUser',
+					type: 'post',
+					data: {id: id},
+					success:function(response) {
+						location.reload();
+					}
+				})
+			}
+		})
+	}
+	function tolakUser(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Ingin Menolak Pendaftar Ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'Action/TolakUser',
+					type: 'post',
+					data: {id: id},
+					success:function(response) {
+						location.reload();
+					}
+				})
+			}
+		})
+	}
+	function infoUser(id) {
+		$.ajax({
+			url: BASE_URL + 'Action/InfoUser',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modaluser").html(respon);
+				$("#showmodaluser").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function terimapinjaman(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Ingin Menerima Pinjaman Ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/TerimaPinjaman',
+					type: 'post',
+					data: {id: id},
+					success:function(response) {
+						location.reload();
+					}
+				})
 			}
 		})
 	}
 	function tolakpinjaman(id) {
-		$.ajax({
-			url: BASE_URL + 'PinjamController/TolakPinjaman',
-			type: 'POST',
-			data: {id: id},
-			success:function() {
-				location.reload();
+		Swal.fire({
+			title: 'Apakah Anda Yakin Ingin Menolak Data Ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/TolakPinjaman',
+					type: 'POST',
+					data: {id: id},
+					success:function() {
+						location.reload();
+					}
+				})
 			}
 		})
-		
 	}
 	function lanjutPinjam(id) {
 		$.ajax({
@@ -49,6 +174,18 @@
 			success: function (respon) {
 				$("#modalpinjam").html(respon);
 				$("#showmodalpinjam").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function uploadpinjaman(id) {
+		$.ajax({
+			url: BASE_URL + 'Action/UploadBuktiTansfer',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalpinjam").html(respon);
+				$("#modaluploadbukti").modal({backdrop:'static',keyboard: false});
 			}
 		});
 	}
@@ -130,7 +267,53 @@
 		})
 	}
 	(function ($) {
-$("#formbayarpinjam").submit(function (event) {
+		$("#formuploadbuktipinjam").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Apakah Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'Action/actTfPinjam',
+						type: "POST",
+						dataType:'json',
+						data: data,
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							if (response.success == false) {
+								Swal.fire(
+									''+response.msg+'',
+									);
+							}else{
+								Swal.fire(
+									'Upload Bukti Berhasil',
+									);
+								location.reload();
+							}
+
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+				}
+			});
+		});
+		$("#formbayarpinjam").submit(function (event) {
 			var data = new FormData($(this)[0]);
 			Swal.fire({
 				title: 'Apakah Data Sudah benar ?',

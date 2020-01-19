@@ -53,9 +53,9 @@
         <!-- End Footer area-->
     <?php } ?>
 
-        <script type="text/javascript">
-            var BASE_URL = '<?=site_url('/')?>';
-        </script>
+    <script type="text/javascript">
+        var BASE_URL = '<?=site_url('/')?>';
+    </script>
     <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
@@ -78,8 +78,6 @@
     <script src="<?=base_url('/')?>assets/js/icheck/icheck.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/icheck/icheck-active.js"></script>
-    <script src="<?=base_url('/')?>assets/js/chat/jquery.chat.js"></script>
-    <script src="<?=base_url('/')?>assets/js/todo/jquery.todo.js"></script>
     <script src="<?=base_url('/')?>assets/js/data-table/jquery.dataTables.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/sweetalert2.js"></script>
     <script src="<?=base_url('/')?>assets/js/wave/waves.min.js"></script>
@@ -147,213 +145,213 @@
           if (index !== 0){ 
             prev.classList.add('step-form__button--active')
             prev.setAttribute('aria-hidden', 'false')
-          } else {
+        } else {
             prev.classList.remove('step-form__button--active')
             prev.setAttribute('aria-hidden', 'true')
-          }
+        }
 
-          if (index === totalSteps - 1) {
+        if (index === totalSteps - 1) {
             next.classList.remove('step-form__button--active')
             next.setAttribute('aria-hidden', 'true')
             submit.classList.add('step-form__button--active')
             submit.setAttribute('aria-hidden', 'false')
             submit.addEventListener('click', stepInputValidation)
-          } else {
+        } else {
             next.classList.add('step-form__button--active')
             next.setAttribute('aria-hidden', 'false')
             submit.classList.remove('step-form__button--active')
             submit.setAttribute('aria-hidden', 'true')
             submit.removeEventListener('click', stepInputValidation)
-          }
-
-          stepSetProgress(index)
         }
 
-        function stepActionHandler (index) {
-          if (index === 1 && ! stepInputValidation()) return false
+        stepSetProgress(index)
+    }
+
+    function stepActionHandler (index) {
+      if (index === 1 && ! stepInputValidation()) return false
 
           steps[currentStep].classList.remove('step-form__step--active')
 
-          currentStep = currentStep + index
+      currentStep = currentStep + index
 
-          showStep(currentStep)
-        }
+      showStep(currentStep)
+  }
 
-        function stepInputHandler (element) {
-          const input = element.querySelector('.step-form__input')
+  function stepInputHandler (element) {
+      const input = element.querySelector('.step-form__input')
 
-          const focusHandler = event => {
-            if (event.type === 'blur') {
-              if (input.value === '')
+      const focusHandler = event => {
+        if (event.type === 'blur') {
+          if (input.value === '')
               element.classList.remove('step-form__step--focused')
-            }
+      }
 
-            if (event.type === 'focus') {
-              if (input.value === '')
+      if (event.type === 'focus') {
+          if (input.value === '')
               element.classList.add('step-form__step--focused')
-            }
-          }
+      }
+  }
 
-          input.addEventListener('blur', focusHandler)
-          input.addEventListener('focus', focusHandler)
-        }
+  input.addEventListener('blur', focusHandler)
+  input.addEventListener('focus', focusHandler)
+}
 
-        function stepInputValidation () {
-          const inputs = steps[currentStep].querySelectorAll('.step-form__input')
-          const norek = steps[currentStep].querySelectorAll('#norek')
+function stepInputValidation () {
+  const inputs = steps[currentStep].querySelectorAll('.step-form__input')
+  const norek = steps[currentStep].querySelectorAll('#norek')
 
-          let i, valid = true
+  let i, valid = true
 
-          for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].value === '') {
-              steps[currentStep].classList.add('step-form__step--invalid')
-              valid = false
-            } else if (
-              norek.value !== '' &&
-              steps[currentStep].classList.remove('step-form__step--invalid')
-            ) {
-              steps[currentStep].classList.remove('step-form__step--invalid')
-            }
-          }
+  for (i = 0; i < inputs.length; i++) {
+    if (inputs[i].value === '') {
+      steps[currentStep].classList.add('step-form__step--invalid')
+      valid = false
+  } else if (
+      norek.value !== '' &&
+      steps[currentStep].classList.remove('step-form__step--invalid')
+      ) {
+      steps[currentStep].classList.remove('step-form__step--invalid')
+  }
+}
 
-          if (valid)
-            progress[currentStep].classList.add('step-form__progress-step--complete')
+if (valid)
+    progress[currentStep].classList.add('step-form__progress-step--complete')
 
-          return valid
-        }
+return valid
+}
 
-        function stepSetProgress (index) {
-          for (let i = 0; i < progress.length; i++)
-            progress[i].classList.remove('step-form__progress-step--active')
+function stepSetProgress (index) {
+  for (let i = 0; i < progress.length; i++)
+    progress[i].classList.remove('step-form__progress-step--active')
 
-          progress[index].classList.add('step-form__progress-step--active')
-        }
+progress[index].classList.add('step-form__progress-step--active')
+}
 
-        showStep(currentStep)
+showStep(currentStep)
 
-        steps.forEach(step => stepInputHandler(step))
-        next.addEventListener('click', () => stepActionHandler(1))
-        prev.addEventListener('click', () => stepActionHandler(-1))
+steps.forEach(step => stepInputHandler(step))
+next.addEventListener('click', () => stepActionHandler(1))
+prev.addEventListener('click', () => stepActionHandler(-1))
 
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#daftarRek").click(function(){
-                $("#sudahPunya").hide();
-                $("#belumPunya").show();
-                $("#formNorek").html("");
-            });
-            $("#inputNorek").click(function(){
-                $("#sudahPunya").show();
-                $("#belumPunya").hide();
-                $("#formNorek").html("<div class='form-group' id='formNorek'><label style='float: left;'>Nomor Rekening</label><div class='nk-int-st'><input type='number' id='norek' class='form-control input-sm step-form__input' placeholder='Masukkan Nomor Rekening'></div></div>");
-            });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#daftarRek").click(function(){
+            $("#sudahPunya").hide();
+            $("#belumPunya").show();
+            $("#formNorek").html("");
         });
-        /*modal*/
-        $(document).on('ready', function(){
-            $modal = $('.modal-frame');
-            $overlay = $('.modal-overlay');
-            $sidenav = $('.js-side-nav-container');
-
-            $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
-              if($modal.hasClass('state-leave')) {
-                $modal.removeClass('state-leave');
-            }
+        $("#inputNorek").click(function(){
+            $("#sudahPunya").show();
+            $("#belumPunya").hide();
+            $("#formNorek").html("<div class='form-group' id='formNorek'><label style='float: left;'>Nomor Rekening</label><div class='nk-int-st'><input type='number' id='norek' class='form-control input-sm step-form__input' placeholder='Masukkan Nomor Rekening'></div></div>");
         });
+    });
+    /*modal*/
+    $(document).on('ready', function(){
+        $modal = $('.modal-frame');
+        $overlay = $('.modal-overlay');
+        $sidenav = $('.js-side-nav-container');
 
-            $('.close').on('click', function(){
-              $overlay.removeClass('state-show');
-              $modal.removeClass('state-appear').addClass('state-leave');
-          });
-
-            $('.open').on('click', function(){
-              $overlay.addClass('state-show');
-              $modal.removeClass('state-leave').addClass('state-appear');
-              $sidenav.removeClass('side-nav-visible');
-          });
-        });
-        /*end modal*/
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#besar_pinjam").keyup(function() {
-                var x = document.getElementById('suratPer');
-                if($(this).val() >= 20000000) {
-                    $("#suratPer").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan' required></div></div></div></div>");
-                } else {
-                    $("#suratPer").html("");
-                }
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#datatransaksi").dataTable();
-            $("#datapinjaman").dataTable();
-
-        });
-        function pilihsimpan() {
-            if ($('#pilihsimpanan').val() == 1) {
-                $("#simpanpokok").removeAttr('style');
-                $("#angsuranpokok").removeAttr('style');
-                $("#jasapokok").removeAttr('style');
-                $("#simpanwajib").attr('style', 'display:none;');
-                $("#simpansuka").attr('style', 'display:none;');
-            }else if($('#pilihsimpanan').val() == 2){
-                $("#simpanwajib").removeAttr('style');                
-                $("#simpanpokok").attr('style', 'display:none;');
-                $("#angsuranpokok").attr('style', 'display:none;');
-                $("#jasapokok").attr('style', 'display:none;');
-                $("#simpansuka").attr('style', 'display:none;');
-            }else if($('#pilihsimpanan').val() == 3){
-                $("#simpansuka").removeAttr('style');      
-                $("#simpanwajib").attr('style', 'display:none;');    
-                $("#simpanpokok").attr('style', 'display:none;');
-                $("#angsuranpokok").attr('style', 'display:none;');
-                $("#jasapokok").attr('style', 'display:none;');
-            }
+        $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+          if($modal.hasClass('state-leave')) {
+            $modal.removeClass('state-leave');
         }
-        function pilihbayar() {
-            if ($('#sistem_bayar').val() == 1) {
-                $("#petugas").removeAttr('style');
-                $("#foto").attr('style', 'display:none;');
-            }else if($('#sistem_bayar').val() == 2){
-                $("#foto").removeAttr('style');                
-                $("#petugas").attr('style', 'display:none;');
+    });
+
+        $('.close').on('click', function(){
+          $overlay.removeClass('state-show');
+          $modal.removeClass('state-appear').addClass('state-leave');
+      });
+
+        $('.open').on('click', function(){
+          $overlay.addClass('state-show');
+          $modal.removeClass('state-leave').addClass('state-appear');
+          $sidenav.removeClass('side-nav-visible');
+      });
+    });
+    /*end modal*/
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#besar_pinjam").keyup(function() {
+            var x = document.getElementById('suratPer');
+            if($(this).val() >= 20000000) {
+                $("#suratPer").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan' required></div></div></div></div>");
+            } else {
+                $("#suratPer").html("");
             }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#datatransaksi").dataTable();
+        $("#datapinjaman").dataTable();
+
+    });
+    function pilihsimpan() {
+        if ($('#pilihsimpanan').val() == 1) {
+            $("#simpanpokok").removeAttr('style');
+            $("#angsuranpokok").removeAttr('style');
+            $("#jasapokok").removeAttr('style');
+            $("#simpanwajib").attr('style', 'display:none;');
+            $("#simpansuka").attr('style', 'display:none;');
+        }else if($('#pilihsimpanan').val() == 2){
+            $("#simpanwajib").removeAttr('style');                
+            $("#simpanpokok").attr('style', 'display:none;');
+            $("#angsuranpokok").attr('style', 'display:none;');
+            $("#jasapokok").attr('style', 'display:none;');
+            $("#simpansuka").attr('style', 'display:none;');
+        }else if($('#pilihsimpanan').val() == 3){
+            $("#simpansuka").removeAttr('style');      
+            $("#simpanwajib").attr('style', 'display:none;');    
+            $("#simpanpokok").attr('style', 'display:none;');
+            $("#angsuranpokok").attr('style', 'display:none;');
+            $("#jasapokok").attr('style', 'display:none;');
         }
-        $('#nama_petugas').select2({
-            placeholder: "Pilih Petugas...",
-            minimumInputLength: 0,
-            ajax: {
-              url: '<?= site_url('action/getPetugas')?>',
-              dataType: 'json',
-              data: function (params) {
-                  var query = {
-                    search: params.term,
-                }
-                return query;
-            },
-            processResults: function (data) {
-                return {
-                  results: data
-              };
-          },
-          cache: false,
+    }
+    function pilihbayar() {
+        if ($('#sistem_bayar').val() == 1) {
+            $("#petugas").removeAttr('style');
+            $("#foto").attr('style', 'display:none;');
+        }else if($('#sistem_bayar').val() == 2){
+            $("#foto").removeAttr('style');                
+            $("#petugas").attr('style', 'display:none;');
+        }
+    }
+    $('#nama_petugas').select2({
+        placeholder: "Pilih Petugas...",
+        minimumInputLength: 0,
+        ajax: {
+          url: '<?= site_url('action/getPetugas')?>',
+          dataType: 'json',
+          data: function (params) {
+              var query = {
+                search: params.term,
+            }
+            return query;
+        },
+        processResults: function (data) {
+            return {
+              results: data
+          };
       },
-  });
-        $('#nama_petugas').on('select2:select', function(event) {
-            $("#idpetugas").val(event.params.data.id);
-            $("#namapetugas").val(event.params.data.text);
-        });
-        $('#nama_petugas').on('change.select2', function(event) {
-            $("#idpetugas").val("");
-            $("#namapetugas").val("");
-        });
-    </script>
-    <script type="text/javascript">
+      cache: false,
+  },
+});
+    $('#nama_petugas').on('select2:select', function(event) {
+        $("#idpetugas").val(event.params.data.id);
+        $("#namapetugas").val(event.params.data.text);
+    });
+    $('#nama_petugas').on('change.select2', function(event) {
+        $("#idpetugas").val("");
+        $("#namapetugas").val("");
+    });
+</script>
+<script type="text/javascript">
 
-        $('#peng_rptra').on('click',function () {
+    $('#peng_rptra').on('click',function () {
         if ($('#peng_rptra').is(':checked')) {
             $('#isi_peke1').removeAttr('disabled');
             $('#isi_peke2').attr('disabled', 'disabled');
@@ -361,7 +359,7 @@
         }
 
     });
-        $('#peng_pkk').on('click',function () {
+    $('#peng_pkk').on('click',function () {
         if ($('#peng_pkk').is(':checked')) {
             $('#isi_peke2').removeAttr('disabled');
             $('#isi_peke1').attr('disabled', 'disabled');
@@ -369,7 +367,7 @@
         }
 
     });
-        $('#lainnya').on('click',function () {
+    $('#lainnya').on('click',function () {
         if ($('#lainnya').is(':checked')) {
             $('#isi_peke3').removeAttr('disabled');
             $('#isi_peke1').attr('disabled', 'disabled');
@@ -377,7 +375,7 @@
         }
 
     });
-        $('#transfer').on('click',function () {
+    $('#transfer').on('click',function () {
         if ($('#transfer').is(':checked')) {
             $('#buktitf').removeAttr('style');
         }else{
@@ -385,15 +383,85 @@
         }
 
     });
-        $('#petugas').on('click',function () {
+    $('#petugas').on('click',function () {
         if ($('#petugas').is(':checked')) {
             $('#buktitf').attr('style', 'display:none;');
         }
 
     });
+</script>
+<script type="text/javascript">
+    $("#frmbaru").submit(function (event) {
+        var data = new FormData($(this)[0]);
+        $.ajax({
+            url:'rekap.php?page=baru', 
+            type: "POST",
+            data: data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                var res = JSON.parse(response,'baru');
+                console.log(res);
+                $("#example3").dataTable().fnClearTable();
+                if (res.data!=null) {
+                    var jancoeg = loopDataAbsen(res.data,'baru');
+                    $("#example3").dataTable().fnAddData(jancoeg);
+                    $("#example3").dataTable().fnDraw();
+                }
+            },
+            error: function () {
 
-        
-    </script>
-    
+            }
+        });
+        return false;
+    });
+    function loopDataAbsen(table,type) {
+            var array_data = [],
+            temp_array = [];
+            var no=1;
+            $(table).each(function(key,val) {
+                temp_array = [];
+                var link;
+                if(type=='masuk'){
+
+                    temp_array = [
+                    no,
+                    val.idnya,
+                    val.nama,
+                    val.stok,
+                    val.jumlah_masuk,
+                    val.harga,
+                    'Barang Masuk'
+                    ];
+
+                }else if(type=='keluar'){
+                    temp_array = [
+                    no,
+                    val.idnya,
+                    val.nama,
+                    val.stok,
+                    val.jumlah_keluar,
+                    val.harga,
+                    'Barang Rusak'
+                    ];
+                }else if(type=='baru'){
+                    temp_array = [
+                    no,
+                    val.idnya,
+                    val.nama,
+                    val.stok,
+                    val.harga,
+                    val.dibuat,
+                    'Barang Baru'
+                    ];
+                };
+
+                no = no+1;
+                array_data[array_data.length] = temp_array;
+            });
+            return array_data;
+        }
+</script>
 </body>
 </html>

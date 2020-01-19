@@ -58,7 +58,7 @@
                                                                 <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
                                                                 <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
                                                             <?php }else if ($key->status_pinjaman == 2){ ?> 
-                                                                <button onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success" data-toggle="tooltip" data-title="Upload Bukti Transfer"><i class="notika-icon notika-checked"></i></button>
+                                                                <button onclick="uploadpinjaman(<?=$key->id?>)" class="btn btn-success" data-toggle="tooltip" data-title="Upload Bukti Transfer"><i class="notika-icon notika-up-arrow"></i></button>
                                                                 <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>
                                                             <?php }else{ ?>
                                                                 <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>

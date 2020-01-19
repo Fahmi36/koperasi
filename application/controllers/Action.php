@@ -65,6 +65,45 @@ class Action extends CI_Controller {
 			}
 		}
 	}
+	public function newuser()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else if ($this->session->userdata('username') == null) {
+			redirect('/');
+		}else{
+			$data['title'] = 'Data User - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['anggota'] = $this->mm->getAnggotaBaru();
+			$data['link_view'] = 'pages/admin/new_user';
+			$this->load->view('utama',$data);		
+		}
+	}
+	public function datasimpan()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else if ($this->session->userdata('username') == null) {
+			redirect('/');
+		}else{
+			$data['title'] = 'Data Simpan - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['simpanan'] = $this->mm->getSimpananBelumVerif();
+			$data['link_view'] = 'pages/admin/bayar_simpan';
+			$this->load->view('utama',$data);
+		}
+	}
+	public function datapinjamadmin()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else if ($this->session->userdata('username') == null) {
+			redirect('/');
+		}else{
+			$data['title'] = 'Data Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['cicilan'] = $this->mm->getCicil();
+			$data['link_view'] = 'pages/admin/bayar_pinjam';
+			$this->load->view('utama',$data);
+		}
+	}
 	public function login()
 	{
 		if ($this->session->userdata('id')!=null) {
@@ -130,6 +169,17 @@ class Action extends CI_Controller {
 		$data['link_view'] = 'pages/sukarela';
 		$this->load->view('utama',$data);
 	}
+	public function report()
+	{
+		if ($this->session->userdata('username')==null) {
+			redirect('/');
+		}else{
+			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/report';
+			$data['rekap'] = $this->mm->getReport();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function page_not_found()
 	{
 		$data['title'] = "404 PAGE NOT FOUND";
@@ -168,11 +218,51 @@ class Action extends CI_Controller {
 			echo json_encode(array('success'=>false,'msg'=>$e));
 		}
 	}
+	public function actTfPinjam()
+	{
+		try {
+			$this->mm->upbuktipinjam();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function TerimaUser()
+	{
+		try {
+			$this->mm->ActTerimaUser();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function TolakUser()
+	{
+		try {
+			$this->mm->ActTolakUser();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function InfoUser()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['user'] = $this->mm->getAnggotaBaru($this->input->post('id'));
+        $json = $this->load->view('pages/admin/modalinfouser',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
 	public function ModalPinjam()
     {
         // return var_dump($this->input->post('id'));
         $data['angsuran'] = $this->mm->getAngsuran($this->input->post('id'));
         $json = $this->load->view('pages/modalpinjam',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function UploadBuktiTansfer()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modaltfpinjam',$data);
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
