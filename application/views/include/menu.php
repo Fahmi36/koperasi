@@ -60,7 +60,7 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li class="<?php if($this->uri->segment(1)==""){echo "active";}?>"><a href="<?php echo site_url(''); ?>"><i class="notika-icon notika-house"></i> Beranda</a></li>
                     <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>"><a href="<?php echo site_url('simpanan'); ?>"><i class="notika-icon notika-dollar"></i> Simpanan</a></li>
-                    <?php if ($this->session->userdata('username') == null): ?>
+                    <?php if ($this->session->userdata('username') != null): ?>
                     <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>"><a href="<?php echo site_url('new_user'); ?>"><i class="notika-icon notika-finance"></i> Data Pendaftar Baru</a></li>
                     <li class="<?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}?>"><a data-toggle="tab" href="#databayarweb"><i class="notika-icon notika-form"></i> Data Pembayaran</a></li>
                     <li class="<?php if($this->uri->segment(1)=="report"){echo "active";}?>">

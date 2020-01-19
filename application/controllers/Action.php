@@ -67,16 +67,16 @@ class Action extends CI_Controller {
 	}
 	public function newuser()
 	{
-		if ($this->session->userdata('id')==null) {
-			redirect('login');
-		}else if ($this->session->userdata('username') == null) {
-			redirect('/');
-		}else{
+		// if ($this->session->userdata('id')==null) {
+		// 	redirect('login');
+		// }else if ($this->session->userdata('username') == null) {
+		// 	redirect('/');
+		// }else{
 			$data['title'] = 'Data User - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['anggota'] = $this->mm->getAnggotaBaru();
 			$data['link_view'] = 'pages/admin/new_user';
 			$this->load->view('utama',$data);		
-		}
+		// }
 	}
 	public function datasimpan()
 	{
