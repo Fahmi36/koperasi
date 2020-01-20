@@ -208,6 +208,7 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+
 	public function page_not_found()
 	{
 		$data['title'] = "404 PAGE NOT FOUND";
@@ -282,6 +283,20 @@ class Action extends CI_Controller {
 	{
 		try {
 			$this->mm->actUbahpassword();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function Rekap()
+	{
+		try {
+			$cek = $this->mm->getAnggota();
+			foreach ($cek as $key) {
+				$data['hutang'] = $this->mm->getReportHutang($key->id_anggota);
+				$data['cicil'] = $this->mm->getReportCicil($key->id_anggota);
+
+			echo json_encode($data);
+			}
 		} catch (Exception $e) {
 			echo json_encode(array('success'=>false,'msg'=>$e));
 		}

@@ -645,22 +645,49 @@ class MMain extends CI_Model {
 	}
 	public function getReportHutang($id)
 	{
-		$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
-		$this->db->from('cicil');
-		$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
-		$this->db->where('anggota_pinjaman.id_anggota', $id);
-		$this->db->where_in('status', [2,3]);
-		$query = $this->db->get();
-		return $query->row()->nunggak;
+		$awal = $this->input->post('awal');
+		$akhir = $this->input->post('akhir');
+		if ($awal == null AND $akhir == null) {
+			$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
+			$this->db->from('cicil');
+			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+			$this->db->where('anggota_pinjaman.id_anggota', $id);
+			$this->db->where_in('status', [2,3]);
+			$query = $this->db->get();
+		}else{
+			$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
+			$this->db->from('cicil');
+			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
+			$this->db->where('cicil.created_at >=',date('Y-m-d',strtotime($awal)));
+			$this->db->where('cicil.created_at <=',date('Y-m-d',strtotime($akhir)));
+			$this->db->where('anggota_pinjaman.id_anggota', $id);
+			$this->db->where_in('status', [2,3]);
+			$query = $this->db->get();
+		}
+			return $query->row()->nunggak;
+		
 	}
 	public function getReportCicil($id)
 	{
-		$this->db->select('SUM(besar_persetujuan_pinjaman) as hitung');
-		$this->db->from('anggota_pinjaman');
-		$this->db->where('anggota_pinjaman.id_anggota', $id);
-		$this->db->where_in('status_pinjaman', [2,3]);
-		$query = $this->db->get();
-		return $query->row()->hitung;
+		$awal = $this->input->post('awal');
+		$akhir = $this->input->post('akhir');
+		if ($awal == null AND $akhir == null) {
+			$this->db->select('SUM(besar_persetujuan_pinjaman) as hitung');
+			$this->db->from('anggota_pinjaman');
+			$this->db->where('anggota_pinjaman.id_anggota', $id);
+			$this->db->where_in('status_pinjaman', [2,3]);
+			$query = $this->db->get();
+		}else{
+			$this->db->select('SUM(besar_persetujuan_pinjaman) as hitung');
+			$this->db->from('anggota_pinjaman');
+			$this->db->where('tgl_pengajuan_pinjaman >=',date('Y-m-d',strtotime($awal)));
+			$this->db->where('tgl_pengajuan_pinjaman <=',date('Y-m-d',strtotime($akhir)));
+			$this->db->where_in('status_pinjaman', [2,3]);
+			$this->db->where('anggota_pinjaman.id_anggota', $id);
+			$query = $this->db->get();
+		}
+			return $query->row()->hitung;
+		
 	}
 	public function Uploadfoto($param)
 	{

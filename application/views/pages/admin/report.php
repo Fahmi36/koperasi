@@ -23,20 +23,20 @@
 					<div class="invoice-img" style="padding: 30px 0;background-color: #3a53c4;margin-bottom: 20px;">
 						<h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Halaman Report</h3>
 					</div>
-					<form id="frmCustom" action="javascript:;">
+					<form id="frmCustom" method="post" action="javascript:;">
 						<div class="row">
 							<div class="col-lg-4">
 								<label>Mulai tanggal</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-									<input type="text" id="awal" value="<?php echo date('Y-m-d') ?>" class="form-control dateAwal" name="awal" placeholder="Dari Tanggal">
+									<input autocomplete="off" type="text" id="awal" value="<?php echo date('Y-m-d') ?>" class="form-control dateAwal" name="awal" placeholder="Dari Tanggal">
 								</div>
 							</div>
 							<div class="col-lg-4">
 								<label>Sampai tanggal</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-									<input type="text" id="akhir" value="<?php echo date('Y-m-d') ?>" class="form-control dateAkhir" name="akhir" placeholder="Ke Tanggal">
+									<input autocomplete="off" type="text" id="akhir" value="<?php echo date('Y-m-d') ?>" class="form-control dateAkhir" name="akhir" placeholder="Ke Tanggal">
 								</div>
 							</div>
 							<div class="col-md-4">
