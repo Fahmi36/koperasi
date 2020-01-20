@@ -136,6 +136,7 @@
 						<form action="javascript:void(0);" method="post" id="ubahprofile" enctype="multipart/form-data" accept-charset="utf-8">
 							<div class="form-example-wrap">
 								<?php if ($profile->avatar == null){ ?>
+									
 									<center>
 										<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" style="width: 200px;height: 200px;">
 										<h6 style="margin-top: 20px;">Ubah foto profile</h6>
@@ -162,70 +163,25 @@
 								<?php } ?>
 								<div class="form-example-int">
 									<div class="form-group">
-										<label>Nama Lengkap</label>
+										<label>Username</label>
+										<div class="nk-int-st">
+											<input type="text" name="username" value="<?=$profile->username?>" class="form-control input-sm">
+										</div>
+									</div>
+								</div>
+								<div class="form-example-int">
+									<div class="form-group">
+										<label>Nama</label>
 										<div class="nk-int-st">
 											<input type="text" name="nama" value="<?=$profile->nama?>" class="form-control input-sm">
 										</div>
 									</div>
 								</div>
-								<div class="form-example-int mg-t-15">
-									<div class="form-group">
-										<label>Tempat Lahir</label>
-										<div class="nk-int-st">
-											<input type="text" name="tempat_lahir" value="<?=$profile->tempat_lahir?>" class="form-control input-sm">
-										</div>
-									</div>
-								</div>
-								<div class="form-example-int mg-t-15">
-									<div class="form-group">
-										<label>Tanggal Lahir</label>
-										<div class="nk-int-st">
-											<input type="text" name="tgl_lahir" value="<?=$profile->tgl_lahir?>" class="form-control input-sm" data-mask="9999-99-99" placeholder="dd/mm/yyyy">
-										</div>
-									</div>
-								</div>
-								<!-- <div class="form-example-int mg-t-15">
-									<div class="form-group">
-										<label>Pekerjaan</label>
-										<div class="chiller_cb">
-											<input id="peng_rptra" name="pekerjaan" type="checkbox">
-											<label for="peng_rptra">Pengelola RPTRA, Kelurahan</label>
-											<span></span>
-										</div>
-										<div class="form-group">
-											<div class="nk-int-st">
-												<input type="text" class="form-control input-sm" name="pengelola" id="isi_peke1" disabled/>
-											</div>
-										</div>
-
-										<div class="chiller_cb">
-											<input id="peng_pkk" name="pekerjaan" type="checkbox">
-											<label for="peng_pkk">Tim Penggerak/Pengelola PKK, Kelurahan</label>
-											<span></span>
-										</div>
-										<div class="form-group">
-											<div class="nk-int-st">
-												<input type="text" class="form-control input-sm" name="tim_penggerak" id="isi_peke2" disabled/>
-											</div>	
-										</div>
-
-										<div class="chiller_cb">
-											<input id="lainnya" name="pekerjaan" type="checkbox">
-											<label for="lainnya">Lainnya</label>
-											<span></span>
-										</div>
-										<div class="form-group">
-											<div class="nk-int-st">
-												<input type="text" class="form-control input-sm" name="lainnya" id="isi_peke3" disabled/>
-											</div>
-										</div>
-									</div>
-								</div> -->
 								<div class="form-example-int">
 									<div class="form-group">
-										<label>Alamat Lengkap</label>
+										<label>Email</label>
 										<div class="nk-int-st">
-											<textarea name="alamat" class="form-control auto-size" rows="3"><?=$profile->alamat?></textarea>
+											<input type="text" name="email" value="<?=$profile->email?>" class="form-control input-sm">
 										</div>
 									</div>
 								</div>
@@ -243,24 +199,6 @@
 											<label style="font-weight: normal;">No Telpon (Handphone)</label>
 											<div class="nk-int-st">
 												<input type="text" name="no_hp" value="<?=$profile->no_hp?>" class="form-control input-sm">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-										<div class="form-group">
-											<label style="font-weight: normal;">No Rekening</label>
-											<div class="nk-int-st">
-												<input type="text" name="no_rek" value="<?=$profile->no_rek?>" class="form-control input-sm">
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-										<div class="form-group">
-											<label style="font-weight: normal;">Nama Bank</label>
-											<div class="nk-int-st">
-												<input type="text" name="bank" value="<?=$profile->bank?>" class="form-control input-sm">
 											</div>
 										</div>
 									</div>

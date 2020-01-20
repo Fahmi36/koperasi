@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/style.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
+    <link rel="stylesheet" href="<?=base_url('/')?>assets/css/datapicker/datepicker3.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
@@ -120,7 +121,6 @@
             });
 
         });
-        
         $(function() {
             $('#input-lainnya').hide(); 
             $('#pekerjaan').change(function(){
@@ -328,6 +328,7 @@ prev.addEventListener('click', () => stepActionHandler(-1))
     $(document).ready(function() {
         $("#datatransaksi").dataTable();
         $("#datapinjaman").dataTable();
+        $("#datareport").dataTable();
 
     });
     function pilihsimpan() {

@@ -64,7 +64,7 @@
                                                         <?php if($this->session->userdata('username') == null){ ?>
                                                             <td>
 
-                                                             <?php if ($key->status_pinjaman == 2){ ?> 
+                                                             <?php if ($key->status_pinjaman == 5){ ?> 
                                                                 <a href="<?=site_url('bayar/pinjaman/'.$key->id)?>" target="_blank" data-toggle="tooltip" data-title="Bayar Pinjaman" class="btn btn-primary notika-btn-blue"><i class="notika-icon notika-next"></i></a>
                                                             <?php } ?>
                                                                 <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn notika-btn-white"><i class="notika-icon notika-menus"></i></button>

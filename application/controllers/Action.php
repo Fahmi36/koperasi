@@ -35,6 +35,7 @@ class Action extends CI_Controller {
 			$data['title'] = 'Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/pinjaman';
 			$data['kelompok'] = $this->mm->getKelompok();
+			$data['namakelompok'] = $this->mm->getNamaKelompok();
 			$this->load->view('utama',$data);
 		}
 	}
@@ -99,7 +100,7 @@ class Action extends CI_Controller {
 			redirect('/');
 		}else{
 			$data['title'] = 'Data Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['cicilan'] = $this->mm->getCicil();
+			$data['cicilan'] = $this->mm->getCicilAdmin();
 			$data['link_view'] = 'pages/admin/bayar_pinjam';
 			$this->load->view('utama',$data);
 		}
@@ -131,6 +132,19 @@ class Action extends CI_Controller {
 		}else{
 			$data['title'] = 'Profile - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/user/profile';
+			$data['profile'] = $this->mm->getProfile();
+			$this->load->view('utama',$data);
+		}
+	}
+	public function setting()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}elseif($this->session->userdata('username') == null){
+			redirect('/');
+		}else{
+			$data['title'] = 'Profile - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/user/setting';
 			$data['profile'] = $this->mm->getProfile();
 			$this->load->view('utama',$data);
 		}
@@ -185,12 +199,16 @@ class Action extends CI_Controller {
 		if ($this->session->userdata('username')==null) {
 			redirect('/');
 		}else{
+
+			$this->load->model('MMain', 'mm');
 			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/admin/report';
-			$data['rekap'] = $this->mm->getReport();
+			// $data['rekap'] = $this->mm->getReport();
+			$data['anggota'] = $this->mm->getAnggota();
 			$this->load->view('utama',$data);
 		}
 	}
+
 	public function page_not_found()
 	{
 		$data['title'] = "404 PAGE NOT FOUND";
@@ -249,6 +267,36 @@ class Action extends CI_Controller {
 	{
 		try {
 			$this->mm->ActTolakUser();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function Ubahprofile()
+	{
+		try {
+			$this->mm->actUbahprofile();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function UbahPassword()
+	{
+		try {
+			$this->mm->actUbahpassword();
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'msg'=>$e));
+		}
+	}
+	public function Rekap()
+	{
+		try {
+			$cek = $this->mm->getAnggota();
+			foreach ($cek as $key) {
+				$data['hutang'] = $this->mm->getReportHutang($key->id_anggota);
+				$data['cicil'] = $this->mm->getReportCicil($key->id_anggota);
+
+			echo json_encode($data);
+			}
 		} catch (Exception $e) {
 			echo json_encode(array('success'=>false,'msg'=>$e));
 		}

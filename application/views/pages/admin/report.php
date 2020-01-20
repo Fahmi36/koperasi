@@ -23,20 +23,20 @@
 					<div class="invoice-img" style="padding: 30px 0;background-color: #3a53c4;margin-bottom: 20px;">
 						<h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Halaman Report</h3>
 					</div>
-					<form id="frmCustom" action="javascript:;">
+					<form id="frmCustom" method="post" action="javascript:;">
 						<div class="row">
 							<div class="col-lg-4">
 								<label>Mulai tanggal</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-									<input type="text" id="awal" value="<?php echo date('Y-m-d') ?>" class="form-control dateAwal" name="awal" placeholder="Dari Tanggal">
+									<input autocomplete="off" type="text" id="awal" value="<?php echo date('Y-m-d') ?>" class="form-control dateAwal" name="awal" placeholder="Dari Tanggal">
 								</div>
 							</div>
 							<div class="col-lg-4">
 								<label>Sampai tanggal</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-									<input type="text" id="akhir" value="<?php echo date('Y-m-d') ?>" class="form-control dateAkhir" name="akhir" placeholder="Ke Tanggal">
+									<input autocomplete="off" type="text" id="akhir" value="<?php echo date('Y-m-d') ?>" class="form-control dateAkhir" name="akhir" placeholder="Ke Tanggal">
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -46,31 +46,38 @@
 					</form>
 					<div class="data-table-list" style="padding-left: 0;padding-right: 0;">
 						<div class="table-responsive">
-							<table id="datapinjaman" class="table table-striped">
+							<table id="datareport" class="table table-striped">
 								<thead>
 									<tr>
 										<th>Nama</th>
-										<th>Jumlah Simpanan</th>
 										<th>Jumlah Hutang</th>
 										<th>Jumlah Cicilan</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($rekap as $key): ?>
+									<?php foreach ($anggota as $key): ?>
 										<tr>
 											<td><?=$key->nama?></td>
-											<td><?=$key->jml_hutang?></td>
-											<td><?=$key->jml_cicil?></td>
-											<td><?=$key->jml_cicil?></td>
-										</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
+											<?php if ($this->mm->getReportHutang($key->id_anggota)==null){ ?>
+												<td>Rp. 0</td>
+											<?php }else{ ?>
+											<td>Rp. <?=strrev(implode('.',str_split(strrev(strval($this->mm->getReportHutang($key->id_anggota))),3)))?></td>
+											<?php } ?>
+											<?php if ($this->mm->getReportCicil($key->id_anggota)!=null){ ?>
+											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportCicil($key->id_anggota))),3)))?>
+												</td>
+											<?php }else{ ?>
+												<td>Rp. 0</td>
+											<?php } ?>
+											</tr>
+										<?php endforeach ?>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div id="modalcicil"></div>
 		</div>
-		<div id="modalcicil"></div>
 	</div>
-</div>
