@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/style.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
+    <link rel="stylesheet" href="<?=base_url('/')?>assets/css/datapicker/datepicker3.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
@@ -85,6 +86,8 @@
     <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
+    <script src="<?=base_url('/')?>assets/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?=base_url('/')?>assets/js/datapicker/datepicker-active.js"></script>
     <script src="<?=base_url('/')?>assets/js/jasny-bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -92,6 +95,33 @@
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-steps/jquery.steps.min.js"></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/minimalist-picker/dobpicker.js"></script>
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
+    <script type="text/javascript">
+        $('.dateAwal').datepicker({
+                format: 'yyyy-mm-dd'
+            }).on('changeDate', function(selected){
+                startDate = new Date(selected.date.valueOf());
+                startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+                $('.dateAkhir').datepicker('setStartDate', startDate);
+            }); 
+
+            $('.dateAkhir').datepicker({
+                format: 'yyyy-mm-dd'
+            }).on('changeDate', function(selected){
+                FromEndDate = new Date(selected.date.valueOf());
+                FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+                $('.dateAwal').datepicker('setEndDate', FromEndDate);
+            });
+        $(function() {
+            $('#input-lainnya').hide(); 
+            $('#pekerjaan').change(function(){
+                if($('#pekerjaan').val() == 'lainnya') {
+                    $('#input-lainnya').show(); 
+                } else {
+                    $('#input-lainnya').hide(); 
+                } 
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#resetPass").modal('show');
@@ -288,6 +318,7 @@ prev.addEventListener('click', () => stepActionHandler(-1))
     $(document).ready(function() {
         $("#datatransaksi").dataTable();
         $("#datapinjaman").dataTable();
+        $("#datareport").dataTable();
 
     });
     function pilihsimpan() {

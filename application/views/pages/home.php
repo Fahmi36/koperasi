@@ -222,7 +222,7 @@
     </div>
 </div>
 
-<?php if ($user->no_rek == null): ?>
+<?php if ($user->no_rek == null AND $this->session->userdata('username') == null): ?>
     <div class="modal fade" id="resetPass" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
       <div class="modal-dialog modals-default">
         <div class="modal-content">
