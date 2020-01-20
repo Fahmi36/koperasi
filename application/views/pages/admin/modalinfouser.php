@@ -107,7 +107,7 @@
 							</div>
 							<div class="col-md-7">
 								<?php if ($data->f_ktp != NULL) { ?>
-									<img src="<?php echo base_url('assets/img/ktp/').$data->f_ktp ?>">
+									<img src="<?php echo base_url('assets/images/bukti/').$data->f_ktp ?>">
 								<?php } else { ?>
 									<label class="text-danger">Foto KTP Tidak Ada</label>
 								<?php } ?>
@@ -124,7 +124,7 @@
 							</div>
 							<div class="col-md-7">
 								<?php if ($data->f_foto != NULL) { ?>
-									<img src="<?php echo base_url('assets/img/foto3x4/').$data->f_foto ?>">
+									<img src="<?php echo base_url('assets/images/bukti/').$data->f_foto ?>">
 								<?php } else { ?>
 									<label class="text-danger">Foto 3x4 Tidak Ada</label>
 								<?php } ?>
@@ -141,7 +141,7 @@
 							</div>
 							<div class="col-md-7">
 								<?php if ($data->f_foto2 != NULL) { ?>
-									<img src="<?php echo base_url('assets/img/foto2x3/').$data->f_foto2 ?>">
+									<img src="<?php echo base_url('assets/images/bukti/').$data->f_foto2 ?>">
 								<?php } else { ?>
 									<label class="text-danger">Foto 2x3 Tidak Ada</label>
 								<?php } ?>
