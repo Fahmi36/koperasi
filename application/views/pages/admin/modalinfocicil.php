@@ -29,7 +29,11 @@
 								<label>:</label>
 							</div>
 							<div class="col-md-7">
-								<label><?=$data->bukti_tf?></label>
+								<?php if ($data->bukti_tf != NULL) { ?>
+									<img src="<?php echo base_url('assets/img/bukti/').$data->bukti_tf ?>">
+								<?php } else { ?>
+									<label class="text-danger">Foto Bukti Transfer Tidak Ada</label>
+								<?php } ?>
 							</div>
 						</div>
 					</div>

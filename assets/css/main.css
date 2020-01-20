@@ -718,3 +718,9 @@
   .step-form__button--active {
     display: inline-flex;
   }
+  th.datepicker-switch:hover{
+    background-color: red !important;
+  }
+  .bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.bottom{
+    z-index: 999999999999;
+  }

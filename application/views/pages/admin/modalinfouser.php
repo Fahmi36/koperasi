@@ -106,7 +106,11 @@
 								<label>:</label>
 							</div>
 							<div class="col-md-7">
-								<label><?=$data->f_ktp?></label>
+								<?php if ($data->f_ktp != NULL) { ?>
+									<img src="<?php echo base_url('assets/img/ktp/').$data->f_ktp ?>">
+								<?php } else { ?>
+									<label class="text-danger">Foto KTP Tidak Ada</label>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -119,7 +123,11 @@
 								<label>:</label>
 							</div>
 							<div class="col-md-7">
-								<label><?=$data->f_foto?></label>
+								<?php if ($data->f_foto != NULL) { ?>
+									<img src="<?php echo base_url('assets/img/foto3x4/').$data->f_foto ?>">
+								<?php } else { ?>
+									<label class="text-danger">Foto 3x4 Tidak Ada</label>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -132,7 +140,11 @@
 								<label>:</label>
 							</div>
 							<div class="col-md-7">
-								<label><?=$data->f_foto2?></label>
+								<?php if ($data->f_foto2 != NULL) { ?>
+									<img src="<?php echo base_url('assets/img/foto2x3/').$data->f_foto2 ?>">
+								<?php } else { ?>
+									<label class="text-danger">Foto 2x3 Tidak Ada</label>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
