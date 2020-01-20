@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?=base_url('/')?>assets/css/datapicker/datepicker3.css">
+    <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 </head>
 
 <body>
@@ -86,8 +86,8 @@
     <script src="<?=base_url('/')?>assets/js/autosize.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/plugins.js"></script>
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
-    <script src="<?=base_url('/')?>assets/js/datapicker/bootstrap-datepicker.js"></script>
-    <script src="<?=base_url('/')?>assets/js/datapicker/datepicker-active.js"></script>
+<!--     <script src="<?=base_url('/')?>assets/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?=base_url('/')?>assets/js/datapicker/datepicker-active.js"></script> -->
     <script src="<?=base_url('/')?>assets/js/jasny-bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -95,23 +95,32 @@
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-steps/jquery.steps.min.js"></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/minimalist-picker/dobpicker.js"></script>
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+    <script src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/development/src/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript">
-        $('.dateAwal').datepicker({
-            startView: 1,
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            autoclose: true,
-            format: "dd/mm/yyyy"
-        });
+         $(function () {
+           
+            $('#awal,#akhir').datetimepicker({
+                useCurrent: false,
+                format: 'DD-MM-YYYY',
+                minDate: moment()
+            });
+            $('#awal').datetimepicker().on('dp.change', function (e) {
+                var incrementDay = moment(new Date(e.date));
+                incrementDay.add(1, 'days');
+                $('#enddate').data('DateTimePicker').minDate(incrementDay);
+                $(this).data("DateTimePicker").hide();
+            });
 
-        $('.dateAkhir').datepicker({
-            startView: 2,
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            autoclose: true
+            $('#akhir').datetimepicker().on('dp.change', function (e) {
+                var decrementDay = moment(new Date(e.date));
+                decrementDay.subtract(1, 'days');
+                $('#startdate').data('DateTimePicker').maxDate(decrementDay);
+                 $(this).data("DateTimePicker").hide();
+            });
+
         });
+        
         $(function() {
             $('#input-lainnya').hide(); 
             $('#pekerjaan').change(function(){
