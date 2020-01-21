@@ -101,26 +101,16 @@
 		});
 	}
 	function terimapinjaman(id) {
-		Swal.fire({
-			title: 'Apakah Anda Yakin Ingin Menerima Pinjaman Ini ?',
-			text: "Klik Ya",
-			type: 'success',
-			buttonsStyling: false,
-			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
-				$.ajax({
-					url: BASE_URL + 'PinjamController/TerimaPinjaman',
-					type: 'post',
-					data: {id: id},
-					success:function(response) {
-						location.reload();
-					}
-				})
+		$.ajax({
+			url: BASE_URL + 'Action/PersetujuanPinjaman',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalpinjam").html(respon);
+				$("#showmodalpinjam").modal({backdrop:'static',keyboard: false});
 			}
-		})
+		});
 	}
 	function tolakpinjaman(id) {
 		Swal.fire({
@@ -188,6 +178,75 @@
 				$("#modaluploadbukti").modal({backdrop:'static',keyboard: false});
 			}
 		});
+	}
+	function ulangpinjaman(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Ingin Mengubah data sebelum di acc ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/UlangPinjaman',
+					type: 'POST',
+					data: {id: id},
+					success:function() {
+						location.reload();
+					}
+				})
+			}
+		})
+	}
+	function verifpinjaman(id) {
+		$.ajax({
+			url: BASE_URL + 'Action/VerifPinjaman',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalpinjam").html(respon);
+				$("#modalverifpinjam").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function KembalikanPinjam(id) {
+		$.ajax({
+			url: BASE_URL + 'Action/KembalikanPinjaman',
+			type: 'POST',
+			dataType: 'html',
+			data: {id: id},
+			success: function (respon) {
+				$("#modalpinjam").html(respon);
+				$("#modalverifpinjam").modal('hide');
+				$("#modalkembalipinjam").modal({backdrop:'static',keyboard: false});
+			}
+		});
+	}
+	function VerifData(id) {
+		Swal.fire({
+			title: 'Apakah Anda Yakin Memverifikasi Data ini ?',
+			text: "Klik Ya",
+			type: 'success',
+			buttonsStyling: false,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-info',
+			cancelButtonClass: 'btn btn-danger',
+			confirmButtonText: 'Ya',
+			preConfirm: () => { 
+				$.ajax({
+					url: BASE_URL + 'PinjamController/VerifikasiPinjaman',
+					type: 'POST',
+					data: {id: id},
+					success:function() {
+						location.reload();
+					}
+				})
+			}
+		})
 	}
 	function infosimpan(id) {
 		$.ajax({
@@ -476,6 +535,49 @@
 										$("#modalreview").modal({backdrop:'static',keyboard: false});
 									}
 								});
+							}
+
+						},
+						error: function () {
+							Swal.fire(
+								'"'+response.msg+'"',
+								'Hubungi Tim Terkait',
+								);
+						}
+					});
+				}
+			});
+		});
+		$("#formubahpinjam").submit(function (event) {
+			var data = new FormData($(this)[0]);
+			Swal.fire({
+				title: 'Data Sudah benar ?',
+				text: "Klik Ya",
+				type: 'success',
+				buttonsStyling: false,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-info',
+				cancelButtonClass: 'btn btn-danger',
+				confirmButtonText: 'Ya',
+				preConfirm: () => { 
+					$.ajax({
+						url: BASE_URL + 'PinjamController/ubahPinjam',
+						type: "POST",
+						dataType:'json',
+						data: data,
+						contentType: false,
+						cache: false,
+						processData: false,
+						beforeSend:function(argument) {
+							$(".loader-overlay").removeAttr('style');
+						},
+						success: function (response) {
+							if (response.success == false) {
+								Swal.fire(
+									''+response.msg+'',
+									);
+							}else{
+								window.location.href = BASE_URL + 'bayar/pinjaman';
 							}
 
 						},

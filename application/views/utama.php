@@ -322,6 +322,19 @@ prev.addEventListener('click', () => stepActionHandler(-1))
                 $("#suratPer").html("");
             }
         });
+        $("#besar_pinjam_ulang").keyup(function() {
+            var x = document.getElementById('suratPerUlang');
+            if($(this).val() >= 20000000) {
+                $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
+            } else {
+                $("#suratPerUlang").html("");
+            }
+        });
+            if ($("#besar_pinjam_ulang").val() >= 20000000) {
+               $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
+            } else {
+                $("#suratPerUlang").html("");
+            }
     });
 </script>
 <script type="text/javascript">

@@ -39,6 +39,19 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function ulangpinjaman()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/kirimulang';
+			$data['kelompok'] = $this->mm->getKelompok();
+			$data['namakelompok'] = $this->mm->getNamaKelompok();
+			$data['data'] = $this->mm->getDataPinjaman($this->uri->segment(3));
+			$this->load->view('utama',$data);
+		}
+	}
 	public function setoran()
 	{
 		if ($this->session->userdata('id')==null) {
@@ -358,11 +371,36 @@ class Action extends CI_Controller {
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
-     public function InfoPinjaman()
+    public function InfoPinjaman()
     {
         // return var_dump($this->input->post('id'));
         $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
         $json = $this->load->view('pages/modalpinjaman',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function VerifPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
+        $json = $this->load->view('pages/admin/modalverifpinjam',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function PersetujuanPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modalpersetujuanpinjaman',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function KembalikanPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modalkembalipinjaman',$data);
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }

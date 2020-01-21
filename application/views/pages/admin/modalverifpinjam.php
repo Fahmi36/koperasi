@@ -1,5 +1,4 @@
-
-<div class="modal fade" id="showmodalpinjam" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalverifpinjam" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modals-defaul">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -30,19 +29,6 @@
 							</div>
 							<div class="col-md-7">
 								<label>Rp. <?=number_format($data->besar_pengajuan_pinjaman,0,',','.')?></label>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-3">
-								<label>Jumlah Pinjaman yang di Setujui</label>
-							</div>
-							<div class="col-md-1" style="max-width: 3.33333%;">
-								<label>:</label>
-							</div>
-							<div class="col-md-7">
-								<label>Rp. <?=number_format($data->besar_persetujuan_pinjaman,0,',','.')?></label>
 							</div>
 						</div>
 					</div>
@@ -107,7 +93,8 @@
 					<?php endforeach ?>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <a onclick="KembalikanPinjam(<?=$data->id?>)" class="btn btn-danger">Kembalikan</a>
+                <a onclick="VerifData(<?=$data->id?>)"  class="btn btn-primary">Verifikasi Pinjam</a>
 				</div>
 			</div>
 		</div>

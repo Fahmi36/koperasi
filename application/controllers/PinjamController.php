@@ -181,7 +181,7 @@ class PinjamController extends CI_Controller {
 					$data = array(
 						'id_anggota'=>$this->session->userdata('id'),
 						'besar_pengajuan_pinjaman'=>$this->input->post('nominal'),
-						'besar_persetujuan_pinjaman'=>$this->input->post('nominal'),
+						'besar_persetujuan_pinjaman'=>'0',
 						'tgl_pengajuan_pinjaman'=>date('Y-m-d H:i:s'),
 						'no_rek'=>$this->input->post('norek'),
 						'no_hp'=>$this->input->post('telp'),
@@ -266,11 +266,17 @@ class PinjamController extends CI_Controller {
 
 		$datams = array(
 			'status_pinjaman'=>'2',
+			'besar_persetujuan_pinjaman'=>$this->input->post('jumlah'),
 			'id_petugas'=>$this->session->userdata('id'),
 		);
 
 		$this->mc->update($datamc,$wheremc);
-		$this->ms->update($datams,$wherems);
+		$query = $this->ms->update($datams,$wherems);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
 
 	}
 	public function TolakPinjaman()
@@ -292,6 +298,82 @@ class PinjamController extends CI_Controller {
 		);
 
 		$this->mc->update($datamc,$wheremc);
+		$this->ms->update($datams,$wherems);
+	}
+	public function KembalikanPinjaman()
+	{
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'6',
+			'keterangan'=>$this->input->post('keterangan'),
+		);
+
+		$query = $this->ms->update($datams,$wherems);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
+	}
+	public function ubahPinjam()
+	{
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();
+		$jasa = $bunga->bunga/100;
+		$surat = $this->Uploadfoto('surat_pernyataan_ulang');
+		$datams = array(
+			'status_pinjaman'=>'1',
+			'besar_pengajuan_pinjaman'=>$this->input->post('nominal'),
+			'besar_persetujuan_pinjaman'=>'0',
+			'no_rek'=>$this->input->post('norek'),
+			'no_hp'=>$this->input->post('telp'),
+			'kelompok'=>$this->input->post('kelompok'),
+			'keperluan'=>$this->input->post('keperluan'),	
+			'biaya_jasa'=>round($this->input->post('nominal')*$jasa),
+			'surat_pt' => $surat,
+		);
+
+		$query  = $this->ms->update($datams,$wherems);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
+	}
+	public function VerifikasiPinjaman()
+	{
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'7',
+		);
+
+		$query  = $this->ms->update($datams,$wherems);
+		if ($query == true) {
+			$json = $this->successRespone($query);
+		}else{
+			$json = $this->failedRespone();
+		}
+	}
+	public function UlangPinjaman()
+	{
+		$wherems = array(
+			'id'=>$this->input->post('id')
+		);
+
+		$datams = array(
+			'status_pinjaman'=>'1',
+			'besar_persetujuan_pinjaman' => '0',
+		);
+
 		$this->ms->update($datams,$wherems);
 	}
 	public function BuktiBayarPinjaman()

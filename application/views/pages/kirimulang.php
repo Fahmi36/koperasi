@@ -27,7 +27,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<form action="javascript:void(0)" method="post" id="formpinjam" accept-charset="utf-8" enctype="multipart/form-data">
+				<form action="javascript:void(0)" method="post" id="formubahpinjam" accept-charset="utf-8" enctype="multipart/form-data">
 					<div class="form-example-wrap mg-t-30">
 						<div class="cmp-tb-hd cmp-int-hd text-center heading-h2">
 							<h2>Permohonan Pinjaman</h2>
@@ -46,6 +46,7 @@
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
 											<input type="text" name="nama" value="<?=$this->session->userdata('nama')?>" class="form-control input-sm" placeholder="Masukkan Nama" required="" autocomplete="off">
+											<input type="hidden" name="id" value="<?=$this->uri->segment(3)?>" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -61,6 +62,7 @@
 										<div class="nk-int-st">
 											<select name="kelompok" class="form-control input-sm" required="" autocomplete="off">
 												<option selected disabled>Pilih Jenis Kelompok</option>
+												<option selected value="<?=$data->kelompok?>"><?=$data->kelompok?></option>
 												<?php foreach ($namakelompok as $key) { ?>
 													<option value="<?=$key->kelompok?>"><?=$key->kelompok?></option>
 												<?php } ?>
@@ -92,14 +94,14 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required="" autocomplete="off">
+											<input type="number" id="besar_pinjam_ulang" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" value="<?=$data->besar_pengajuan_pinjaman?>" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="form-example-int form-horizental" id="suratPer">
-							
+
+						<div class="form-example-int form-horizental" id="suratPerUlang">
 						</div>
 						<div class="form-example-int form-horizental mg-t-15">
 							<div class="form-group">
@@ -128,7 +130,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="telp" class="form-control input-sm" placeholder="Masukkan No. Telp" required="" autocomplete="off">
+											<input type="number" name="telp" class="form-control input-sm" placeholder="Masukkan No. Telp" required="" value="<?=$data->no_hp?>"autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -142,7 +144,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="norek"  class="form-control input-sm" placeholder="Masukkan No. Rekening" required="" autocomplete="off">
+											<input type="number" name="norek"  class="form-control input-sm" placeholder="Masukkan No. Rekening" required="" value="<?=$data->no_rek?>" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -156,7 +158,21 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required="" autocomplete="off">
+											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required="" value="<?=$data->keperluan?>" autocomplete="off">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-example-int form-horizental mg-t-15">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+										<label class="hrzn-fm">Keterangan di Tolak :</label>
+									</div>
+									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+										<div class="nk-int-st">
+											<input type="text" class="form-control input-sm" required="" value="<?=$data->keterangan?>" disabled autocomplete="off">
 										</div>
 									</div>
 								</div>

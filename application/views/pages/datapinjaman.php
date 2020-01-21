@@ -36,7 +36,8 @@
                                                     <th>Nomor Telpon</th>
                                                     <th>Tanggal Pengajuan</th>
                                                     <th>Keperluan</th>
-                                                    <th>Jumlah</th>
+                                                    <th>Jumlah Pengajuan</th>
+                                                    <th>Jumlah Persetujuan</th>
                                                     <th>Status</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -49,7 +50,9 @@
                                                         <td><?=$key->no_hp?></td>
                                                         <td><?=$key->tgl_pengajuan_pinjaman?></td>
                                                         <td><?=$key->keperluan?></td>
+                                                        <td><?=number_format($key->besar_pengajuan_pinjaman,0,',','.')?></td>
                                                         <td><?=number_format($key->besar_persetujuan_pinjaman,0,',','.')?></td>
+
                                                         <?php if ($key->status_pinjaman == 0){ ?> 
                                                             <td>Di Tolak</td>
                                                         <?php }else if ($key->status_pinjaman == 1){ ?>
@@ -57,26 +60,50 @@
                                                         <?php }else if ($key->status_pinjaman == 2){ ?>
                                                             <td>Sudah di Setujui</td>
                                                         <?php }else if ($key->status_pinjaman == 5){ ?>
-                                                            <td>Pinjaman Sudah di Transfer</td>
+                                                            <td>Sudah Di Transfer</td>
+                                                        <?php }else if ($key->status_pinjaman == 6){ ?>
+                                                            <td>Data Di Kembalikan</td>
+                                                        <?php }else if ($key->status_pinjaman == 7){ ?>
+                                                            <td>Sudah Di Verifikasi</td>
                                                         <?php }else{ ?>
                                                             <td>Sudah Lunas</td>
                                                         <?php } ?>
+
                                                         <?php if($this->session->userdata('username') == null){ ?>
                                                             <td>
 
                                                              <?php if ($key->status_pinjaman == 5){ ?> 
                                                                 <a href="<?=site_url('bayar/pinjaman/'.$key->id)?>" target="_blank" data-toggle="tooltip" data-title="Bayar Pinjaman" class="btn btn-primary notika-btn-blue"><i class="notika-icon notika-next"></i></a>
+                                                            <?php }else if($key->status_pinjaman == 6){?>
+                                                                <a href="<?=site_url('kirim/ulangpinjaman/'.$key->id)?>" target="_blank" data-toggle="tooltip" data-title="Kirim Ulang Pinjaman" class="btn btn-primary notika-btn-blue"><i class="notika-icon notika-right-arrow"></i></a>
                                                             <?php } ?>
                                                                 <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn notika-btn-white"><i class="notika-icon notika-menus"></i></button>
                                                             </td>
                                                         <?php }else{ ?>
                                                             <td>
-                                                             <?php if ($key->status_pinjaman == 1){ ?> 
-                                                                <button data-toggle="tooltip" data-title="Setujui Pinjaman" onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
-                                                                <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
-                                                                <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                <?php if ($key->status_pinjaman == 1){ ?> 
+                                                                     
+                                                                    <?php if ($key->besar_pengajuan_pinjaman > 20000000){ ?>
+                                                                        <?php if ($this->session->userdata('level') == '2'): ?>
+                                                                            <?php if ($key->status_pinjaman == 7){ ?>
+                                                                                <button data-toggle="tooltip" data-title="Setujui Pinjaman" onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
+                                                                                <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
+                                                                                <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                            <?php }else{ ?>
+                                                                                <button data-toggle="tooltip" data-title="Verifikasi Pinjaman" onclick="verifpinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
+                                                                                <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
+                                                                                <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                            <?php } ?>
+                                                                        <?php endif ?>
+                                                                    <?php }else{ ?>
+                                                                        
+                                                                         <button data-toggle="tooltip" data-title="Setujui Pinjaman" onclick="terimapinjaman(<?=$key->id?>)" class="btn btn-success"><i class="notika-icon notika-checked"></i></button>
+                                                                         <button data-toggle="tooltip" data-title="Tolak Pinjaman" onclick="tolakpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-close"></i></button>
+                                                                         <button data-toggle="tooltip" data-title="Informasi Pinjaman" onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info"><i class="notika-icon notika-menus"></i></button>
+                                                                   <?php } ?>
                                                             <?php }else if ($key->status_pinjaman == 2){ ?> 
                                                                 <button onclick="uploadpinjaman(<?=$key->id?>)" class="btn btn-success" data-toggle="tooltip" data-title="Upload Bukti Transfer"><i class="notika-icon notika-up-arrow"></i></button>
+                                                                <button data-toggle="tooltip" data-title="Ulang Pinjaman" onclick="ulangpinjaman(<?=$key->id?>)" class="btn btn-danger"><i class="notika-icon notika-left-arrow"></i></button>
                                                                 <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>
                                                             <?php }else{ ?>
                                                                 <button onclick="infopinjaman(<?=$key->id?>)" class="btn btn-info" data-toggle="tooltip" data-title="Informasi Pinjaman"><i class="notika-icon notika-menus"></i></button>

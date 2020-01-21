@@ -26,7 +26,6 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($cicilan as $key): ?>
-
                                                     <tr>
                                                         <td><?=$key->nama?></td>
                                                         <td><?=$key->no_hp?></td>
