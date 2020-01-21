@@ -45,7 +45,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="nama" value="<?=$this->session->userdata('nama')?>" class="form-control input-sm" placeholder="Masukkan Nama" required>
+											<input type="text" name="nama" value="<?=$this->session->userdata('nama')?>" class="form-control input-sm" placeholder="Masukkan Nama" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<select name="kelompok" class="form-control input-sm" required>
+											<select name="kelompok" class="form-control input-sm" required="" autocomplete="off">
 												<option selected disabled>Pilih Jenis Kelompok</option>
 												<?php foreach ($namakelompok as $key) { ?>
 													<option value="<?=$key->kelompok?>"><?=$key->kelompok?></option>
@@ -78,7 +78,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="noanggota" value="<?=$this->session->userdata('id');?>" class="form-control input-sm" placeholder="Masukkan No. Anggota" required>
+											<input type="text" name="noanggota" value="<?=$this->session->userdata('id');?>" class="form-control input-sm" placeholder="Masukkan No. Anggota" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -92,7 +92,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required>
+											<input type="number" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -109,7 +109,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<select name="jml_angsuran" class="form-control input-sm" required readonly>
+											<select name="jml_angsuran" class="form-control input-sm" required="" autocomplete="off" readonly>
 												<!-- <option selected disabled>Pilih Jumlah Angsuran</option> -->
 												<!-- <option value="3">3 Bulan</option> -->
 												<!-- <option value="6">6 Bulan</option> -->
@@ -128,7 +128,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="telp" value="<?=$kelompok->no_hp?>" class="form-control input-sm" placeholder="Masukkan No. Telp" required>
+											<input type="number" name="telp" class="form-control input-sm" placeholder="Masukkan No. Telp" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -142,7 +142,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" name="norek" value="<?=$kelompok->no_rek?>" class="form-control input-sm" placeholder="Masukkan No. Rekening" required>
+											<input type="number" name="norek"  class="form-control input-sm" placeholder="Masukkan No. Rekening" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -156,7 +156,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required>
+											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>

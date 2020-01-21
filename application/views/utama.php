@@ -134,7 +134,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#resetPass").modal('show');
+            $("#resetPass").modal({backdrop:'static',keyboard: false});
         });
         $(document).ready(function() {    
             var readURL = function(input) {

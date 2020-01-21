@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MMain extends CI_Model {
 
-	public function getUser()
+	public function getUser() 
 	{
 		$row = $this->db->get_where('anggota',array('id_anggota'=>$this->session->userdata('id')));
 		return $row->row();
@@ -40,6 +40,7 @@ class MMain extends CI_Model {
 			$this->db->select('SUM(jumlah_transaksi) as simpan');
 			$this->db->from('anggota_setoran');
 			$this->db->where('tipe_transaksi',1);
+			$this->db->where('status',1);
 			$this->db->where('id_anggota', $this->session->userdata('id'));
 			$query = $this->db->get();
 		}else{
@@ -85,16 +86,40 @@ class MMain extends CI_Model {
 		$query = $this->db->get();
 		return $query->row();
 	}
-	public function getSimpananWajib()
+	public function getSimpananWajib($id='')
 	{
-		$this->db->select('SUM(jumlah_transaksi) as simpan');
-		$this->db->from('anggota_setoran');
-		$this->db->where('tipe_transaksi',1);
-		$this->db->where('id_jenis_setoran', 2);
-		$this->db->where('status', 1);
-		$this->db->where('id_anggota', $this->session->userdata('id'));
-		$query = $this->db->get();
-		return $query->row();
+		if ($id!='') {
+			$this->db->select('SUM(jumlah_transaksi) as simpan');
+			$this->db->from('anggota_setoran');
+			$this->db->where('tipe_transaksi',1);
+			$this->db->where('id_jenis_setoran', 2);
+			$this->db->where('status', 1);
+			$this->db->where('id_anggota', $id);
+			$query = $this->db->get();
+			return $query->row()->simpan;
+		}else{
+			$this->db->select('SUM(jumlah_transaksi) as simpan');
+			$this->db->from('anggota_setoran');
+			$this->db->where('tipe_transaksi',1);
+			$this->db->where('id_jenis_setoran', 2);
+			$this->db->where('status', 1);
+			$this->db->where('id_anggota', $this->session->userdata('id'));
+			$query = $this->db->get();
+			return $query->row();
+		}
+		
+	}
+	public function getSimpananSukarela($id)
+	{
+			$this->db->select('SUM(jumlah_transaksi) as suka');
+			$this->db->from('anggota_setoran');
+			$this->db->where('tipe_transaksi',1);
+			$this->db->where('id_jenis_setoran', 3);
+			$this->db->where('status', 1);
+			$this->db->where('id_anggota', $id);
+			$query = $this->db->get();
+			return $query->row()->suka;
+		
 	}
 	public function getJatuhTempo()
 	{
@@ -357,7 +382,7 @@ class MMain extends CI_Model {
 				$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
 				$this->db->join('cicil', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
 				$this->db->where('cicil.status', '3');
-				$this->db->where('cicil.id', $this->input->post('id'));
+				$this->db->where('cicil.id', $id);
 				$this->db->group_by('cicil.id_angsuran');
 				$query = $this->db->get();
 			}else{
@@ -387,7 +412,7 @@ class MMain extends CI_Model {
 	}
 	public function getDetailPinjaman($id)
 	{
-		$this->db->select('anggota_pinjaman.id,anggota_pinjaman.no_hp,anggota_pinjaman.tgl_pengajuan_pinjaman,anggota_pinjaman.besar_persetujuan_pinjaman,anggota_pinjaman.keperluan,anggota_pinjaman.status_pinjaman,anggota_pinjaman.biaya_jasa,anggota.nama');
+		$this->db->select('anggota_pinjaman.id,anggota_pinjaman.no_hp,anggota_pinjaman.tgl_pengajuan_pinjaman,anggota_pinjaman.besar_persetujuan_pinjaman,anggota_pinjaman.keperluan,anggota_pinjaman.status_pinjaman,anggota_pinjaman.biaya_jasa,anggota.nama,anggota_pinjaman.surat_pt');
 		$this->db->from('anggota_pinjaman');
 		$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
 		$this->db->where('anggota_pinjaman.id', $id);
@@ -645,47 +670,22 @@ class MMain extends CI_Model {
 	}
 	public function getReportHutang($id)
 	{
-		$awal = $this->input->post('awal');
-		$akhir = $this->input->post('akhir');
-		if ($awal == null AND $akhir == null) {
 			$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
 			$this->db->from('cicil');
 			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
 			$this->db->where('anggota_pinjaman.id_anggota', $id);
 			$this->db->where_in('status', [2,3]);
 			$query = $this->db->get();
-		}else{
-			$this->db->select('SUM(jumlah_bayar + jasa) as nunggak');
-			$this->db->from('cicil');
-			$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
-			$this->db->where('cicil.created_at >=',date('Y-m-d',strtotime($awal)));
-			$this->db->where('cicil.created_at <=',date('Y-m-d',strtotime($akhir)));
-			$this->db->where('anggota_pinjaman.id_anggota', $id);
-			$this->db->where_in('status', [2,3]);
-			$query = $this->db->get();
-		}
 			return $query->row()->nunggak;
 		
 	}
-	public function getReportCicil($id)
+	public function getReportPinjaman($id)
 	{
-		$awal = $this->input->post('awal');
-		$akhir = $this->input->post('akhir');
-		if ($awal == null AND $akhir == null) {
 			$this->db->select('SUM(besar_persetujuan_pinjaman) as hitung');
 			$this->db->from('anggota_pinjaman');
 			$this->db->where('anggota_pinjaman.id_anggota', $id);
 			$this->db->where_in('status_pinjaman', [2,3]);
 			$query = $this->db->get();
-		}else{
-			$this->db->select('SUM(besar_persetujuan_pinjaman) as hitung');
-			$this->db->from('anggota_pinjaman');
-			$this->db->where('tgl_pengajuan_pinjaman >=',date('Y-m-d',strtotime($awal)));
-			$this->db->where('tgl_pengajuan_pinjaman <=',date('Y-m-d',strtotime($akhir)));
-			$this->db->where_in('status_pinjaman', [2,3]);
-			$this->db->where('anggota_pinjaman.id_anggota', $id);
-			$query = $this->db->get();
-		}
 			return $query->row()->hitung;
 		
 	}

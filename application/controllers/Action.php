@@ -214,6 +214,31 @@ class Action extends CI_Controller {
 		$data['title'] = "404 PAGE NOT FOUND";
 		$this->load->view('not_found',$data);
 	}
+	public function reportUser()
+	{
+		if ($this->session->userdata('username')==null) {
+			redirect('/');
+		}else{
+
+			$this->load->model('MMain', 'mm');
+			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/report';
+			$data['rekap'] = $this->mm->getReportUser();
+			$this->load->view('utama',$data);
+		}
+	}
+	public function reportSimpan()
+	{
+		if ($this->session->userdata('username')==null) {
+			redirect('/');
+		}else{
+			$this->load->model('MMain', 'mm');
+			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/report';
+			$data['rekap'] = $this->mm->getReportSimpanPinjam();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function getPetugas()
 	{
 		$this->db->select('id_anggota,nama');

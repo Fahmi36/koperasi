@@ -150,7 +150,7 @@
 			type: 'post',
 			data: {id: id},
 			success:function(response) {
-				location.reload();
+				window.location.href = BASE_URL + "bayar/pinjaman";
 			}
 		})
 	}

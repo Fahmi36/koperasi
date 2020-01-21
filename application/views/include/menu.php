@@ -11,6 +11,16 @@
                             <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>">
                                 <a href="<?php echo site_url('simpanan'); ?>">Simpanan</a>
                             </li>
+                            <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
+                                <a data-toggle="collapse" data-target="#demoevent" href="#">Pinjaman</a>
+                                <ul id="demoevent" class="collapse dropdown-header-top">
+
+                                    <?php if ($this->session->userdata('username') == null): ?>
+                                        <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
+                                    <?php endif ?>
+                                    <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
+                                </ul>
+                            </li>
                             <?php if ($this->session->userdata('username') != null): ?>
                                 <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>">
                                     <a href="<?php echo site_url('new_user'); ?>">Data Pendaftar Baru</a>
@@ -23,19 +33,14 @@
                                     </ul>
                                 </li>
                                  <li class="<?php if($this->uri->segment(1)=="report"){echo "active";}?>">
-                                    <a href="<?php echo site_url('report'); ?>">Report</a>
+                                    <a data-toggle="collapse" data-target="#datareport" href="#">Rekap</a>
+                                    <ul id="datareport" class="collapse dropdown-header-top">
+                                        <li><a href="<?php echo site_url('report'); ?>">Total Simpanan Anggota</a></li>
+                                        <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan dan Pinjaman Perbulan</a></li>
+                                        <li><a href="<?php echo site_url('report/user'); ?>">Rekap Daftar Anggota Baru Perbulan</a></li>
+                                    </ul>
                                 </li>
                             <?php endif ?>
-                            <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
-                                <a data-toggle="collapse" data-target="#demoevent" href="#">Pinjaman</a>
-                                <ul id="demoevent" class="collapse dropdown-header-top">
-
-                                    <?php if ($this->session->userdata('username') == null): ?>
-                                        <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
-                                    <?php endif ?>
-                                    <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -60,25 +65,16 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li class="<?php if($this->uri->segment(1)==""){echo "active";}?>"><a href="<?php echo site_url(''); ?>"><i class="notika-icon notika-house"></i> Beranda</a></li>
                     <li class="<?php if($this->uri->segment(1)=="simpanan"){echo "active";}?>"><a href="<?php echo site_url('simpanan'); ?>"><i class="notika-icon notika-dollar"></i> Simpanan</a></li>
+                    <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>"><a data-toggle="tab" href="#pinjaman"><i class="notika-icon notika-credit-card"></i> Pinjaman</a></li>
+
                     <?php if ($this->session->userdata('username') != null): ?>
                     <li class="<?php if($this->uri->segment(1)=="new_user"){echo "active";}?>"><a href="<?php echo site_url('new_user'); ?>"><i class="notika-icon notika-finance"></i> Data Pendaftar Baru</a></li>
                     <li class="<?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}?>"><a data-toggle="tab" href="#databayarweb"><i class="notika-icon notika-form"></i> Data Pembayaran</a></li>
                     <li class="<?php if($this->uri->segment(1)=="report"){echo "active";}?>">
-                        <a href="<?php echo site_url('report'); ?>"><i class="notika-icon notika-bar-chart"></i>Report</a>
+                        <a data-toggle="tab" href="#datareportweb"><i class="notika-icon notika-bar-chart"></i>Report</a>
                     </li>
                     <?php endif ?>
-                    <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>"><a data-toggle="tab" href="#pinjaman"><i class="notika-icon notika-credit-card"></i> Pinjaman</a></li>
-                    <!-- <li><a href="<?php echo site_url('setoran'); ?>"><i class="notika-icon notika-credit-card"></i> Setoran</a></li> -->
-                    <!-- <li><a data-toggle="tab" href="#Page" ><i class="notika-icon notika-support"></i> Pages</a></li> -->
-                </ul>
-                <div class="tab-content custom-menu-content">
-<!--                     <div id="simpanan" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="<?=site_url('sim_pokok')?>">Pokok</a></li>
-                            <li><a href="<?=site_url('sim_wajib')?>">Wajib</a></li>
-                            <li><a href="<?=site_url('sim_suka')?>">Sukarela</a></li>
-                        </ul>
-                    </div> -->
+
                     <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
@@ -91,22 +87,13 @@
                             <li><a href="<?php echo site_url('data_pinjam'); ?>">Pembayaran Pinjaman</a></li>
                         </ul>
                     </div>
- <!--                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="datareportweb" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="report"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="contact.html">Contact</a>
-                            </li>
-                            <li><a href="invoice.html">Invoice</a>
-                            </li>
-                            <li><a href="typography.html">Typography</a>
-                            </li>
-                            <li><a href="color.html">Color</a>
-                            </li>
-                            <li><a href="login-register.html">Login Register</a>
-                            </li>
-                            <li><a href="404.html">404 Page</a>
-                            </li>
+                             <li><a href="<?php echo site_url('report'); ?>">Total Simpanan Anggota</a></li>
+                            <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan dan Pinjaman Perbulan</a></li>
+                            <li><a href="<?php echo site_url('report/user'); ?>">Rekap Daftar Anggota Baru Perbulan</a></li>
                         </ul>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
