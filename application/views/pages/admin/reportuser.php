@@ -48,6 +48,7 @@
 										<th>Alamat</th>
 										<th>No Handphone</th>
 										<th>Tanggal Di Terima</th>
+										<th>Bulan</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -58,6 +59,7 @@
 											<td><?=$key->alamat?></td>
 											<td><?=$key->no_hp?></td>
 											<td><?=$key->tgl_masuk?></td>
+											<td><?=date('m',strtotime($key->tgl_masuk))?></td>
 											</tr>
 										<?php endforeach ?>
 									</tbody>
