@@ -585,13 +585,15 @@ class MMain extends CI_Model {
 	{
 		$query = $this->db->update('anggota',array(
 			'status'=>1,
+			'tgl_masuk'=>date('Y-m-d'),
+			'acc_by'=>$this->session->userdata('id'),
 		),
 		array('id_anggota'=>$this->input->post('id')
 	));
 		if ($query == true) {
-			$val = array('success'=>true,'msg'=>'Berhasil Upload Bukti');
+			$val = array('success'=>true,'msg'=>'Berhasil Terima Anggota');
 		}else{
-			$val = array('success'=>false,'msg'=>'Gagal Upload Bukti');
+			$val = array('success'=>false,'msg'=>'Gagal Terima Anggota');
 		}
 		echo json_encode($val);
 	}
@@ -603,9 +605,9 @@ class MMain extends CI_Model {
 		array('id_anggota'=>$this->input->post('id')
 	));
 		if ($query == true) {
-			$val = array('success'=>true,'msg'=>'Berhasil Upload Bukti');
+			$val = array('success'=>true,'msg'=>'Berhasil Tolak Anggota');
 		}else{
-			$val = array('success'=>false,'msg'=>'Gagal Upload Bukti');
+			$val = array('success'=>false,'msg'=>'Gagal Tolak Anggota');
 		}
 		echo json_encode($val);
 	}
@@ -633,9 +635,9 @@ class MMain extends CI_Model {
 			),array('id'=>$this->session->userdata('id')));
 		}
 		if ($query == true) {
-			$val = array('success'=>true,'msg'=>'Berhasil Upload Bukti');
+			$val = array('success'=>true,'msg'=>'Berhasil Ubah Data Diri Anda');
 		}else{
-			$val = array('success'=>false,'msg'=>'Gagal Upload Bukti');
+			$val = array('success'=>false,'msg'=>'Gagal Ubah Data Diri Anda');
 		}
 		echo json_encode($val);
 	}
@@ -672,9 +674,9 @@ class MMain extends CI_Model {
 			}
 		}
 		if ($query == true) {
-			$val = array('success'=>true,'msg'=>'Berhasil Upload Bukti');
+			$val = array('success'=>true,'msg'=>'Berhasil Ubah Password Anda');
 		}else{
-			$val = array('success'=>false,'msg'=>'Gagal Upload Bukti');
+			$val = array('success'=>false,'msg'=>'Gagal Ubah Password Anda');
 		}
 		echo json_encode($val);
 	}
@@ -698,6 +700,38 @@ class MMain extends CI_Model {
 			$query = $this->db->get();
 			return $query->row()->hitung;
 		
+	}
+	public function getReportUser()
+	{
+		if ($this->input->post('bulan') == null) {
+			$bulan = date('Y-m');
+		}else{
+			$bulan = date('Y-m',strtotime($this->input->post('bulan')));
+		}
+		$this->db->select('*');
+		$this->db->from('anggota');
+		$this->db->where("DATE_FORMAT(created_date,'%Y-%m')", $bulan);
+		$this->db->where('status', 1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function getSimpanan()
+	{
+		if ($this->input->post('bulansimpan') == null) {
+			$bulan = date('Y-m');
+		}else{
+			$bulan = date('Y-m',strtotime($this->input->post('bulansimpan')));
+		}
+		$this->db->select('SUM(anggota_setoran.jumlah_transaksi) as total, anggota.nama, anggota_setoran.tgl_transaksi');
+		$this->db->from('anggota');
+		$this->db->join('anggota_setoran', 'anggota.id_anggota = anggota_setoran.id_anggota', 'INNER');
+		$this->db->where("DATE_FORMAT(anggota_setoran.tgl_transaksi,'%Y-%m')", $bulan);
+		$this->db->where('anggota_setoran.id_jenis_setoran !=',1);
+		$this->db->group_by('anggota_setoran.id_anggota');
+		$this->db->order_by('tgl_transaksi', 'desc');
+		$query = $this->db->get();
+		// return var_dump($this->db->last_query());
+		return $query->result();
 	}
 	public function Uploadfoto($param)
 	{

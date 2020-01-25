@@ -8,6 +8,7 @@ class PinjamController extends CI_Controller {
 		$this->load->model('MPinjam', 'ms');
 		$this->load->model('MCicil', 'mc');
 		$this->load->model('MMain', 'mm');
+		$this->load->model('MAngsuran', 'ma');
 	}
 	public function resultRespone($data)
 	{
@@ -65,11 +66,11 @@ class PinjamController extends CI_Controller {
     		'id'=>$this->input->post('id')
     	);
     	$datamc = array(
-    		'status'=>'4',
+    		'status'=>'8',
     	);
     	$queryms = $this->mc->update($datamc,$wheremc);
     	if ($queryms == true) {
-    		$cek = $this->db->get_where('cicil',array('angsuran'=>'9','status'=>'4','id'=>$this->input->post('id')));
+    		$cek = $this->db->get_where('cicil',array('angsuran'=>'9','status'=>'8','id'=>$this->input->post('id')));
     		if ($cek->num_rows() > 0) {
     			$row = $cek->row();
     			$where = array(
@@ -86,6 +87,20 @@ class PinjamController extends CI_Controller {
     				$json = $this->failedRespone();
     			}
     		}
+    		$this->db->from('anggota_pinjaman_angsuran');
+    		$this->db->where('id_pinjaman',$cek->row()->id_angsuran);
+    		$this->db->order_by('tgl_angsuran', 'desc');
+    		$ma = $this->db->get();
+    		$cekrow = $this->db->get_where('cicil',array('status'=>'8','id'=>$this->input->post('id')))->row();
+    		$datama = array(
+    			'id_pinjaman'=>$cekrow->id_angsuran,
+    			'jumlah_angsuran'=>$cekrow->jumlah_bayar,
+    			'bayar_jasa'=>$cekrow->jasa,
+    			'sisa_pinjaman'=>$ma->row()->sisa_pinjaman-($cekrow->jumlah_bayar+$cekrow->jasa)
+    			'status'=>1,
+    			'tgl_angsuran'=>date('Y-m-d'),
+    		);
+    		$queryma = $this->ma->insert($datama);
     		$msg = "Berhasil";
     		$json = $this->successRespone($query);
     	}else{
@@ -118,10 +133,13 @@ class PinjamController extends CI_Controller {
 		);
 		$ms = array(
 			'id'=>$this->input->post('id'));
+		$ma = array(
+			'id_pinjaman'=>$this->input->post('id'));
 		$querymc = $this->mc->delete($mc);
 		if ($querymc == true) {
 			$queryms = $this->ms->delete($ms);
 			if ($queryms == true) {
+				$queryma = $this->ma->delete($ma)
 				$msg = "Berhasil";
 				$json = $this->successRespone($query);
 			}else{
@@ -157,7 +175,7 @@ class PinjamController extends CI_Controller {
 	{
 		try {
 
-			$this->db->where_in('status_pinjaman',[0,1,2,4]);
+			$this->db->where_in('status_pinjaman',[0,1,2,3]);
 			$this->db->where('id_anggota',$this->session->userdata('id'));
 			$gagal = $this->db->get('anggota_pinjaman');
 			if ($gagal->num_rows() > 0) {
@@ -193,6 +211,7 @@ class PinjamController extends CI_Controller {
 					);
 					$query = $this->ms->insertid($data);
 					$tanggal = date('Y-m').'-06';
+
 					for ($i=0; $i < $this->input->post('jml_angsuran'); $i++) {
 						$cicilan = array(
 							'tipe_cicil'=>'1',
@@ -208,9 +227,10 @@ class PinjamController extends CI_Controller {
 					}
 					$angsuran = $this->db->insert('anggota_pinjaman_angsuran', array(
 						'id_pinjaman'=>$query,
-						'jumlah_angsuran'=>$this->input->post('nominal'),
-						'bayar_jasa'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
-						'sisa_pinjaman'=>$this->input->post('nominal'),
+						'jumlah_angsuran'=>$this->input->post('nominal')+round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
+						'bayar_jasa'=>0,
+						'sisa_pinjaman'=>round(($this->input->post('nominal')*$jasa)/($this->input->post('jml_angsuran'))),
+						'tgl_angsuran' => $tanggal,
 						'status'=>0,
 					));
 					if ($query == true) {

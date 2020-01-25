@@ -235,9 +235,18 @@ class Action extends CI_Controller {
 
 			$this->load->model('MMain', 'mm');
 			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/admin/report';
+			$data['link_view'] = 'pages/admin/reportuser';
 			$data['rekap'] = $this->mm->getReportUser();
 			$this->load->view('utama',$data);
+		}
+	}
+	public function actReportuser()
+	{
+		try {
+			$data['rekap'] = $this->mm->getReportUser();
+			echo json_encode($data);
+		} catch (Exception $e) {
+			echo json_encode(array($e));
 		}
 	}
 	public function reportSimpan()
@@ -247,9 +256,18 @@ class Action extends CI_Controller {
 		}else{
 			$this->load->model('MMain', 'mm');
 			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/admin/report';
-			$data['rekap'] = $this->mm->getReportSimpanPinjam();
+			$data['link_view'] = 'pages/admin/resportsimpan';
+			$data['rekap'] = $this->mm->getSimpanan();
 			$this->load->view('utama',$data);
+		}
+	}
+	public function actReportSimpan()
+	{
+		try {
+			$data['rekap'] = $this->mm->getSimpanan();
+			echo json_encode($data);
+		} catch (Exception $e) {
+			echo json_encode(array($e));
 		}
 	}
 	public function getPetugas()
