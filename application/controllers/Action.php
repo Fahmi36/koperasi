@@ -173,6 +173,17 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function cetak_sim()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Cetak Simpanan - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/cetak_simpanan';
+			$data['jenis_setor'] = $this->mm->getMasterSetoran();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function data_user()
 	{
 		if ($this->session->userdata('id')==null) {

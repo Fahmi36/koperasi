@@ -1,3 +1,4 @@
+<?php if ($this->uri->segment(1) != 'cetak_simpanan') { ?>
 <div class="header-top-area">
     <div class="container">
         <div class="row">
@@ -90,3 +91,4 @@
     </div>
 </div>
 </div>
+<?php } ?>

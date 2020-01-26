@@ -39,7 +39,7 @@
     <?php } ?>
     <?php $this->load->view($link_view) ?>
 
-    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register'){ ?>
+    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register' AND  $this->uri->segment(1)!= 'cetak_simpanan'){ ?>
         <!-- Start Footer area-->
         <div class="footer-copyright-area" style="background-color: #3a53c4;">
             <div class="container">

@@ -59,6 +59,7 @@ $route['setoran'] = 'action/setoran';
 $route['login'] = 'action/login';
 $route['register'] = 'action/register';
 $route['simpanan'] = 'action/sim_pokok';
+$route['cetak_simpanan'] = 'action/cetak_sim';
 $route['new_user'] = 'action/newuser';
 $route['data_simpan'] = 'action/datasimpan';
 $route['data_pinjam'] = 'action/datapinjamadmin';
