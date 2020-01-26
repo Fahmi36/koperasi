@@ -42,7 +42,7 @@
 								<label>:</label>
 							</div>
 							<div class="col-md-7">
-								<?php if ($data->f_foto2 != NULL) { ?>
+								<?php if ($data->bukti_tf != NULL) { ?>
 									<img src="<?php echo base_url('assets/images/bukti/').$data->bukti_tf ?>">
 								<?php } else { ?>
 									<label class="text-danger">Foto Tidak Ada</label>
