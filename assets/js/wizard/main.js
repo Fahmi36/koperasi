@@ -223,3 +223,13 @@
     });
         
 })(jQuery);
+
+var checker = document.getElementById('s&k');
+var sendbtn = document.getElementById('pinjam');
+checker.onchange = function(){
+    if(this.checked){
+        sendbtn.disabled = false;
+    } else {
+        sendbtn.disabled = true;
+    }
+}

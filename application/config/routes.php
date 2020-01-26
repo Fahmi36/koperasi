@@ -54,19 +54,24 @@ $route['404_override'] = 'page_not_found';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['pinjaman'] = 'action/pinjaman';
+$route['kirim/ulangpinjaman/(:any)'] = 'action/ulangpinjaman';
 $route['setoran'] = 'action/setoran';
 $route['login'] = 'action/login';
 $route['register'] = 'action/register';
 $route['simpanan'] = 'action/sim_pokok';
+$route['cetak_simpanan'] = 'action/cetak_sim';
 $route['new_user'] = 'action/newuser';
 $route['data_simpan'] = 'action/datasimpan';
 $route['data_pinjam'] = 'action/datapinjamadmin';
-$route['report'] = 'action/report';
 $route['bayar/pinjaman'] = 'action/dataPinjam';
 $route['bayar/pinjaman/(:any)'] = 'action/bayarpinjam';
 $route['logout'] = 'action/logout';;
 $route['profile'] = 'action/profile';
 $route['setting'] = 'action/setting';
+
+$route['report'] = 'action/report';
+$route['report/simpan'] = 'action/reportSimpan';
+$route['report/user'] = 'action/reportUser';
 
 //Nggak di pakai Biarin aja ya
 $route['sim_wajib'] = 'action/sim_wajib';

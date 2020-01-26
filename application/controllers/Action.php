@@ -39,6 +39,19 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function ulangpinjaman()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Pinjaman - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/kirimulang';
+			$data['kelompok'] = $this->mm->getKelompok();
+			$data['namakelompok'] = $this->mm->getNamaKelompok();
+			$data['data'] = $this->mm->getDataPinjaman($this->uri->segment(3));
+			$this->load->view('utama',$data);
+		}
+	}
 	public function setoran()
 	{
 		if ($this->session->userdata('id')==null) {
@@ -160,6 +173,17 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function cetak_sim()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Cetak Simpanan - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/cetak_simpanan';
+			$data['jenis_setor'] = $this->mm->getMasterSetoran();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function data_user()
 	{
 		if ($this->session->userdata('id')==null) {
@@ -213,6 +237,49 @@ class Action extends CI_Controller {
 	{
 		$data['title'] = "404 PAGE NOT FOUND";
 		$this->load->view('not_found',$data);
+	}
+	public function reportUser()
+	{
+		if ($this->session->userdata('username')==null) {
+			redirect('/');
+		}else{
+
+			$this->load->model('MMain', 'mm');
+			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/reportuser';
+			$data['rekap'] = $this->mm->getReportUser();
+			$this->load->view('utama',$data);
+		}
+	}
+	public function actReportuser()
+	{
+		try {
+			$data['rekap'] = $this->mm->getReportUser();
+			echo json_encode($data);
+		} catch (Exception $e) {
+			echo json_encode(array($e));
+		}
+	}
+	public function reportSimpan()
+	{
+		if ($this->session->userdata('username')==null) {
+			redirect('/');
+		}else{
+			$this->load->model('MMain', 'mm');
+			$data['title'] = 'Report Data - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/resportsimpan';
+			$data['rekap'] = $this->mm->getSimpanan();
+			$this->load->view('utama',$data);
+		}
+	}
+	public function actReportSimpan()
+	{
+		try {
+			$data['rekap'] = $this->mm->getSimpanan();
+			echo json_encode($data);
+		} catch (Exception $e) {
+			echo json_encode(array($e));
+		}
 	}
 	public function getPetugas()
 	{
@@ -333,11 +400,36 @@ class Action extends CI_Controller {
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }
-     public function InfoPinjaman()
+    public function InfoPinjaman()
     {
         // return var_dump($this->input->post('id'));
         $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
         $json = $this->load->view('pages/modalpinjaman',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function VerifPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
+        $json = $this->load->view('pages/admin/modalverifpinjam',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function PersetujuanPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['pinjam'] = $this->mm->getDetailPinjaman($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modalpersetujuanpinjaman',$data);
+        $this->output->set_content_type('application/json');
+        echo json_encode(array('html'=> $json));
+    }
+    public function KembalikanPinjaman()
+    {
+        // return var_dump($this->input->post('id'));
+        $data['id'] = $this->input->post('id');
+        $json = $this->load->view('pages/admin/modalkembalipinjaman',$data);
         $this->output->set_content_type('application/json');
         echo json_encode(array('html'=> $json));
     }

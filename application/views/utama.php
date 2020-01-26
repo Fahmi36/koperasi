@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="id">
 
 <head>
     <meta charset="utf-8">
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/main.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/style.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/responsive.css">
     <link rel="stylesheet" href="<?=base_url('/')?>assets/css/datapicker/datepicker3.css">
     <script src="<?=base_url('/')?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -38,7 +39,7 @@
     <?php } ?>
     <?php $this->load->view($link_view) ?>
 
-    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register'){ ?>
+    <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1)!= 'register' AND  $this->uri->segment(1)!= 'cetak_simpanan'){ ?>
         <!-- Start Footer area-->
         <div class="footer-copyright-area" style="background-color: #3a53c4;">
             <div class="container">
@@ -58,6 +59,7 @@
     <script type="text/javascript">
         var BASE_URL = '<?=site_url('/')?>';
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="<?=base_url('/')?>assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url('/')?>assets/js/wow.min.js"></script>
@@ -98,26 +100,22 @@
     <script src="<?=base_url('/')?>assets/js/wizard/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
     <script src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/development/src/js/bootstrap-datetimepicker.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
     <script type="text/javascript">
          $(function () {
            
-            $('#awal,#akhir').datetimepicker({
-                useCurrent: false,
-                format: 'DD-MM-YYYY',
+            $('#awalUser,#akhirUser').datetimepicker({
+                format: 'YYYY-MM',
                 minDate: moment()
             });
-            $('#awal').datetimepicker().on('dp.change', function (e) {
-                var incrementDay = moment(new Date(e.date));
-                incrementDay.add(1, 'days');
-                $('#enddate').data('DateTimePicker').minDate(incrementDay);
-                $(this).data("DateTimePicker").hide();
-            });
-
-            $('#akhir').datetimepicker().on('dp.change', function (e) {
-                var decrementDay = moment(new Date(e.date));
-                decrementDay.subtract(1, 'days');
-                $('#startdate').data('DateTimePicker').maxDate(decrementDay);
-                 $(this).data("DateTimePicker").hide();
+            $('#awalSimpan,#akhirSimpan').datetimepicker({
+                format: 'YYYY-MM',
+                minDate: moment()
             });
 
         });
@@ -134,7 +132,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#resetPass").modal('show');
+            $("#resetPass").modal({backdrop:'static',keyboard: false});
         });
         $(document).ready(function() {    
             var readURL = function(input) {
@@ -322,13 +320,37 @@ prev.addEventListener('click', () => stepActionHandler(-1))
                 $("#suratPer").html("");
             }
         });
+        $("#besar_pinjam_ulang").keyup(function() {
+            var x = document.getElementById('suratPerUlang');
+            if($(this).val() >= 20000000) {
+                $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
+            } else {
+                $("#suratPerUlang").html("");
+            }
+        });
+            if ($("#besar_pinjam_ulang").val() >= 20000000) {
+               $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
+            } else {
+                $("#suratPerUlang").html("");
+            }
     });
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#datatransaksi").dataTable();
         $("#datapinjaman").dataTable();
-        $("#datareport").dataTable();
+        $("#datareport").dataTable({dom: 'Bfrtip',
+                buttons: [
+                'excel'
+                ]});
+        $("#datareportuser").dataTable({dom: 'Bfrtip',
+                buttons: [
+                'excel'
+                ]});
+        $("#datareportsimpan").dataTable({dom: 'Bfrtip',
+                buttons: [
+                'excel'
+                ]});
 
     });
     function pilihsimpan() {
@@ -432,23 +454,26 @@ prev.addEventListener('click', () => stepActionHandler(-1))
     });
 </script>
 <script type="text/javascript">
-    $("#frmbaru").submit(function (event) {
+        $("#frmCustomSimpan").submit(function (event) {
         var data = new FormData($(this)[0]);
         $.ajax({
-            url:'rekap.php?page=baru', 
+            url: BASE_URL + 'action/actReportSimpan', 
             type: "POST",
             data: data,
             contentType: false,
             cache: false,
             processData: false,
             success: function (response) {
-                var res = JSON.parse(response,'baru');
-                console.log(res);
-                $("#example3").dataTable().fnClearTable();
-                if (res.data!=null) {
-                    var jancoeg = loopDataAbsen(res.data,'baru');
-                    $("#example3").dataTable().fnAddData(jancoeg);
-                    $("#example3").dataTable().fnDraw();
+                var res = JSON.parse(response);
+                // console.log(res);
+                $("#datareportsimpan").dataTable().fnClearTable();
+                if (res.rekap!=null) {
+                    var jancoeg = loopDataSimpan(res.rekap);
+                    // console.log(jancoeg);
+                    $("#datareportsimpan").dataTable().fnAddData(jancoeg);
+                    $("#datareportsimpan").dataTable().fnDraw();
+                }else{
+                    $("#datareportsimpan").dataTable().fnClearTable();
                 }
             },
             error: function () {
@@ -457,46 +482,62 @@ prev.addEventListener('click', () => stepActionHandler(-1))
         });
         return false;
     });
-    function loopDataAbsen(table,type) {
+    function loopDataSimpan(table,type) {
+            var array_data = [],
+            temp_array = [];
+            $(table).each(function(key,val) {
+                temp_array = [];
+                var link;
+                temp_array = [
+                    val.nama,
+                    val.tgl_transaksi,
+                    '<?=date('F',strtotime('val.tgl_transaksi'))?>',
+                    val.total,
+                    ];
+                array_data[array_data.length] = temp_array;
+            });
+            return array_data;
+        }
+    $("#frmCustomUser").submit(function (event) {
+        var data = new FormData($(this)[0]);
+        $.ajax({
+            url: BASE_URL + 'action/actReportuser', 
+            type: "POST",
+            data: data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                var res = JSON.parse(response);
+                // console.log(res);
+                $("#datareportuser").dataTable().fnClearTable();
+                if (res.data!=null) {
+                    var jancoeg = loopDataUser(res.data);
+                    $("#datareportuser").dataTable().fnAddData(jancoeg);
+                    $("#datareportuser").dataTable().fnDraw();
+                }
+            },
+            error: function () {
+
+            }
+        });
+        return false;
+    });
+    function loopDataUser(table,type) {
             var array_data = [],
             temp_array = [];
             var no=1;
             $(table).each(function(key,val) {
                 temp_array = [];
                 var link;
-                if(type=='masuk'){
-
-                    temp_array = [
-                    no,
-                    val.idnya,
+                temp_array = [
                     val.nama,
-                    val.stok,
-                    val.jumlah_masuk,
-                    val.harga,
-                    'Barang Masuk'
+                    val.nik,
+                    val.alamat,
+                    val.no_hp,
+                    val.tgl_masuk,
+                    '<?=date('F',strtotime('val.tgl_masuk'))?>',
                     ];
-
-                }else if(type=='keluar'){
-                    temp_array = [
-                    no,
-                    val.idnya,
-                    val.nama,
-                    val.stok,
-                    val.jumlah_keluar,
-                    val.harga,
-                    'Barang Rusak'
-                    ];
-                }else if(type=='baru'){
-                    temp_array = [
-                    no,
-                    val.idnya,
-                    val.nama,
-                    val.stok,
-                    val.harga,
-                    val.dibuat,
-                    'Barang Baru'
-                    ];
-                };
 
                 no = no+1;
                 array_data[array_data.length] = temp_array;

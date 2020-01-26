@@ -23,7 +23,7 @@
 					<div class="invoice-img" style="padding: 30px 0;background-color: #3a53c4;margin-bottom: 20px;">
 						<h3 style="text-transform: uppercase;color: #fff;margin-bottom: 0;">Halaman Report</h3>
 					</div>
-					<form id="frmCustom" method="post" action="javascript:;">
+					<!-- <form id="frmCustom" method="post" action="javascript:;">
 						<div class="row">
 							<div class="col-lg-4">
 								<label>Mulai tanggal</label>
@@ -43,32 +43,57 @@
 								<button type="submit" class="btn btn-warning notika-btn-warning waves-effect" style="margin-top: 26px;">Cari</button>
 							</div>
 						</div>
-					</form>
+					</form> -->
 					<div class="data-table-list" style="padding-left: 0;padding-right: 0;">
 						<div class="table-responsive">
 							<table id="datareport" class="table table-striped">
 								<thead>
 									<tr>
 										<th>Nama</th>
-										<th>Jumlah Hutang</th>
-										<th>Jumlah Cicilan</th>
+										<th>Jumlah Total Simpanan Wajib</th>
+										<th>Jumlah Total Simpanan Sukarela</th>
+										<th>Jumlah Total Pinjaman (Sudah Selesai)</th>
+										<th>Jumlah Total Cicilan</th>
+										<th>Jumlah Total Simpanan (Wajib dan Sukarela)</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php foreach ($anggota as $key): ?>
 										<tr>
 											<td><?=$key->nama?></td>
-											<?php if ($this->mm->getReportHutang($key->id_anggota)==null){ ?>
+											<?php if ($this->mm->getSimpananWajib($key->id_anggota)==null){ ?>
 												<td>Rp. 0</td>
 											<?php }else{ ?>
-											<td>Rp. <?=strrev(implode('.',str_split(strrev(strval($this->mm->getReportHutang($key->id_anggota))),3)))?></td>
+											<td>Rp. <?=strrev(implode('.',str_split(strrev(strval($this->mm->getSimpananWajib($key->id_anggota))),3)))?></td>
 											<?php } ?>
-											<?php if ($this->mm->getReportCicil($key->id_anggota)!=null){ ?>
-											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportCicil($key->id_anggota))),3)))?>
+
+											<?php if ($this->mm->getSimpananSukarela($key->id_anggota)==null){ ?>
+												<td>Rp. 0</td>
+											<?php }else{ ?>
+											<td>Rp. <?=strrev(implode('.',str_split(strrev(strval($this->mm->getSimpananSukarela($key->id_anggota))),3)))?></td>
+											<?php } ?>
+
+											<?php if ($this->mm->getReportPinjaman($key->id_anggota)!=null){ ?>
+											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportPinjaman($key->id_anggota))),3)))?>
 												</td>
 											<?php }else{ ?>
 												<td>Rp. 0</td>
 											<?php } ?>
+
+											<?php if ($this->mm->getReportHutang($key->id_anggota)!=null){ ?>
+											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportHutang($key->id_anggota))),3)))?>
+												</td>
+											<?php }else{ ?>
+												<td>Rp. 0</td>
+											<?php } ?>
+
+											<?php if ($this->mm->getSimpananSukarela($key->id_anggota)!=null AND $this->mm->getSimpananWajib($key->id_anggota)!=null){ ?>
+											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getSimpananWajib($key->id_anggota) + $this->mm->getSimpananSukarela($key->id_anggota))),3)))?>
+												</td>
+											<?php }else{ ?>
+												<td>Rp. 0</td>
+											<?php } ?>
+											
 											</tr>
 										<?php endforeach ?>
 									</tbody>

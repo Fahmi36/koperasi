@@ -26,7 +26,6 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($cicilan as $key): ?>
-
                                                     <tr>
                                                         <td><?=$key->nama?></td>
                                                         <td><?=$key->no_hp?></td>
@@ -38,7 +37,7 @@
                                                             <td>Sudah Pernah Di Tolak</td>
                                                         <?php }else if ($key->status == 3){ ?>
                                                             <td>Menunggu Persetujuan</td>
-                                                        <?php }else if ($key->status == 4){ ?>
+                                                        <?php }else if ($key->status == 8){ ?>
                                                             <td>Sudah Lunas</td>
                                                         <?php } ?>
                                                         <?php if($this->session->userdata('username') != null){ ?>

@@ -1,3 +1,4 @@
+<?php if ($this->uri->segment(1) != 'cetak_simpanan') { ?>
 <div class="header-top-area">
     <div class="container">
         <div class="row">
@@ -52,7 +53,8 @@
                             </div>
                         </li> -->
                         <li class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><?php $this->session->userdata('username'); ?> <i class="notika-icon notika-settings"></i></span></a>
+                            <!-- <div class="ntd-ctn"><span>3</span></div> -->
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><?php $this->session->userdata('nama'); ?> <i class="notika-icon notika-settings"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn" style="width: 170px;">
                                 <div class="hd-message-info">
                                     <?php if ($this->session->userdata('username') == null){ ?>
@@ -89,3 +91,4 @@
     </div>
 </div>
 </div>
+<?php } ?>

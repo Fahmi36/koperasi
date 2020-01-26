@@ -108,7 +108,7 @@
                 </div>
             <?php } ?>
         </div>
-
+        
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-tb-30">
                 <div class="invoice-wrap">
