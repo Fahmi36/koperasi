@@ -131,6 +131,23 @@
                         <input type="number" name="no_hp" id="no_hp" />
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="no_rek" class="form-label required">Nomor Rekening (DKI)</label>
+                    <input type="number" name="no_rek" id="no_rek" />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="no_kartu" class="form-label required">Nomor Kartu (DKI)</label>
+                        <input type="number" name="no_kartu" id="no_kartu" onKeyPress="if(this.value.length==16) return false;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cvv" class="form-label required">CVV</label>
+                        <input type="number" name="cvv" id="cvv" onKeyPress="if(this.value.length==3) return false;" />
+                    </div>
+                </div>
             </fieldset>
 
             <h3>
