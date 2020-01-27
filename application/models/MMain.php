@@ -123,7 +123,7 @@ class MMain extends CI_Model {
 			$this->db->where('tipe_transaksi',1);
 			$this->db->where('id_jenis_setoran', 2);
 			$this->db->where('status', 1);
-			$this->db->where('id_anggota', $this->session->userdata('id'));
+			$this->db->where('id_anggota', $this->session->userdata('id_anggota'));
 			$query = $this->db->get();
 			return $query->row();
 		}
@@ -146,7 +146,7 @@ class MMain extends CI_Model {
 		$this->db->select('tgl_tempo');
 		$this->db->from('cicil');
 		$this->db->join('anggota_pinjaman', 'anggota_pinjaman.id = cicil.id_angsuran', 'left');
-		$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id'));
+		$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id_anggota'));
 		$this->db->where('cicil.tipe_cicil',1);
 		$this->db->where('cicil.status',2);
 		$this->db->group_by('cicil.status');
@@ -269,9 +269,10 @@ class MMain extends CI_Model {
 			$this->db->from('anggota_setoran');
 			$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'left');
 			$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'left');
-			$this->db->where('anggota.no_anggota', $this->session->userdata('id'));
+			$this->db->where('anggota.no_anggota', $this->session->userdata('id_anggota'));
 			$this->db->order_by('tgl_transaksi', 'desc');
 			$query = $this->db->get();
+			// return var_dump($this->db->last_query());
 		}else{
 			$this->db->select('anggota_setoran.id,anggota.nama,master_jenis_setoran.jenis_setoran,anggota_setoran.jumlah_transaksi as saldo_akhir,anggota_setoran.tipe_transaksi,anggota_setoran.tgl_transaksi,anggota_setoran.status');
 			$this->db->from('anggota_setoran');
@@ -392,7 +393,7 @@ class MMain extends CI_Model {
 			$this->db->select('anggota_pinjaman.id,anggota_pinjaman.no_hp,anggota_pinjaman.tgl_pengajuan_pinjaman,anggota_pinjaman.besar_persetujuan_pinjaman,anggota_pinjaman.keperluan,anggota_pinjaman.status_pinjaman,anggota_pinjaman.biaya_jasa,anggota.nama,anggota_pinjaman.besar_pengajuan_pinjaman');
 			$this->db->from('anggota_pinjaman');
 			$this->db->join('anggota', 'anggota_pinjaman.id_anggota = anggota.id_anggota', 'left');
-			$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id'));
+			$this->db->where('anggota_pinjaman.id_anggota', $this->session->userdata('id_anggota'));
 			$this->db->where('anggota_pinjaman.status_pinjaman !=', '4');
 			$query = $this->db->get();
 		}else{
@@ -710,6 +711,15 @@ class MMain extends CI_Model {
 			$query = $this->db->get();
 			return $query->row()->hitung;
 		
+	}
+	public function getReportjasa($id)
+	{
+		$this->db->select('SUM(biaya_jasa) as hitung');
+			$this->db->from('anggota_pinjaman');
+			$this->db->where('anggota_pinjaman.id_anggota', $id);
+			$this->db->where_in('status_pinjaman', [2,3]);
+			$query = $this->db->get();
+			return $query->row()->hitung;
 	}
 	public function getReportUser()
 	{

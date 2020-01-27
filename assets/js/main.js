@@ -318,7 +318,7 @@
 								''+response.msg+'',
 								);
 						}else{
-							window.open(BASE_URL + '/print/simpanan/'+id,'_blank');				
+							window.open(BASE_URL + 'cetak_simpanan/'+id,'_blank');				
 						}
 					}
 				})

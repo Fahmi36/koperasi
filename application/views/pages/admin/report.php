@@ -53,6 +53,7 @@
 										<th>Jumlah Total Simpanan Wajib</th>
 										<th>Jumlah Total Simpanan Sukarela</th>
 										<th>Jumlah Total Pinjaman (Sudah Selesai)</th>
+										<th>Total Jasa</th>
 										<th>Jumlah Total Cicilan</th>
 										<th>Jumlah Total Simpanan (Wajib dan Sukarela)</th>
 									</tr>
@@ -75,6 +76,13 @@
 
 											<?php if ($this->mm->getReportPinjaman($key->id_anggota)!=null){ ?>
 											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportPinjaman($key->id_anggota))),3)))?>
+												</td>
+											<?php }else{ ?>
+												<td>Rp. 0</td>
+											<?php } ?>
+
+											<?php if ($this->mm->getReportjasa($key->id_anggota)!=null){ ?>
+											<td>Rp. <?= strrev(implode('.',str_split(strrev(strval($this->mm->getReportjasa($key->id_anggota))),3)))?>
 												</td>
 											<?php }else{ ?>
 												<td>Rp. 0</td>

@@ -96,7 +96,7 @@ class PinjamController extends CI_Controller {
     			'id_pinjaman'=>$cekrow->id_angsuran,
     			'jumlah_angsuran'=>$cekrow->jumlah_bayar,
     			'bayar_jasa'=>$cekrow->jasa,
-    			'sisa_pinjaman'=>$ma->row()->sisa_pinjaman-($cekrow->jumlah_bayar+$cekrow->jasa)
+    			'sisa_pinjaman'=>$ma->row()->sisa_pinjaman-($cekrow->jumlah_bayar+$cekrow->jasa),
     			'status'=>1,
     			'tgl_angsuran'=>date('Y-m-d'),
     		);
@@ -139,7 +139,7 @@ class PinjamController extends CI_Controller {
 		if ($querymc == true) {
 			$queryms = $this->ms->delete($ms);
 			if ($queryms == true) {
-				$queryma = $this->ma->delete($ma)
+				$queryma = $this->ma->delete($ma);
 				$msg = "Berhasil";
 				$json = $this->successRespone($query);
 			}else{
