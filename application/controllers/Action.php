@@ -180,7 +180,7 @@ class Action extends CI_Controller {
 		}else{
 			$data['title'] = 'Cetak Simpanan - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/cetak_simpanan';
-			$data['jenis_setor'] = $this->mm->getMasterSetoran();
+			$data['simpan'] = $this->mm->getPrintSimpanan($this->uri->segment(2));
 			$this->load->view('utama',$data);
 		}
 	}

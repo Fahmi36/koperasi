@@ -36,7 +36,7 @@
                                     <a data-toggle="collapse" data-target="#datareporthp" href="#">Data Pembayaran</a>
                                     <ul id="datareporthp" class="collapse dropdown-header-top">
                                         <li><a href="<?php echo site_url('report'); ?>">Total Simpanan Anggota</a></li>
-                                        <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan dan Pinjaman Perbulan</a></li>
+                                        <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan Perbulan</a></li>
                                         <li><a href="<?php echo site_url('report/user'); ?>">Rekap Daftar Anggota Baru Perbulan</a></li>
                                     </ul>
                                 </li>
@@ -92,7 +92,7 @@
                     <div id="datareportweb" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="report"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
                            <li><a href="<?php echo site_url('report'); ?>">Total Simpanan Anggota</a></li>
-                           <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan dan Pinjaman Perbulan</a></li>
+                           <li><a href="<?php echo site_url('report/simpan'); ?>">Rekap Simpanan Perbulan</a></li>
                            <li><a href="<?php echo site_url('report/user'); ?>">Rekap Daftar Anggota Baru Perbulan</a></li>
                        </ul>
                    </div>

@@ -318,7 +318,7 @@
 								''+response.msg+'',
 								);
 						}else{
-							location.reload();				
+							window.open(BASE_URL + '/print/simpanan/'+id,'_blank');				
 						}
 					}
 				})

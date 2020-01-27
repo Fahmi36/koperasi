@@ -88,6 +88,16 @@ class MMain extends CI_Model {
 		}
 		return $query->row();
 	}
+	public function getPrintSimpanan($id)
+	{ 
+		$this->db->select('*');
+		$this->db->from('anggota_setoran');
+		$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'inner');
+		$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'Inner');
+		$this->db->where('anggota_setoran.id',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
 	public function getPengeluran()
 	{ 
 		$this->db->select('SUM(jumlah_transaksi) as simpan');
