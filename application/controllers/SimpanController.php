@@ -60,6 +60,7 @@ class SimpanController extends CI_Controller {
 				'sistem_bayar'=>'1',
 				'saldo_akhir'=> $hasil,
 				'status'=>$this->input->post('status'),
+				'accby'=>$this->session->userdata('id'),
 			);
 
 			$where = array(
@@ -91,31 +92,36 @@ class SimpanController extends CI_Controller {
 			$this->db->order_by('saldo_akhir', 'desc');
 			$get= $this->db->get()->row();
 
-			if ($this->input->post('jumlah_pokok') == null AND $this->input->post('jumlah_wajib') == null) {
-				$jumlahnya = $this->input->post('jumlah_suka');
-			}else if ($this->input->post('jumlah_suka')== null AND $this->input->post('jumlah_pokok') == null) {
-				$jumlahnya = $this->input->post('jumlah_wajib');
-			}else if ($this->input->post('jumlah_suka') == null AND $this->input->post('jumlah_wajib')== null) {
-				$jumlahnya = $this->input->post('jumlah_pokok');
-			}
-			$gambar = $this->Uploadfoto('filenya');
-			$data = array(
-				'id_anggota'=>$session,
-				'tipe_transaksi'=>'1',
-				'id_jenis_setoran'=>$this->input->post('jenis_setoran'),
-				'jumlah_transaksi'=>$jumlahnya,
-				'tgl_transaksi'=>$this->input->post('set-tanggal'),
-				'saldo_akhir'=> ($get->saldo_akhir),
-				'metode_bayar'=>$this->input->post('sistem_bayar'),
-				'bukti_transfer'=>$gambar,
-				'id_petugas'=>$this->input->post('idpetugas'),
-			);
-			$query = $this->ms->insert($data);
-			if ($query == true) {
-				$msg = 'Data Berhasil di Simpan';
-				$json = $this->successRespone($msg);
+			if (@$get->saldo_akhir == null) {
+				$msg = "No Anggota Tidak Valid";
+				$json = $this->failedFecthData($msg);
 			}else{
-				$json = $this->failedRespone();
+				if ($this->input->post('jumlah_pokok') == null AND $this->input->post('jumlah_wajib') == null) {
+					$jumlahnya = $this->input->post('jumlah_suka');
+				}else if ($this->input->post('jumlah_suka')== null AND $this->input->post('jumlah_pokok') == null) {
+					$jumlahnya = $this->input->post('jumlah_wajib');
+				}else if ($this->input->post('jumlah_suka') == null AND $this->input->post('jumlah_wajib')== null) {
+					$jumlahnya = $this->input->post('jumlah_pokok');
+				}
+				$gambar = $this->Uploadfoto('filenya');
+				$data = array(
+					'id_anggota'=>$session,
+					'tipe_transaksi'=>'1',
+					'id_jenis_setoran'=>$this->input->post('jenis_setoran'),
+					'jumlah_transaksi'=>$jumlahnya,
+					'tgl_transaksi'=>$this->input->post('set-tanggal'),
+					'saldo_akhir'=> ($get->saldo_akhir),
+					'metode_bayar'=>$this->input->post('sistem_bayar'),
+					'bukti_transfer'=>$gambar,
+					'id_petugas'=>$this->input->post('idpetugas'),
+				);
+				$query = $this->ms->insert($data);
+				if ($query == true) {
+					$msg = 'Data Berhasil di Simpan';
+					$json = $this->successRespone($msg);
+				}else{
+					$json = $this->failedRespone();
+				}
 			}
 		} catch (Exception $e) {
 			$this->failedFecthData($e);

@@ -103,24 +103,11 @@
                                         </div>
                                         <div class="col-md-7">
                                         <label>Transfer</label>
-                                            <!-- <img src="<?=base_url('img/$data->bukti_transfer')?>"> -->
+                                        <img src="<?php echo base_url('assets/images/bukti/').$data->bukti_transfer ?>">
                                         </div>
                                     </div>
                                 </div>
                             <?php endif ?>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Saldo Akhir</label>
-                                    </div>
-                                    <div class="col-md-1" style="max-width: 3.33333%;">
-                                        <label>:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <label>Rp. <?=number_format($data->saldo_akhir,0,',','.')?></label>
-                                    </div>
-                                </div>
-                            </div>
                         <?php endforeach ?>
                     </div>
                 </div> 
