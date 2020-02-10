@@ -91,7 +91,7 @@
     <script src="<?=base_url('/')?>assets/js/main.js"></script>
 <!--     <script src="<?=base_url('/')?>assets/js/datapicker/bootstrap-datepicker.js"></script>
     <script src="<?=base_url('/')?>assets/js/datapicker/datepicker-active.js"></script> -->
-    <script src="<?=base_url('/')?>assets/js/jasny-bootstrap.min.js"></script>
+    <!-- <script src="<?=base_url('/')?>assets/js/jasny-bootstrap.min.js"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="https://colorlib.com/etc/bwiz/colorlib-wizard-11/vendor/jquery-validation/dist/additional-methods.min.js"></script>
