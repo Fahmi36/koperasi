@@ -27,7 +27,7 @@
                                     <a data-toggle="collapse" data-target="#databayar" href="#">Data Pembayaran</a>
                                     <ul id="databayar" class="collapse dropdown-header-top">
                                         <li><a href="<?php echo site_url('data_simpan'); ?>">Pembayaran Simpanan</a></li>
-                                        <li><a href="<?php echo site_url('data_pinjam'); ?>">Pembayaran Pinjaman</a></li>
+                                        <li><a href="<?php echo site_url('data_pinjam'); ?>">Pembayaran Cicilan Pinjaman</a></li>
                                     </ul>
                                 </li>
                                 <li class="<?php if($this->uri->segment(1)=="report"){echo "active";}?>">
@@ -82,7 +82,7 @@
                     <div id="databayarweb" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="data_pinjam"){echo "active";}else if($this->uri->segment(1)=="data_simpan"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="<?php echo site_url('data_simpan'); ?>">Pembayaran Simpanan</a></li>
-                            <li><a href="<?php echo site_url('data_pinjam'); ?>">Pembayaran Pinjaman</a></li>
+                            <li><a href="<?php echo site_url('data_pinjam'); ?>">Pembayaran Cicilan Pinjaman</a></li>
                         </ul>
                     </div>
                     <div id="datareportweb" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="report"){echo "active";} ?>">

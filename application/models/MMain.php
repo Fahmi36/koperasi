@@ -467,9 +467,9 @@ class MMain extends CI_Model {
 			$bayar = $this->input->post('pembayaran');
 
 			if ($bayar == 1) {
-				$status = '1';
-			}else{
 				$status = '2';
+			}else{
+				$status = '3';
 			}
 
 			$methode = $this->input->post('metode_pem');
@@ -572,7 +572,7 @@ class MMain extends CI_Model {
 		}else{
 			$this->db->select('*');
 			$this->db->from('anggota');
-			$this->db->where('status', 3);
+			$this->db->where_in('status', [2,3]);
 			$query = $this->db->get();
 		}
 		return $query->result();
@@ -594,8 +594,14 @@ class MMain extends CI_Model {
 	}
 	public function ActTerimaUser()
 	{
+		$cek = $this->db->get_where('anggota', array('id_anggota'=>$this->input->post('id')))->row();
+		if ($cek->status == '2') {
+			$status = 1;
+		}else{
+			$status = 4;
+		}
 		$query = $this->db->update('anggota',array(
-			'status'=>1,
+			'status'=>$status,
 			'tgl_masuk'=>date('Y-m-d'),
 			'acc_by'=>$this->session->userdata('id'),
 		),

@@ -36,19 +36,6 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Jumlah Simpan</label>
-                                </div>
-                                <div class="col-md-1" style="max-width: 3.33333%;">
-                                    <label>:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <label>Rp. <?= number_format($data->jumlah_transaksi,0,',','.')?></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3">
                                     <label>Tanggal Simpan</label>
                                 </div>
                                 <div class="col-md-1" style="max-width: 3.33333%;">

@@ -22,12 +22,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <?php if ($totalsimpan->simpan == null){
-                                $simpan = 0;
-                                }else{
-                                $simpan = $totalsimpan->simpan;
-                            } ?>
-                            <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($simpan)),3)))?></span></h2>
+                            <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($totalsimpan->simpan)),3)))?></span></h2>
                             <p>Total Simpanan</p>
                         </div>
                         <!-- <div class="sparkline-bar-stats1"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div> -->
@@ -36,12 +31,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <?php if ($simpananwajib->simpan == null){
-                                $simpan = 0;
-                                }else{
-                                $simpan = $simpananwajib->simpan;
-                            } ?>
-                            <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($simpan)),3)))?></span></h2>
+                            <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($simpananwajib->simpan)),3)))?></span></h2>
                             <p>Simpanan Wajib</p>
                         </div>
                         <!-- <div class="sparkline-bar-stats2"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div> -->
@@ -102,7 +92,7 @@
                                 $nunggak = $belumbayar->nunggak;
                             } ?>
                             <h2>Rp. <span><?=strrev(implode('.',str_split(strrev(strval($nunggak)),3)))?></span></h2>
-                            <p>Total Tunggakan</p>
+                            <p>Total Uang Mengendap</p>
                         </div>
                         <!-- div class="sparkline-bar-stats3"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div> -->
                     </div>
@@ -132,6 +122,7 @@
                                     <table id="datatransaksi" class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th>No Tiket</th>
                                                 <th>Nama Anggota</th>
                                                 <th>Jenis Simpan</th>
                                                 <th>Jenis Transaksi</th>
@@ -144,6 +135,7 @@
                                         <tbody>
                                             <?php foreach ($simpanan as $key): ?>
                                                 <tr>
+                                                    <td><?=$key->id?></td>
                                                     <td><?=$key->nama?></td>
                                                     <td><?=$key->jenis_setoran?></td>
                                                     <?php if ($key->tipe_transaksi == 0){ ?> 
@@ -161,9 +153,7 @@
                                                     <td>Rp. <?=number_format($key->saldo_akhir,0,',','.')?></td>
                                                     <td><?=$key->tgl_transaksi?></td>
                                                     <?php if($this->session->userdata('username') == null){ ?>
-                                                        <td>
-                                                            <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
-                                                            <a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-print"></i></a></td>
+                                                        <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button></td>
                                                     <?php }else{ ?>
                                                         <td>
                                                            <?php if ($key->status == 0){ ?> 
@@ -233,8 +223,8 @@
         <div id="modalsimpan"></div>
     </div>
 </div>
-
-<?php if ($user->no_rek == null AND $this->session->userdata('username') == null): ?>
+<?php if($this->session->userdata('username') == null): ?>
+<?php if ($user->no_rek == null): ?>
     <div class="modal fade" id="resetPass" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
       <div class="modal-dialog modals-default">
         <div class="modal-content">
@@ -300,4 +290,5 @@
 </div>
 </div>
 </div>
+<?php endif ?>
 <?php endif ?>

@@ -34,6 +34,7 @@
 												<th>Nomor Telpon</th>
 												<th>Pekerjaan</th>
 												<th>No Rekening Bank DKI</th>
+												<th>Jenis Pembayaran</th>
 												<th>Aksi</th>
 											</tr>
 										</thead>
@@ -45,7 +46,11 @@
 													<td><?=$key->no_hp?></td>
 													<td><?=$key->pekerjaan?></td>
 													<td><?=$key->no_rek?></td>
-
+													<?php if ($key->status == '2'): ?>
+														<td>Lunas</td>
+														<?php elseif($key->status == '3'): ?>
+															<td>Cicil 10 Bulan</td>
+														<?php endif ?>
 													<?php if($this->session->userdata('username') != null){ ?>
 														<td>
 															<button data-toggle="tooltip" data-title="Setujui Pendaftar Baru" onclick="terimaUser(<?=$key->id_anggota?>)" class="btn btn-success notika-btn-success waves-effect"><i class="notika-icon notika-checked"></i></button>
