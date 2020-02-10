@@ -50,6 +50,8 @@
 														<td>Lunas</td>
 														<?php elseif($key->status == '3'): ?>
 															<td>Cicil 10 Bulan</td>
+														<?php elseif($key->status == '4'): ?>
+															<td>Sedang tahap Pencicilan</td>
 														<?php endif ?>
 													<?php if($this->session->userdata('username') != null){ ?>
 														<td>

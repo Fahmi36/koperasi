@@ -480,6 +480,11 @@ class MMain extends CI_Model {
 			$gambarfoto = $this->Uploadfoto('foto_1');
 			$gambarfoto2 = $this->Uploadfoto('foto_2');
 			$gambartf = $this->Uploadfoto('foto_tf');
+
+			$nokartu = $this->Uploadfoto('no_kartu');
+			$norek = $this->Uploadfoto('no_rek');
+			$namabank = $this->Uploadfoto('nama_bank');
+
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
 			$this->db->select('MAX(no_anggota) as jml');
@@ -500,6 +505,9 @@ class MMain extends CI_Model {
 				'status'=>'3',
 				'created_date'=>date('Y-m-d H:i:s'),
 				'pekerjaan'=>$pekerjaan,
+				'no_kartu'=>$nokartu,
+				'no_rek'=>$norek,
+				'bank'=>$namabank,
 				'password'=>password_hash('123456', PASSWORD_DEFAULT),
 			));
 			$id_anggota = $this->db->insert_id();
@@ -572,7 +580,7 @@ class MMain extends CI_Model {
 		}else{
 			$this->db->select('*');
 			$this->db->from('anggota');
-			$this->db->where_in('status', [2,3]);
+			$this->db->where_in('status', [2,3,4]);
 			$query = $this->db->get();
 		}
 		return $query->result();
