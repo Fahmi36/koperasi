@@ -312,7 +312,7 @@ class MMain extends CI_Model {
 		if ($cek->num_rows() != 0 ) {
 			$cekpassanggota = password_verify(''.$this->input->post('password').'', ''.$row->password.'');
 			if ($cekpassanggota == true) {
-				$session1 = array('id'=>$row->id_anggota,'id_anggota'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
+				$session1 = array('id'=>$row->id_anggota,'id_anggota'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok,'status'=>$row->status);
 				$this->session->set_userdata($session1);
 				$val = array('success'=>true,'msg'=>'success');
 			}else{
@@ -529,7 +529,7 @@ class MMain extends CI_Model {
 					'sistem_bayar'=>$bayar,
 					'metode_bayar'=>$methode,
 					'bukti_transfer'=>$gambartf,
-					'status'=>'Pending',
+					'status'=>'0',
 				));
 				$val = array('success'=>true,'msg'=>'Menunggu Konfirmasi dari Petugas');
 			}else{
@@ -615,6 +615,10 @@ class MMain extends CI_Model {
 		),
 		array('id_anggota'=>$this->input->post('id')
 	));
+		$this->db->update('anggota_setoran', array(
+				'status'=>'1'),
+			array('tipe_transaksi'=>'1','id_anggota'=>$this->input->post('id'),'id_jenis_setoran'=>'1'
+		));
 		if ($query == true) {
 			$val = array('success'=>true,'msg'=>'Berhasil Terima Anggota');
 		}else{
