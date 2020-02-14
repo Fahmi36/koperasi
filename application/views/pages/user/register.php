@@ -226,4 +226,3 @@
 <div class="footer">
 
 </div>
-<!-- JS
