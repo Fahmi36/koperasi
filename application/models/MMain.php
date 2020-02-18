@@ -775,7 +775,11 @@ class MMain extends CI_Model {
 	function getNamaPetugas($id)
 	{
 		$q = $this->db->get_where('anggota',array('id_anggota'=>$id));
-		return $q->row();
+		if ($q->num_rows == 0) {
+			return 'Tidak ada Petugas';
+		}else{
+			return $q->row()->nama;
+		}
 	}
 	public function Uploadfoto($param)
 	{

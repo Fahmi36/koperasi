@@ -155,7 +155,7 @@
 					<div class="form-group">
 							<div class="row">
 								<div class="col-md-12">
-									<label><?= $this->mm->getNamaPetugas($simpan->id_petugas)->nama?></label>
+									<label><?= $this->mm->getNamaPetugas($simpan->id_petugas)?></label>
 								</div>
 							</div>
 						</div>

@@ -154,6 +154,9 @@
                                                     <td><?=$key->tgl_transaksi?></td>
                                                     <?php if($this->session->userdata('username') == null){ ?>
                                                         <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button></td>
+                                                        <?php if ($key->status == 1): ?>
+                                                            <td><a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></a></td>
+                                                        <?php endif ?>
                                                     <?php }else{ ?>
                                                         <td>
                                                            <?php if ($key->status == 0){ ?> 
@@ -162,6 +165,7 @@
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
                                                         <?php }else{ ?>
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
+                                                            <a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
                                                         <?php } ?>
                                                     </td>
                                                 <?php } ?>
