@@ -90,7 +90,7 @@ class MMain extends CI_Model {
 	}
 	public function getPrintSimpanan($id)
 	{ 
-		$this->db->select('akun_user.username as admin, anggota_setoran.metode_bayar,anggota_setoran.jumlah_transaksi,master_jenis_setoran.jenis_setoran,anggota_setoran.tgl_transaksi,anggota.no_anggota,anggota.nama,anggota_setoran.id_petugas');
+		$this->db->select('akun_user.username as admin, anggota_setoran.metode_bayar,anggota_setoran.jumlah_transaksi,master_jenis_setoran.jenis_setoran,anggota_setoran.tgl_transaksi,anggota.no_anggota,anggota.nama,anggota_setoran.id_petugas,anggota_setoran.bukti_transfer');
 		$this->db->from('anggota_setoran');
 		$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'inner');
 		$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'Inner');

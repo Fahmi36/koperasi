@@ -155,7 +155,7 @@
 					<div class="form-group">
 							<div class="row">
 								<div class="col-md-12">
-									<label><?= $this->mm->getNamaPetugas($key->id_petugas)->nama?></label>
+									<label><?= $this->mm->getNamaPetugas($simpan->id_petugas)->nama?></label>
 								</div>
 							</div>
 						</div>
@@ -164,7 +164,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<label>Transfer</label>
-									<img src="<?php echo base_url('assets/images/bukti/').$data->bukti_transfer ?>">
+									<img src="<?php echo base_url('assets/images/bukti/').$simpan->bukti_transfer ?>">
 								</div>
 							</div>
 						</div>
