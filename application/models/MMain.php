@@ -90,10 +90,11 @@ class MMain extends CI_Model {
 	}
 	public function getPrintSimpanan($id)
 	{ 
-		$this->db->select('*');
+		$this->db->select('akun_user.username as admin, anggota_setoran.metode_bayar,anggota_setoran.jumlah_transaksi,anggota_setoran.jenis_setoran,anggota_setoran.tgl_transaksi,anggota.no_anggota,anggota.nama.anggota_setoran.id_petugas');
 		$this->db->from('anggota_setoran');
 		$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'inner');
 		$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'Inner');
+		$this->db->join('akun_user', 'anggota_setoran.accby = akun_user.id', 'left');
 		$this->db->where('anggota_setoran.id',$id);
 		$query = $this->db->get();
 		return $query->row();
@@ -770,6 +771,11 @@ class MMain extends CI_Model {
 		$query = $this->db->get();
 		// return var_dump($this->db->last_query());
 		return $query->result();
+	}
+	function getNamaPetugas($id)
+	{
+		$q = $this->db->get_where('anggota',array('id_anggota'=>$id));
+		return $q->row();
 	}
 	public function Uploadfoto($param)
 	{
