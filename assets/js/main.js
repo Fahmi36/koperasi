@@ -3,12 +3,12 @@
 			title: 'Apakah Anda Yakin Menerima Cicilan Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) {	
 				$.ajax({
 					url: BASE_URL + 'PinjamController/TerimaCicil',
 					type: 'post',
@@ -28,9 +28,9 @@
 							);
 						$('#page-loader').fadeOut('fast'); 
 					}
-				})
+				});
 			}
-		})
+		});
 	}
 	function tolakcicilan(id) {
 		$.ajax({
@@ -85,12 +85,12 @@
 			title: 'Apakah Anda Yakin Pendaftar Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'Action/TerimaUser',
 					type: 'post',
@@ -112,19 +112,19 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function tolakUser(id) {
 		Swal.fire({
 			title: 'Apakah Anda Yakin Ingin Menolak Pendaftar Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'Action/TolakUser',
 					type: 'post',
@@ -146,7 +146,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function infoUser(id) {
 		$.ajax({
@@ -201,12 +201,12 @@
 			title: 'Apakah Anda Yakin Ingin Menolak Data Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'PinjamController/TolakPinjaman',
 					type: 'POST',
@@ -228,7 +228,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function lanjutPinjam(id) {
 		$.ajax({
@@ -324,12 +324,12 @@
 			title: 'Apakah Anda Yakin Ingin Mengubah data sebelum di acc ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'PinjamController/UlangPinjaman',
 					type: 'POST',
@@ -351,7 +351,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function verifpinjaman(id) {
 		$.ajax({
@@ -403,12 +403,12 @@
 			title: 'Apakah Anda Yakin Memverifikasi Data ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) {  
 				$.ajax({
 					url: BASE_URL + 'PinjamController/VerifikasiPinjaman',
 					type: 'POST',
@@ -430,7 +430,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function infosimpan(id) {
 		$.ajax({
@@ -461,12 +461,12 @@
 			title: 'Apakah Anda Yakin Ingin Menolak Data Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'SimpanController/AccSimpananAnggota',
 					type: "POST",
@@ -495,19 +495,19 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function terimasimpan(id) {
 		Swal.fire({
 			title: 'Apakah anda Menyetujui data ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'SimpanController/AccSimpananAnggota',
 					type: "POST",
@@ -536,7 +536,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function loopDataAbsen(table,type) {
 		var array_data = [],
@@ -584,12 +584,12 @@
 				title: 'Apakah Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {  
 					$.ajax({
 						url: BASE_URL + 'PinjamController/BuktiBayarPinjaman',
 						type: "POST",
@@ -631,12 +631,12 @@
 				title: 'Yakin Ingin Mengubah Password ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'Action/UbahPassword',
 						type: "POST",
@@ -676,12 +676,12 @@
 				title: 'Apakah Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) { 
 					$.ajax({
 						url: BASE_URL + 'Action/Ubahprofile',
 						type: "POST",
@@ -721,12 +721,12 @@
 				title: 'Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'PinjamController/pinjamUang',
 						type: "POST",
@@ -775,12 +775,12 @@
 				title: 'Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'PinjamController/ubahPinjam',
 						type: "POST",
@@ -853,12 +853,12 @@
 				title: 'Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'SimpanController/Simpanan',
 						type: "POST",
@@ -925,12 +925,12 @@
 				title: 'Data Sudah benar ?',
 				text: "Klik Ya",
 				type: 'success',
-				buttonsStyling: false,
-				showCancelButton: true,
-				confirmButtonClass: 'btn btn-info',
-				cancelButtonClass: 'btn btn-danger',
-				confirmButtonText: 'Ya',
-				preConfirm: () => { 
+				confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
+                showCancelButton: true,
+            })
+			.then((result) => {
+                if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'action/tambahRek',
 						type: "POST",

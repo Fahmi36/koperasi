@@ -3,75 +3,75 @@
     var form = $("#signup-form");
     form.validate({
         errorPlacement: function errorPlacement(error, element) {
-             element.before(error); 
+           element.before(error); 
+       },
+       rules: {
+        nama_lengkap : {
+            required: true,
         },
-        rules: {
-            nama_lengkap : {
-                required: true,
-            },
-            tempat_lahir : {
-                required: true,
-            },
-            tanggal_lahir : {
-                required: true,
-            },
-            alamat : {
-                required: true,
-            },
-            no_ktp : {
-                required: true,
-            },
-            no_hp : {
-                required: true,
-            },
-            no_rek : {
-                required: true,
-            },
-            no_kartu : {
-                required: true,
-            },
-            cvv : {
-                required: true,
-            },
-            pekerjaan : {
-                required: true,
-            },
-            file_fotocopy : {
-                required: true,
-            },
-            foto_1 : {
-                required: true,
-            },
-            foto_2: {
-                required: true,
-            },
-            sim_sukarela : {
-                required: true,
-            },
-            pembayaran : {
-                required: true,
-            },
-            metode_pem : {
-                required: true,
-            },
-            sebesar : {
-                required: true,
-            },
+        tempat_lahir : {
+            required: true,
         },
-        onfocusout: function(element) {
-            $(element).valid();
+        tanggal_lahir : {
+            required: true,
         },
-        highlight : function(element, errorClass, validClass) {
-            $(element.form).find('.actions').addClass('form-error');
-            $(element).removeClass('valid');
-            $(element).addClass('error');
+        alamat : {
+            required: true,
         },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element.form).find('.actions').removeClass('form-error');
-            $(element).removeClass('error');
-            $(element).addClass('valid');
-        }
-    });
+        no_ktp : {
+            required: true,
+        },
+        no_hp : {
+            required: true,
+        },
+        no_rek : {
+            required: true,
+        },
+        no_kartu : {
+            required: true,
+        },
+        cvv : {
+            required: true,
+        },
+        pekerjaan : {
+            required: true,
+        },
+        file_fotocopy : {
+            required: true,
+        },
+        foto_1 : {
+            required: true,
+        },
+        foto_2: {
+            required: true,
+        },
+        sim_sukarela : {
+            required: true,
+        },
+        pembayaran : {
+            required: true,
+        },
+        metode_pem : {
+            required: true,
+        },
+        sebesar : {
+            required: true,
+        },
+    },
+    onfocusout: function(element) {
+        $(element).valid();
+    },
+    highlight : function(element, errorClass, validClass) {
+        $(element.form).find('.actions').addClass('form-error');
+        $(element).removeClass('valid');
+        $(element).addClass('error');
+    },
+    unhighlight: function(element, errorClass, validClass) {
+        $(element.form).find('.actions').removeClass('form-error');
+        $(element).removeClass('error');
+        $(element).addClass('valid');
+    }
+});
     form.steps({
         headerTag: "h3",
         bodyTag: "fieldset",
@@ -100,12 +100,12 @@
                 title: 'Data Sudah benar ?',
                 text: "Klik Ya",
                 type: 'success',
-                buttonsStyling: false,
+                confirmButtonText: "Iya",
+                cancelButtonText: "Belum",
                 showCancelButton: true,
-                confirmButtonClass: 'btn btn-info',
-                cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'Ya',
-                preConfirm: () => { 
+            })
+            .then((result) => {
+                if (result.value) { 
                     $.ajax({
                         url: BASE_URL + 'Action/actRegis',
                         type: "POST",
@@ -130,13 +130,14 @@
                             Swal.fire(
                                 '"'+response.msg+'"',
                                 'Hubungi Tim Terkait',
-                            );
+                                );
                             $('#page-loader').fadeOut('fast'); 
                         }
                     });
                     return false;
                 }
             });
+            // });
         },
         // onInit : function (event, currentIndex) {
         //     event.append('demo');
@@ -234,7 +235,7 @@
         minimumAge: 0,
         maximumAge: 120
     });
-        
+
 })(jQuery);
 
 var checker = document.getElementById('s&k');
