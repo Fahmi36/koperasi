@@ -3,12 +3,12 @@
 			title: 'Apakah Anda Yakin Menerima Cicilan Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) {	
 				$.ajax({
 					url: BASE_URL + 'PinjamController/TerimaCicil',
 					type: 'post',
@@ -16,9 +16,9 @@
 					success:function(response) {
 						location.reload();
 					}
-				})
+				});
 			}
-		})
+		});
 	}
 	function tolakcicilan(id) {
 		$.ajax({
@@ -49,12 +49,12 @@
 			title: 'Apakah Anda Yakin Pendaftar Ini ?',
 			text: "Klik Ya",
 			type: 'success',
-			buttonsStyling: false,
+			confirmButtonText: "Iya",
+			cancelButtonText: "Belum",
 			showCancelButton: true,
-			confirmButtonClass: 'btn btn-info',
-			cancelButtonClass: 'btn btn-danger',
-			confirmButtonText: 'Ya',
-			preConfirm: () => { 
+		})
+		.then((result) => {
+			if (result.value) { 
 				$.ajax({
 					url: BASE_URL + 'Action/TerimaUser',
 					type: 'post',
@@ -64,7 +64,7 @@
 					}
 				})
 			}
-		})
+		});
 	}
 	function tolakUser(id) {
 		Swal.fire({
