@@ -115,19 +115,22 @@
                         cache: false,
                         processData: false,
                         beforeSend:function(argument) {
-                            $(".loader-overlay").removeAttr('style');
+                            $("#text-loader").html('Mohon Tunggu');
+                            $('#page-loader').fadeIn('fast');
                         },
                         success: function (response) {
                             Swal.fire(
                                 ''+response.msg+'',
                                 );
                             // $("#signup-form")[0].reset();
+                            $('#page-loader').fadeOut('fast'); 
                         },
                         error: function () {
                             Swal.fire(
                                 '"'+response.msg+'"',
                                 'Hubungi Tim Terkait',
-                                );
+                            );
+                            $('#page-loader').fadeOut('fast'); 
                         }
                     });
                     return false;

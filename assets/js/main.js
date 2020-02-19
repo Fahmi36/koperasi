@@ -277,7 +277,8 @@
 					dataType:'json',
 					data: {id:id,status:'2'},
 					beforeSend:function(argument) {
-						$(".loader-overlay").removeAttr('style');
+						$("#text-loader").html('Mohon Tunggu');
+                    	$('#page-loader').fadeIn('fast');
 					},
 					success: function (response) {
 						if (response.success == false) {
@@ -287,7 +288,7 @@
 						}else{
 							location.reload();
 						}
-
+                    	$('#page-loader').fadeOut('fast');
 					}
 				})
 			}
@@ -310,7 +311,8 @@
 					dataType:'json',
 					data: {id:id,status:'1'},
 					beforeSend:function(argument) {
-						$(".loader-overlay").removeAttr('style');
+						$("#text-loader").html('Mohon Tunggu');
+                    	$('#page-loader').fadeIn('fast');
 					},
 					success: function (response) {
 						if (response.success == false) {
@@ -320,6 +322,7 @@
 						}else{
 							window.open(BASE_URL + 'cetak_simpanan/'+id,'_blank');				
 						}
+                    	$('#page-loader').fadeOut('fast');
 					}
 				})
 			}
@@ -386,7 +389,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							if (response.success == false) {
@@ -398,13 +402,14 @@
 									'Silakan Menunggu Konfirmasi dari petugas',
 									);
 							}
-
+                    		$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+                    		$('#page-loader').fadeOut('fast');
 						}
 					});
 				}
@@ -431,7 +436,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							if (response.success == false) {
@@ -441,13 +447,14 @@
 							}else{
 								location.reload();
 							}
-
+							$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+							$('#page-loader').fadeOut('fast');
 						}
 					});
 				}
@@ -474,7 +481,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							if (response.success == false) {
@@ -484,13 +492,14 @@
 							}else{
 								location.reload();
 							}
-
+							$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+							$('#page-loader').fadeOut('fast');
 						}
 					});
 				}
@@ -517,7 +526,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							if (response.success == false) {
@@ -536,13 +546,14 @@
 									}
 								});
 							}
-
+							$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+							$('#page-loader').fadeOut('fast');
 						}
 					});
 				}
@@ -569,7 +580,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							if (response.success == false) {
@@ -579,13 +591,14 @@
 							}else{
 								window.location.href = BASE_URL + 'bayar/pinjaman';
 							}
-
+                    		$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+							$('#page-loader').fadeOut('fast');
 						}
 					});
 				}
@@ -602,7 +615,8 @@
 				cache: false,
 				processData: false,
 				beforeSend:function(argument) {
-					$(".loader-overlay").removeAttr('style');
+					$("#text-loader").html('Mohon Tunggu');
+                    $('#page-loader').fadeIn('fast');
 				},
 				success: function (response) {
 					if (response.success == false) {
@@ -612,13 +626,14 @@
 					}else{
 						window.location.href= BASE_URL;
 					}
-
+					$('#page-loader').fadeOut('fast'); 
 				},
 				error: function () {
 					Swal.fire(
 						'"'+response.msg+'"',
 						'Hubungi Tim Terkait',
-						);
+					);
+					$('#page-loader').fadeOut('fast'); 
 				}
 			});
 		});
@@ -643,7 +658,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							Swal.fire(
@@ -651,12 +667,14 @@
 								);
 							$("#formsimpan")[0].reset();
 							location.reload();
+                    		$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+                    		$('#page-loader').fadeOut('fast');
 						}
 					});
 					return false;
@@ -712,7 +730,8 @@
 						cache: false,
 						processData: false,
 						beforeSend:function(argument) {
-							$(".loader-overlay").removeAttr('style');
+							$("#text-loader").html('Mohon Tunggu');
+                    		$('#page-loader').fadeIn('fast');
 						},
 						success: function (response) {
 							Swal.fire(
@@ -720,12 +739,14 @@
 								);
 							$("#ubahrekening")[0].reset();
 							location.reload();
+                    		$('#page-loader').fadeOut('fast');
 						},
 						error: function () {
 							Swal.fire(
 								'"'+response.msg+'"',
 								'Hubungi Tim Terkait',
-								);
+							);
+                    		$('#page-loader').fadeOut('fast');
 						}
 					});
 					return false;

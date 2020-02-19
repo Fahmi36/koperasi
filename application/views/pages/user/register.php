@@ -184,8 +184,8 @@
                     <label for="sim_sukarela" class="form-label">Penyetoran pertama anggota baru yang terdiri dari :</label>
                     <label for="department" class="form-label">- Simpanan Pokok : Rp 1.000.000 (dibayar 1x selama menjadi anggota)</label>
                     <label for="department" class="form-label">- Simpanan Wajib : Rp 25.000 (dibayar perbulan)</label>
-                    <label for="department" class="form-label">- Simpanan Sukarela : Rp 10.000</label>
-                    <input type="number" name="sim_sukarela" id="sim_sukarela" placeholder="Simpanan Sukarela" />
+                    <label for="department" class="form-label">- Simpanan Sukarela : ...... (dibayar perbulan minimal Rp 10.000)</label>
+                    <input type="number" name="sim_sukarela" id="sim_sukarela" placeholder="Jumlah Simpanan Sukarela yang ingin dibayarkan" />
                 </div>
                 <div class="form-group">
                     <label for="pembayaran" class="form-label required">Yang sudah dibayarkan secara :</label>
@@ -212,7 +212,7 @@
                             <label for="transfer">Transfer ke <b>Bank DKI dengan No Rekening 108-13-17099-8</b></label>
                         </div>
                         <div class="form-group" id="buktitf" style="display: none;">
-                            <label for="foto_tf" class="form-label required">Foto Bukti Transfer</label>
+                            <label for="foto_tf" class="form-label required" style="border:none;">Foto Bukti Transfer</label>
                             <input type="file" name="foto_tf" id="foto_tf" />
                         </div>
                     </div>

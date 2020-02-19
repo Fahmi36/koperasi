@@ -155,7 +155,7 @@
                                                     <?php if($this->session->userdata('username') == null){ ?>
                                                         <td><button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button></td>
                                                         <?php if ($key->status == 1): ?>
-                                                            <td><a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></a></td>
+                                                            <td><a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-default notika-btn-default waves-effect"><i class="fa fa-print"></i></a></td>
                                                         <?php endif ?>
                                                     <?php }else{ ?>
                                                         <td>
@@ -165,7 +165,7 @@
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
                                                         <?php }else{ ?>
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
-                                                            <a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
+                                                            <a href="<?=site_url('cetak_simpanan/'.$key->id)?>" class="btn btn-default notika-btn-default waves-effect"><i class="fa fa-print"></i></a>
                                                         <?php } ?>
                                                     </td>
                                                 <?php } ?>

@@ -33,6 +33,14 @@
 </head>
 
 <body>
+    <div class="page-loader" id="page-loader">
+        <div>
+            <div id="preloader">
+                <div id="loader"></div>
+            </div>
+            <p id="text-loader"></p>
+        </div>
+    </div> 
     <?php if ($this->uri->segment(1) != 'login' AND $this->uri->segment(1) != 'register'){ ?>
         <?php $this->load->view('include/top_nav');?>
         <?php $this->load->view('include/menu');?>
