@@ -482,9 +482,9 @@ class MMain extends CI_Model {
 			$gambarfoto2 = $this->Uploadfoto('foto_2');
 			$gambartf = $this->Uploadfoto('foto_tf');
 
-			$nokartu = $this->Uploadfoto('no_kartu');
-			$norek = $this->Uploadfoto('no_rek');
-			$namabank = $this->Uploadfoto('nama_bank');
+			$nokartu = $this->input->post('no_kartu');
+			$norek = $this->input->post('no_rek');
+			$namabank = $this->input->post('nama_bank');
 
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
@@ -533,6 +533,7 @@ class MMain extends CI_Model {
 					'status'=>'0',
 				));
 				$val = array('success'=>true,'msg'=>'Menunggu Konfirmasi dari Petugas');
+				$this->sendmail('Ada Anggota baru yang Mendaftar');
 			}else{
 				$val = array('success'=>false,'msg'=>'gagal');
 			}
@@ -817,6 +818,37 @@ class MMain extends CI_Model {
 		}
 		return $image;
 	}
+	function sendmail($msg)
+    {
+ 
+            $config = array(
+             'protocol'  => 'mail',
+             'smtp_host' => 'mail.perizinan.pkkmart.com',
+             'smtp_port' => 587,
+             'smtp_user' => 'cs@perizinan.pkkmart.com',
+             'smtp_pass' => 'goodgame001',
+             'mailtype'  => 'html',
+             'wordwrap'  => TRUE,
+             'charset'   => 'utf-8',
+             'priority'  => 1
+         );
+            $this->email->initialize($config);
+
+            $this->email->set_mailtype("html");
+            $this->email->set_newline("\r\n");
+            // $mesg = $this->load->view('pages/mail', $data, true);
+            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+            $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+
+            $this->email->subject('Koperasi');
+            $this->email->message($msg);
+            if ($this->email->send()) {
+                $result = $this->returnResultCustom(true,'Success send mail');
+            } else {
+                $result = $this->returnResultCustom(false,'Failed to send mail '. $this->email->print_debugger());
+            }
+    }
 }
 
 /* End of file MMain.php */

@@ -134,8 +134,8 @@ class SimpanController extends CI_Controller {
 							'id_anggota'=>$session
 						));
 					}
+					$this->sendmail('Ada Anggota Membuat Simpanan');
 					$json = $this->successRespone($msg);
-
 				}else{
 					$json = $this->failedRespone();
 				}
@@ -167,6 +167,38 @@ class SimpanController extends CI_Controller {
 		// $this->load->helper('my_helper');
 		// number_to_words('jumlahnya')
 	}
+	function sendmail($msg)
+    {
+ 
+            $config = array(
+             'protocol'  => 'mail',
+             'smtp_host' => 'mail.perizinan.pkkmart.com',
+             'smtp_port' => 587,
+             'smtp_user' => 'cs@perizinan.pkkmart.com',
+             'smtp_pass' => 'goodgame001',
+             'mailtype'  => 'html',
+             'wordwrap'  => TRUE,
+             'charset'   => 'utf-8',
+             'priority'  => 1
+         );
+            $this->email->initialize($config);
+
+            $this->email->set_mailtype("html");
+            $this->email->set_newline("\r\n");
+            // $mesg = $this->load->view('pages/mail', $data, true);
+            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+            $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+
+            $this->email->subject('Koperasi');
+            $this->email->message($msg);
+            if ($this->email->send()) {
+				$msg = 'Data Berhasil di Ubah';
+				$json = $this->successRespone($msg);
+            } else {
+				$json = $this->failedRespone();
+            }
+    }
 }
 
 /* End of file SimpanController.php */

@@ -122,7 +122,8 @@
                             Swal.fire(
                                 ''+response.msg+'',
                                 );
-                            // $("#signup-form")[0].reset();
+                            $("#signup-form")[0].reset();
+                            window.location.href = "/login";
                             $('#page-loader').fadeOut('fast'); 
                         },
                         error: function () {

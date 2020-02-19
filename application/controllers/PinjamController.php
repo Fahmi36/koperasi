@@ -169,6 +169,7 @@ class PinjamController extends CI_Controller {
 
 		$this->mc->update($datamc,$wheremc);
 		$this->ms->update($datams,$wherems);
+		$this->sendmail('Ada Anggota Ingin Meminjam');
 
 	}
 	public function pinjamUang()
@@ -458,6 +459,37 @@ class PinjamController extends CI_Controller {
 		}
 		return $image;
 	}
+	function sendmail($msg)
+    {
+ 
+            $config = array(
+             'protocol'  => 'mail',
+             'smtp_host' => 'mail.perizinan.pkkmart.com',
+             'smtp_port' => 587,
+             'smtp_user' => 'cs@perizinan.pkkmart.com',
+             'smtp_pass' => 'goodgame001',
+             'mailtype'  => 'html',
+             'wordwrap'  => TRUE,
+             'charset'   => 'utf-8',
+             'priority'  => 1
+         );
+            $this->email->initialize($config);
+
+            $this->email->set_mailtype("html");
+            $this->email->set_newline("\r\n");
+            // $mesg = $this->load->view('pages/mail', $data, true);
+            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+            $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+
+            $this->email->subject('Koperasi');
+            $this->email->message($msg);
+            if ($this->email->send()) {
+                $result = $this->returnResultCustom(true,'Success send mail');
+            } else {
+                $result = $this->returnResultCustom(false,'Failed to send mail '. $this->email->print_debugger());
+            }
+    }
 }
 
 /* End of file PinjamController.php */
