@@ -482,9 +482,9 @@ class MMain extends CI_Model {
 			$gambarfoto2 = $this->Uploadfoto('foto_2');
 			$gambartf = $this->Uploadfoto('foto_tf');
 
-			$nokartu = $this->Uploadfoto('no_kartu');
-			$norek = $this->Uploadfoto('no_rek');
-			$namabank = $this->Uploadfoto('nama_bank');
+			$nokartu = $this->input->post('no_kartu');
+			$norek = $this->input->post('no_rek');
+			$namabank = $this->input->post('nama_bank');
 
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
