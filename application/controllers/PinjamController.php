@@ -180,7 +180,7 @@ class PinjamController extends CI_Controller {
 				$msg = "Gagal Melakukan Pinjaman, Karena Simpanan Pokok Anda Belum Lunas";
 				$json = $this->failedFecthData($msg);
 			}else{
-				$this->db->where_in('status_pinjaman',[0,1,2,3]);
+				$this->db->where_in('status_pinjaman',[0,1,2]);
 				$this->db->where('id_anggota',$this->session->userdata('id'));
 				$gagal = $this->db->get('anggota_pinjaman');
 				if ($gagal->num_rows() > 0) {
