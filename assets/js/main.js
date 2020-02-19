@@ -876,7 +876,7 @@
 								''+response.msg+'',
 								);
 							$("#formsimpan")[0].reset();
-							location.reload();
+							// location.reload();
 							$('#page-loader').fadeOut('fast');
 						},
 						error: function () {

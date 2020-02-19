@@ -162,11 +162,11 @@ class SimpanController extends CI_Controller {
 		}
 		return $image;
 	}
-	public function Helper()
-	{
-		// $this->load->helper('my_helper');
-		// number_to_words('jumlahnya')
-	}
+	// public function Helper()
+	// {
+	// 	// $this->load->helper('my_helper');
+	// 	// number_to_words('jumlahnya')
+	// }
 	function sendmail($msg)
     {
  
@@ -193,6 +193,7 @@ class SimpanController extends CI_Controller {
             $this->email->subject('Koperasi');
             $this->email->message($msg);
             if ($this->email->send()) {
+				$msg = $this->email->print_debugger();
 				$json = $this->successRespone($msg);
             } else {
 				$json = $this->failedRespone();
