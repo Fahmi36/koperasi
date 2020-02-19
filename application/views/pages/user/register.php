@@ -182,7 +182,7 @@
                     <label for="sim_sukarela" class="form-label">Penyetoran pertama anggota baru yang terdiri dari :</label>
                     <label for="department" class="form-label">- Simpanan Pokok : Rp 1.000.000 (dibayar 1x selama menjadi anggota)</label>
                     <label for="department" class="form-label">- Simpanan Wajib : Rp 25.000 (dibayar perbulan)</label>
-                    <label for="department" class="form-label">- Simpanan Sukarela : Rp 25.000 (dibayar perbulan minimal Rp 10.000)</label>
+                    <label for="department" class="form-label">- Simpanan Sukarela : Rp 10.000</label>
                     <input type="number" name="sim_sukarela" id="sim_sukarela" placeholder="Simpanan Sukarela" />
                 </div>
                 <div class="form-group">
