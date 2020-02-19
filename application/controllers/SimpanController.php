@@ -102,7 +102,7 @@ class SimpanController extends CI_Controller {
 					$jumlahnya = $this->input->post('jumlah_wajib');
 				}else if ($this->input->post('jumlah_suka') == null AND $this->input->post('jumlah_wajib')== null) {
 					$jumlahnya = $this->input->post('jumlah_pokok');
-				}
+				} 
 				$gambar = $this->Uploadfoto('filenya');
 				$data = array(
 					'id_anggota'=>$session,
@@ -118,7 +118,24 @@ class SimpanController extends CI_Controller {
 				$query = $this->ms->insert($data);
 				if ($query == true) {
 					$msg = 'Data Berhasil di Simpan';
+					$this->db->select('SUM(jumlah_transaksi) as setoranpokok');
+					$this->db->from('anggota_setoran');
+					$this->db->join('anggota', 'anggota_setoran.id_anggota = anggota.id_anggota', 'INNER');
+					$this->db->where('anggota_setoran.id_anggota', $session);
+					$this->db->where('anggota_setoran.tipe_transaksi', '1');
+					$this->db->where('anggota_setoran.id_jenis_setoran', '1');
+					$this->db->where('anggota_setoran.status', '1');
+					$this->db->where('anggota.status', '4');
+					$q = $this->db->get();
+					if ($q->row()->setoranpokok > 999999) {
+						$this->db->update('anggota', array(
+							'status'=>'1',
+						),array(
+							'id_anggota'=>$session
+						));
+					}
 					$json = $this->successRespone($msg);
+
 				}else{
 					$json = $this->failedRespone();
 				}

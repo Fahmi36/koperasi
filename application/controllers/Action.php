@@ -178,10 +178,11 @@ class Action extends CI_Controller {
 		if ($this->session->userdata('id')==null) {
 			redirect('login');
 		}else{
+			
+			$this->load->model('MMain', 'mm');
 			$data['title'] = 'Cetak Simpanan - Selamat Datang di Koperasi Simpan Pinjam';
-			$data['link_view'] = 'pages/cetak_simpanan';
 			$data['simpan'] = $this->mm->getPrintSimpanan($this->uri->segment(2));
-			$this->load->view('utama',$data);
+			$this->load->view('pages/cetak_simpanan',$data);
 		}
 	}
 	public function data_user()

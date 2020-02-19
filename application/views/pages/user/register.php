@@ -1,4 +1,3 @@
-<!-- Main css -->
 <link rel="stylesheet" href="https://colorlib.com/etc/bwiz/colorlib-wizard-11/css/style.css">
 <link rel="stylesheet" href="https://colorlib.com/etc/bwiz/colorlib-wizard-11/fonts/themify-icons/themify-icons.css">
 <style type="text/css">
@@ -142,11 +141,14 @@
                         <label for="no_kartu" class="form-label required">Nomor Kartu (DKI)</label>
                         <input type="number" name="no_kartu" id="no_kartu" onKeyPress="if(this.value.length==16) return false;" />
                     </div>
-
                     <div class="form-group">
+                        <label for="cvv" class="form-label required">Nama Bank</label>
+                        <input type="text" name="nama_bank" />
+                    </div>
+                    <!-- <div class="form-group">
                         <label for="cvv" class="form-label required">CVV</label>
                         <input type="number" name="cvv" id="cvv" onKeyPress="if(this.value.length==3) return false;" />
-                    </div>
+                    </div> -->
                 </div>
             </fieldset>
 
@@ -224,4 +226,3 @@
 <div class="footer">
 
 </div>
-<!-- JS -->

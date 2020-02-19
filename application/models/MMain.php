@@ -90,10 +90,11 @@ class MMain extends CI_Model {
 	}
 	public function getPrintSimpanan($id)
 	{ 
-		$this->db->select('*');
+		$this->db->select('akun_user.username as admin, anggota_setoran.metode_bayar,anggota_setoran.jumlah_transaksi,master_jenis_setoran.jenis_setoran,anggota_setoran.tgl_transaksi,anggota.no_anggota,anggota.nama,anggota_setoran.id_petugas,anggota_setoran.bukti_transfer');
 		$this->db->from('anggota_setoran');
 		$this->db->join('anggota', 'anggota.id_anggota = anggota_setoran.id_anggota', 'inner');
 		$this->db->join('master_jenis_setoran', 'anggota_setoran.id_jenis_setoran = master_jenis_setoran.id', 'Inner');
+		$this->db->join('akun_user', 'anggota_setoran.accby = akun_user.id', 'left');
 		$this->db->where('anggota_setoran.id',$id);
 		$query = $this->db->get();
 		return $query->row();
@@ -312,7 +313,7 @@ class MMain extends CI_Model {
 		if ($cek->num_rows() != 0 ) {
 			$cekpassanggota = password_verify(''.$this->input->post('password').'', ''.$row->password.'');
 			if ($cekpassanggota == true) {
-				$session1 = array('id'=>$row->id_anggota,'id_anggota'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok);
+				$session1 = array('id'=>$row->id_anggota,'id_anggota'=> $row->no_anggota,'nohp'=>$row->no_hp,'no_rek'=>$row->no_rek,'username' => null,'nama' => $row->nama,'level'=>'anggota','kelompok'=>$row->id_kelompok,'status'=>$row->status);
 				$this->session->set_userdata($session1);
 				$val = array('success'=>true,'msg'=>'success');
 			}else{
@@ -467,9 +468,9 @@ class MMain extends CI_Model {
 			$bayar = $this->input->post('pembayaran');
 
 			if ($bayar == 1) {
-				$status = '1';
-			}else{
 				$status = '2';
+			}else{
+				$status = '3';
 			}
 
 			$methode = $this->input->post('metode_pem');
@@ -480,6 +481,11 @@ class MMain extends CI_Model {
 			$gambarfoto = $this->Uploadfoto('foto_1');
 			$gambarfoto2 = $this->Uploadfoto('foto_2');
 			$gambartf = $this->Uploadfoto('foto_tf');
+
+			$nokartu = $this->Uploadfoto('no_kartu');
+			$norek = $this->Uploadfoto('no_rek');
+			$namabank = $this->Uploadfoto('nama_bank');
+
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
 			$this->db->select('MAX(no_anggota) as jml');
@@ -500,6 +506,9 @@ class MMain extends CI_Model {
 				'status'=>'3',
 				'created_date'=>date('Y-m-d H:i:s'),
 				'pekerjaan'=>$pekerjaan,
+				'no_kartu'=>$nokartu,
+				'no_rek'=>$norek,
+				'bank'=>$namabank,
 				'password'=>password_hash('123456', PASSWORD_DEFAULT),
 			));
 			$id_anggota = $this->db->insert_id();
@@ -521,7 +530,7 @@ class MMain extends CI_Model {
 					'sistem_bayar'=>$bayar,
 					'metode_bayar'=>$methode,
 					'bukti_transfer'=>$gambartf,
-					'status'=>'Pending',
+					'status'=>'0',
 				));
 				$val = array('success'=>true,'msg'=>'Menunggu Konfirmasi dari Petugas');
 			}else{
@@ -572,7 +581,7 @@ class MMain extends CI_Model {
 		}else{
 			$this->db->select('*');
 			$this->db->from('anggota');
-			$this->db->where('status', 3);
+			$this->db->where_in('status', [2,3,4]);
 			$query = $this->db->get();
 		}
 		return $query->result();
@@ -594,13 +603,23 @@ class MMain extends CI_Model {
 	}
 	public function ActTerimaUser()
 	{
+		$cek = $this->db->get_where('anggota', array('id_anggota'=>$this->input->post('id')))->row();
+		if ($cek->status == '2') {
+			$status = 1;
+		}else{
+			$status = 4;
+		}
 		$query = $this->db->update('anggota',array(
-			'status'=>1,
+			'status'=>$status,
 			'tgl_masuk'=>date('Y-m-d'),
 			'acc_by'=>$this->session->userdata('id'),
 		),
 		array('id_anggota'=>$this->input->post('id')
 	));
+		$this->db->update('anggota_setoran', array(
+				'status'=>'1'),
+			array('tipe_transaksi'=>'1','id_anggota'=>$this->input->post('id'),'id_jenis_setoran'=>'1'
+		));
 		if ($query == true) {
 			$val = array('success'=>true,'msg'=>'Berhasil Terima Anggota');
 		}else{
@@ -752,6 +771,15 @@ class MMain extends CI_Model {
 		$query = $this->db->get();
 		// return var_dump($this->db->last_query());
 		return $query->result();
+	}
+	function getNamaPetugas($id)
+	{
+		$q = $this->db->get_where('anggota',array('id_anggota'=>$id));
+		if ($q->num_rows == 0) {
+			return 'Tidak ada Petugas';
+		}else{
+			return $q->row()->nama;
+		}
 	}
 	public function Uploadfoto($param)
 	{
