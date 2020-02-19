@@ -134,8 +134,8 @@ class SimpanController extends CI_Controller {
 							'id_anggota'=>$session
 						));
 					}
-					$json = $this->successRespone($msg);
 					$this->sendmail('Ada Anggota Membuat Simpanan');
+					$json = $this->successRespone($msg);
 				}else{
 					$json = $this->failedRespone();
 				}
@@ -196,8 +196,7 @@ class SimpanController extends CI_Controller {
 				$msg = 'Data Berhasil di Ubah';
 				$json = $this->successRespone($msg);
             } else {
-				$msg = 'Data Berhasil di Ubah';
-				$json = $this->successRespone($msg);
+				$json = $this->failedRespone();
             }
     }
 }
