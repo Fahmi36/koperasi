@@ -484,12 +484,8 @@ class PinjamController extends CI_Controller {
 
             $this->email->subject('Koperasi');
             $this->email->message($msg);
-            if ($this->email->send()) {
-				$msg = 'Data Berhasil di Ubah';
-				$json = $this->successRespone($msg);
-            } else {
-				$json = $this->failedRespone();
-            }
+            
+            return $this->email->send();
     }
 }
 
