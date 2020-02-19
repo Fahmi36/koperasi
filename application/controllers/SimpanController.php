@@ -162,11 +162,11 @@ class SimpanController extends CI_Controller {
 		}
 		return $image;
 	}
-	public function Helper()
-	{
-		// $this->load->helper('my_helper');
-		// number_to_words('jumlahnya')
-	}
+	// public function Helper()
+	// {
+	// 	// $this->load->helper('my_helper');
+	// 	// number_to_words('jumlahnya')
+	// }
 	function sendmail($msg)
     {
  
@@ -186,17 +186,17 @@ class SimpanController extends CI_Controller {
             $this->email->set_mailtype("html");
             $this->email->set_newline("\r\n");
             // $mesg = $this->load->view('pages/mail', $data, true);
-            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->to('koperasi.pkkmj@gmail.com');
             $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
             $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
 
             $this->email->subject('Koperasi');
             $this->email->message($msg);
             if ($this->email->send()) {
-				$msg = 'Data Berhasil di Ubah';
+				$msg = $this->email->print_debugger();
 				$json = $this->successRespone($msg);
             } else {
-				$json = $this->failedRespone();
+				return $this->email->print_debugger();
             }
     }
 }
