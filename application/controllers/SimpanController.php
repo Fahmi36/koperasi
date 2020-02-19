@@ -186,7 +186,7 @@ class SimpanController extends CI_Controller {
             $this->email->set_mailtype("html");
             $this->email->set_newline("\r\n");
             // $mesg = $this->load->view('pages/mail', $data, true);
-            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->to('koperasi.pkkmj@gmail.com');
             $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
             $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
 

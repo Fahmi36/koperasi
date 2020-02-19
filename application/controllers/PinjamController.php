@@ -478,16 +478,17 @@ class PinjamController extends CI_Controller {
             $this->email->set_mailtype("html");
             $this->email->set_newline("\r\n");
             // $mesg = $this->load->view('pages/mail', $data, true);
-            $this->email->to('koperasi.pkkmmj@gmail.com');
+            $this->email->to('koperasi.pkkmj@gmail.com');
             $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
             $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
 
             $this->email->subject('Koperasi');
             $this->email->message($msg);
             if ($this->email->send()) {
-                $result = $this->returnResultCustom(true,'Success send mail');
+				$msg = 'Data Berhasil di Ubah';
+				$json = $this->successRespone($msg);
             } else {
-                $result = $this->returnResultCustom(false,'Failed to send mail '. $this->email->print_debugger());
+				$json = $this->failedRespone();
             }
     }
 }
