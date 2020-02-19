@@ -196,7 +196,7 @@ class SimpanController extends CI_Controller {
 				$msg = $this->email->print_debugger();
 				$json = $this->successRespone($msg);
             } else {
-				$json = $this->failedRespone();
+				return $this->email->print_debugger();
             }
     }
 }
