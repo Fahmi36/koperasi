@@ -192,8 +192,11 @@ class SimpanController extends CI_Controller {
 
             $this->email->subject('Koperasi');
             $this->email->message($msg);
-            
-            return $this->email->send();
+            if ($this->email->send()) {
+				$json = $this->successRespone($msg);
+            } else {
+				$json = $this->failedRespone();
+            }
     }
 }
 
