@@ -87,9 +87,10 @@ function __construct() {
 	{
 		$this->db->where('status_pinjaman','2');
 		$this->db->group_by('id_anggota');
-		$this->db->limit(10);
+		$this->db->where('cron', '0');
+		// $this->db->limit(10);
 		$query = $this->db->get('anggota_pinjaman');
-		return var_dump($this->db->last_query());
+		// return var_dump($this->db->last_query());
 		$row = $query->row();
 
 		$cek = $this->db->get_where('anggota_pinjaman_angsuran',array('id_pinjaman'=>$row->id));
@@ -105,6 +106,7 @@ function __construct() {
 				));
 			$idangsuran = $this->db->insert_id();
 			if ($queryinsert == true) {
+				$this->db->update('anggota_pinjaman', array('cron'=>'1',array('id'=>$row->id)));
 				$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
 				if ($ceklagi->num_rows() > 0) {
 					$q = $this->failedRespone();
@@ -129,6 +131,7 @@ function __construct() {
 				$q = $this->failedRespone();
 			}
 		}else{
+			$this->db->update('anggota_pinjaman', array('cron'=>'1',array('id'=>$row->id)));
 			$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
 				if ($ceklagi->num_rows() > 0) {
 					$q = $this->failedRespone();
