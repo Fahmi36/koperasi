@@ -87,7 +87,9 @@ function __construct() {
 	{
 		$this->db->where('status_pinjaman','2');
 		$this->db->group_by('id_anggota');
+		$this->db->limit(10);
 		$query = $this->db->get('anggota_pinjaman');
+		return var_dump($this->db->last_query());
 		$row = $query->row();
 
 		$cek = $this->db->get_where('anggota_pinjaman_angsuran',array('id_pinjaman'=>$row->id));
@@ -103,7 +105,11 @@ function __construct() {
 				));
 			$idangsuran = $this->db->insert_id();
 			if ($queryinsert == true) {
-				for ($i=0; $i < 10; $i++) {
+				$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
+				if ($ceklagi->num_rows() > 0) {
+					$q = $this->failedRespone();
+				}else{
+					for ($i=0; $i < 10; $i++) {
 					$cicilan = array(
 						'tipe_cicil'=>'1',
 						'id_angsuran'=>$idangsuran,
@@ -115,6 +121,8 @@ function __construct() {
 						'created_at'=>date('Y-m-d H:i:s')
 					);
 					$cicil = $this->mc->insert($cicilan);
+				}
+				
 			}
 
 			$q = $this->costumeRespone();
