@@ -159,6 +159,15 @@
 								</div>
 							</div>
 						</div>
+					<?php elseif ($simpan->metode_bayar==2): ?>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-12">
+									<label>Transfer</label>
+									<img src="<?php echo base_url('assets/images/bukti/').$simpan->bukti_transfer ?>">
+								</div>
+							</div>
+						</div>
 					<?php else: ?>
 						<div class="form-group">
 							<div class="row">

@@ -389,6 +389,9 @@ prev.addEventListener('click', () => stepActionHandler(-1))
         }else if($('#sistem_bayar').val() == 2){
             $("#foto").removeAttr('style');                
             $("#petugas").attr('style', 'display:none;');
+        }else if ($('#sistem_bayar').val() == 3) {
+            $("#foto").removeAttr('style');                
+            $("#petugas").attr('style', 'display:none;');
         }
     }
     $('#nama_petugas').select2({

@@ -114,6 +114,7 @@ class SimpanController extends CI_Controller {
 					'metode_bayar'=>$this->input->post('sistem_bayar'),
 					'bukti_transfer'=>$gambar,
 					'id_petugas'=>$this->input->post('idpetugas'),
+					'created_at' => date('Y-m-d'),
 				);
 				$query = $this->ms->insert($data);
 				if ($query == true) {

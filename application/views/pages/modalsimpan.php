@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php else: ?>
+                            <?php elseif ($data->metode_bayar == 2): ?>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -90,6 +90,21 @@
                                         </div>
                                         <div class="col-md-7">
                                         <label>Transfer</label>
+                                        <img src="<?php echo base_url('assets/images/bukti/').$data->bukti_transfer ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Metode Bayar</label>
+                                        </div>
+                                        <div class="col-md-1" style="max-width: 3.33333%;">
+                                            <label>:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                        <label>Langsung Dengan Petugas</label>
                                         <img src="<?php echo base_url('assets/images/bukti/').$data->bukti_transfer ?>">
                                         </div>
                                     </div>

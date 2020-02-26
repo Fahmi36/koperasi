@@ -194,8 +194,18 @@ class PinjamController extends CI_Controller {
 					$this->db->where('id_anggota', $this->session->userdata('id'));
 					$cek = $this->db->get();
 					$row = $cek->row();
+
+
+					$this->db->where('created_at <', month('Y-m-d'));
+					$this->db->where('status', '2');
+					$this->db->where_in('id_jenis_setoran', ['2','3']);
+					$this->db->where('id_anggota', $this->session->userdata('id'));
+					$simpanwajib = $this->db->get('anggota_setoran'); 
 					if ($row->simpan*5 < $this->input->post('nominal')) {
 						$msg = "Gagal Melakukan Pinjaman di Atas Rp.".strrev(implode('.',str_split(strrev(strval($row->simpan*5)),3)));
+						$json = $this->failedFecthData($msg);
+					}elseif ($simpanwajib->num_rows() > 0) {
+						$msg = "Gagal Melakukan Pinjaman, Simpanan Wajib dan Simpanan Sukarela di bulan terakhir wajib di lunasi";
 						$json = $this->failedFecthData($msg);
 					}else{
 						$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();

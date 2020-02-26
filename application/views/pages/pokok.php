@@ -36,6 +36,7 @@
 					<br>
 					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Simpanan</h4>
 					<form method="post" action="javascript:void(0)" id="formsimpan" enctype="multipart/form-data" accept-charset="utf-8">
+					<?php if ($this->session->userdata('username') != null): ?>
 					<div class="form-example-int form-horizental">
 						<div class="form-group">
 							<div class="row">
@@ -50,7 +51,6 @@
 							</div>
 						</div>
 					</div>
-					<?php if ($this->session->userdata('username') != null): ?>
 						<div class="form-example-int form-horizental">
 							<div class="form-group">
 								<div class="row">
@@ -79,7 +79,22 @@
 								</div>
 							</div>
 						</div>
-					<?php endif ?>
+					<?php else: ?>
+					<div class="form-example-int form-horizental">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+									<label class="hrzn-fm">Nama Anggota:</label>
+								</div>
+								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+									<div class="nk-int-st">
+										<input type="text" name="nama" value="<?= $this->session->userdata('nama'); ?>" readonly class="form-control input-sm" placeholder="Masukkan Nama">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php endif ?>
 					<div class="form-example-int form-horizental mg-t-15">
 						<div class="form-group">
 							<div class="row">
@@ -179,7 +194,11 @@
 									<div class="nk-int-st">
 										<select class="form-control" name="sistem_bayar" id="sistem_bayar" onchange="pilihbayar()">
 											<option selected disabled>Pilih Jenis Pembayaran</option>
+											<?php if ($this->session->userdata('username') != null): ?>
+											<option value="3">Upload Serah terima</option>
+											<?php else: ?>
 											<option value="1">Melalui Petugas</option>
+											<?php endif ?>
 											<option value="2">Melalui Bank / Transfer</option>
 										</select>
 									</div>

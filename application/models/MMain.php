@@ -465,14 +465,6 @@ class MMain extends CI_Model {
 			$no_tlp = $this->input->post('no_rumah');
 			$no_hp = $this->input->post('no_hp');
 
-			$bayar = $this->input->post('pembayaran');
-
-			if ($bayar == 1) {
-				$status = '2';
-			}else{
-				$status = '3';
-			}
-
 			$methode = $this->input->post('metode_pem');
 			$jml = $this->input->post('sebesar');
 			$sukarela = $this->input->post('sim_sukarela');
@@ -494,7 +486,19 @@ class MMain extends CI_Model {
 			$urut=substr($max,3,3)+1;
 			$depan = substr($max, 0,3);
 			$anggota= $depan.sprintf("%03s",$urut);
-		// return var_dump($anggota);
+			// return var_dump($anggota);
+
+			$simpanwajib = 25000;
+			$simpanpokok = $jml - $sukarela - $simpanwajib;
+			if ($simpanpokok < 100000) {
+				$val = array('success'=>false,'msg'=>'Pembayaran Simpanan Pokok Tidak Boleh Kurang dari Rp. 100.000');
+			}elseif ($simpanpokok < 1000000) {
+				$bayar = '0';
+				$status = '3';
+			}else{
+				$bayar = '1';
+				$status = '4';
+			}
 			$query = $this->db->insert('anggota', array(
 				'no_anggota'=>$anggota,
 				'nama'=>$nama,
@@ -503,7 +507,7 @@ class MMain extends CI_Model {
 				'nik'=>$ktp,
 				'alamat'=>$alamat,
 				'no_hp'=>$no_hp,
-				'status'=>'3',
+				'status'=>$status,
 				'created_date'=>date('Y-m-d H:i:s'),
 				'pekerjaan'=>$pekerjaan,
 				'no_kartu'=>$nokartu,
@@ -523,9 +527,33 @@ class MMain extends CI_Model {
 				$this->db->insert('anggota_setoran', array(
 					'id_anggota'=>$id_anggota,
 					'tipe_transaksi'=>'1',
-					'id_jenis_setoran'=>'1',
-					'jumlah_transaksi'=>$jml,
+					'id_jenis_setoran'=>'2',
+					'jumlah_transaksi'=>$simpanwajib,
 					'saldo_akhir'=>'0',
+					'tgl_transaksi'=>date('Y-m-d'),
+					'sistem_bayar'=>'1',
+					'metode_bayar'=>$methode,
+					'bukti_transfer'=>$gambartf,
+					'status'=>'0',
+				));
+				$this->db->insert('anggota_setoran', array(
+					'id_anggota'=>$id_anggota,
+					'tipe_transaksi'=>'1',
+					'id_jenis_setoran'=>'3',
+					'jumlah_transaksi'=>$sukarela,
+					'saldo_akhir'=>$sukarela,
+					'tgl_transaksi'=>date('Y-m-d'),
+					'sistem_bayar'=>'1',
+					'metode_bayar'=>$methode,
+					'bukti_transfer'=>$gambartf,
+					'status'=>'0',
+				));
+				$this->db->insert('anggota_setoran', array(
+					'id_anggota'=>$id_anggota,
+					'tipe_transaksi'=>'1',
+					'id_jenis_setoran'=>'1',
+					'jumlah_transaksi'=>$simpanpokok,
+					'saldo_akhir'=>$simpanpokok,
 					'tgl_transaksi'=>date('Y-m-d'),
 					'sistem_bayar'=>$bayar,
 					'metode_bayar'=>$methode,
@@ -537,7 +565,6 @@ class MMain extends CI_Model {
 			}else{
 				$val = array('success'=>false,'msg'=>'gagal');
 			}
-
 		}
 		echo json_encode($val);
 	}
