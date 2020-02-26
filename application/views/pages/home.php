@@ -55,9 +55,9 @@
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                         <div class="website-traffic-ctn">
                             <?php if (@$tgltempo->tgl_tempo != null){ ?>
-                            <h2><span><?=date('d F Y',strtotime($tgltempo->tgl_tempo))?></span></h2>
+                                <h2><span><?=date('d F Y',strtotime($tgltempo->tgl_tempo))?></span></h2>
                             <?php }else{ ?>
-                            <h2><span>Tidak ada pinjaman</span></h2>
+                                <h2><span>Tidak ada pinjaman</span></h2>
                             <?php } ?>
                             <p>Jatuh Tempo Pembayaran</p>
                         </div>
@@ -159,7 +159,7 @@
                                                         <?php endif ?>
                                                     <?php }else{ ?>
                                                         <td>
-                                                           <?php if ($key->status == 0){ ?> 
+                                                         <?php if ($key->status == 0){ ?> 
                                                             <button onclick="terimasimpan(<?=$key->id?>)" class="btn btn-success notika-btn-success waves-effect"><i class="fa fa-check-square"></i></button>
                                                             <button onclick="tolaksimpan(<?=$key->id?>)" class="btn btn-danger notika-btn-danger waves-effect"><i class="fa fa-window-close"></i></button>
                                                             <button onclick="infosimpan(<?=$key->id?>)" class="btn btn-info notika-btn-info waves-effect"><i class="fa fa-info-circle"></i></button>
@@ -228,64 +228,64 @@
     </div>
 </div>
 <?php if($this->session->userdata('username') == null): ?>
-<?php if ($user->no_rek == null): ?>
-    <div class="modal fade" id="resetPass" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
-      <div class="modal-dialog modals-default">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        <div class="modal-body">
-            <div class="step-form">
-              <form method="post" action="javascript:void(0)" id="ubahrekening">
-                <div class="step-form__progress">
-                  <span class="step-form__progress-step" role="presentation"></span>
-                  <span class="step-form__progress-step" role="presentation"></span>
-                  <span class="step-form__progress-step" role="presentation"></span>
-              </div>
-              <div class="step-form__step">
-                  <h2 style="text-align: left;font-weight: 300;margin-bottom: 30px;">Anda harus merubah <b>kata sandi</b> default dengan <b>kata sandi</b> yang anda inginkan</h2>
+    <?php if ($user->no_rek == null): ?>
+        <div class="modal fade" id="resetPass" role="dialog" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
+          <div class="modal-dialog modals-default">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="step-form">
+                  <form method="post" action="javascript:void(0)" id="ubahrekening">
+                    <div class="step-form__progress">
+                      <span class="step-form__progress-step" role="presentation"></span>
+                      <span class="step-form__progress-step" role="presentation"></span>
+                      <span class="step-form__progress-step" role="presentation"></span>
+                  </div>
+                  <div class="step-form__step">
+                      <h2 style="text-align: left;font-weight: 300;margin-bottom: 30px;">Anda harus merubah <b>kata sandi</b> default dengan <b>kata sandi</b> yang anda inginkan</h2>
+                      <div class="form-group">
+                        <label style="float: left;">Kata Sandi</label>
+                        <div class="nk-int-st">
+                          <input type="password" id="katasandi" name="sandi" class="form-control input-sm step-form__input" placeholder="Masukkan Kata Sandi">
+                      </div>
+                  </div>
                   <div class="form-group">
-                    <label style="float: left;">Kata Sandi</label>
+                    <label style="float: left;">Konfirmasi Kata Sandi</label>
                     <div class="nk-int-st">
-                      <input type="password" id="katasandi" name="sandi" class="form-control input-sm step-form__input" placeholder="Masukkan Kata Sandi">
+                      <input type="password" id="ulangsandi" name="ulang_sandi" oninput="cekPass()" class="form-control input-sm step-form__input" placeholder="Masukkan Konfirmasi Kata Sandi">
                   </div>
               </div>
-              <div class="form-group">
-                <label style="float: left;">Konfirmasi Kata Sandi</label>
-                <div class="nk-int-st">
-                  <input type="password" id="ulangsandi" name="ulang_sandi" oninput="cekPass()" class="form-control input-sm step-form__input" placeholder="Masukkan Konfirmasi Kata Sandi">
-              </div>
+              <label class="pesan"></label> 
           </div>
-          <label class="pesan"></label> 
-      </div>
-      <div class="step-form__step">
-          <div id="sudahPunya">
-            <h4 style="margin-bottom: 30px;">Masukan Nomor Rekening Bank DKI</h4>
-            <div class="form-group" id="formNorek">
-              <label style="float: left;">Nomor Rekening</label>
-              <div class="nk-int-st">
-                <input type="number" id="norek" name="norek" class="form-control input-sm step-form__input" placeholder="Masukkan Nomor Rekening">
+          <div class="step-form__step">
+              <div id="sudahPunya">
+                <h4 style="margin-bottom: 30px;">Masukan Nomor Rekening Bank DKI</h4>
+                <div class="form-group" id="formNorek">
+                  <label style="float: left;">Nomor Rekening</label>
+                  <div class="nk-int-st">
+                    <input type="number" id="norek" name="norek" class="form-control input-sm step-form__input" placeholder="Masukkan Nomor Rekening">
+                </div>
             </div>
+            <p id="belum" style="text-align: left;">Belum memiliki nomor rekening bank dki? <a href="#" style="font-weight: 600!important;text-decoration: none;color: #395599;" id="daftarRek">Klik Disini</a></p>
         </div>
-        <p id="belum" style="text-align: left;">Belum memiliki nomor rekening bank dki? <a href="#" style="font-weight: 600!important;text-decoration: none;color: #395599;" id="daftarRek">Klik Disini</a></p>
+        <div id="belumPunya" style="display: none;">
+            <h4 style="margin-bottom: 30px;">Silahkan ke PKK Melati Jaya untuk pembuatan nomor rekening Bank DKI</h4>
+            <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank1.jpeg'); ?>" style="margin-bottom: 20px;">
+            <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank2.jpeg'); ?>">
+            <p style="text-align: left;margin-top: 25px;">Sudah memiliki nomor rekening bank dki? <a href="#" style="font-weight: 600!important;text-decoration: none;color: #395599;" id="inputNorek">Klik Disini</a></p>
+        </div>
     </div>
-    <div id="belumPunya" style="display: none;">
-        <h4 style="margin-bottom: 30px;">Silahkan ke PKK Melati Jaya untuk pembuatan nomor rekening Bank DKI</h4>
-        <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank1.jpeg'); ?>" style="margin-bottom: 20px;">
-        <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank2.jpeg'); ?>">
-        <p style="text-align: left;margin-top: 25px;">Sudah memiliki nomor rekening bank dki? <a href="#" style="font-weight: 600!important;text-decoration: none;color: #395599;" id="inputNorek">Klik Disini</a></p>
-    </div>
-</div>
-<div class="step-form__step">
-  <h1>Terima Kasih <i class="notika-icon notika-checked"></i></h1>
-  <input class="step-form__input" style="display: none;">
-</div>
-<div class="step-form__action">
-  <button type="button" class="step-form__button waves-effect" data-action="prev"><i class="notika-icon notika-back"></i> Previous</button>
-  <button type="button" id="next" class="step-form__button step-form__button--active" data-action="next">Next <i class="notika-icon notika-next-pro"></i></button>
-  <button class="step-form__button" type="submit" data-action="submit">Submit</i></button>
-</div>
+    <div class="step-form__step">
+      <h1>Terima Kasih <i class="notika-icon notika-checked"></i></h1>
+      <input class="step-form__input" style="display: none;">
+  </div>
+  <div class="step-form__action">
+      <button type="button" class="step-form__button waves-effect" data-action="prev"><i class="notika-icon notika-back"></i> Previous</button>
+      <button type="button" id="next" class="step-form__button step-form__button--active" data-action="next">Next <i class="notika-icon notika-next-pro"></i></button>
+      <button class="step-form__button" type="submit" data-action="submit">Submit</i></button>
+  </div>
 </form>
 </div>
 </div>
