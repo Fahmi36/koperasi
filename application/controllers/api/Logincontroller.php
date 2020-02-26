@@ -106,7 +106,7 @@ function __construct() {
 				));
 			$idangsuran = $this->db->insert_id();
 			if ($queryinsert == true) {
-				$this->db->update('anggota_pinjaman', array('cron'=>'1',array('id'=>$row->id)));
+				$this->db->update('anggota_pinjaman', array('cron'=>'1'),array('id'=>$row->id));
 				$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
 				if ($ceklagi->num_rows() > 0) {
 					$q = $this->failedRespone();
@@ -131,7 +131,7 @@ function __construct() {
 				$q = $this->failedRespone();
 			}
 		}else{
-			$this->db->update('anggota_pinjaman', array('cron'=>'1',array('id'=>$row->id)));
+			$this->db->update('anggota_pinjaman', array('cron'=>'1'),array('id'=>$row->id));
 			$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
 				if ($ceklagi->num_rows() > 0) {
 					$q = $this->failedRespone();
