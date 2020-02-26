@@ -75,7 +75,7 @@ function __construct() {
 			}
 		}
 	}
-	public function UpdateCicilan($value='')
+	public function UpdateCicilan()
 	{
 		$this->db->where_not_in('status_pinjaman', ['3']);
 		$this->db->group_by('id_anggota');
