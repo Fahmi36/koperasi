@@ -132,7 +132,7 @@ function __construct() {
 			}
 		}else{
 			$this->db->update('anggota_pinjaman', array('cron'=>'1'),array('id'=>$row->id));
-			$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
+			$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$cek->id,'status'=>'0'));
 				if ($ceklagi->num_rows() > 0) {
 					$q = $this->failedRespone();
 				}else{
