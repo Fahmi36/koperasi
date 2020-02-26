@@ -115,7 +115,7 @@ function __construct() {
 			for ($i=0; $i < 10; $i++) {
 					$cicilan = array(
 						'tipe_cicil'=>'1',
-						'id_angsuran'=>$cek->id,
+						'id_angsuran'=>$cek->row()->id,
 						'angsuran'=>$i,
 						'jumlah_bayar'=>round($row->besar_persetujuan_pinjaman/10),
 						'jasa'=>round(($row->besar_persetujuan_pinjaman*$jasa)/(10)),
