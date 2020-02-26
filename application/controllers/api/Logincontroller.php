@@ -108,6 +108,8 @@ function __construct() {
 					);
 					$cicil = $this->mc->insert($cicilan);
 			}
+
+			$q = $this->resultRespone($queryinsert);
 		}else{
 				$q = $this->failedRespone();
 			}
@@ -123,8 +125,9 @@ function __construct() {
 						'status'=>'0',
 						'created_at'=>date('Y-m-d H:i:s')
 					);
-					$cicil = $this->mc->insert($cicilan);
+				$cicil = $this->mc->insert($cicilan);
 			}
+			$q = $this->resultRespone($cicil);
 		}
 		
 	}
