@@ -124,12 +124,15 @@ function __construct() {
 				}
 				
 			}
-
 			$q = $this->costumeRespone();
 		}else{
 				$q = $this->failedRespone();
 			}
 		}else{
+			$ceklagi = $this->db->get_where('cicil',array('id_angsuran'=>$idangsuran,'status'=>'0'));
+				if ($ceklagi->num_rows() > 0) {
+					$q = $this->failedRespone();
+				}else{
 			for ($i=0; $i < 10; $i++) {
 					$cicilan = array(
 						'tipe_cicil'=>'1',
@@ -143,6 +146,7 @@ function __construct() {
 					);
 				$cicil = $this->mc->insert($cicilan);
 			}
+		}
 			$q = $this->costumeRespone();
 		}
 		
