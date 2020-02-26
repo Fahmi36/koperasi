@@ -16,6 +16,7 @@ function __construct() {
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
         
 
+		$this->load->model('MCicil', 'mc');
     }
     public function resultRespone($data)
 	{
@@ -73,7 +74,57 @@ function __construct() {
 				echo "Gagal".$key->no_hp;
 			}
 		}
+	}
+	public function UpdateCicilan($value='')
+	{
+		$this->db->where_not_in('status_pinjaman', ['3']);
+		$this->db->group_by('id_anggota');
+		$query = $this->db->get('anggota_pinjaman');
+		$row = $query->row();
 
+		$cek = $this->db->get_where('anggota_pinjaman_angsuran',array('id_pinjaman'=>$row->id));
+		if ($cek->num_rows() == 0) {
+			$queryinsert = $this->db->insert('anggota_pinjaman_angsuran', array(
+				'id_pinjaman'=>$row->id,
+				'jumlah_angsuran'=>$row->besar_persetujuan_pinjaman,
+				'bayar_jasa'=>$row->besar_persetujuan_pinjaman*10/100,
+				'sisa_pinjaman'=>$row->besar_persetujuan_pinjaman,
+				'status'=>'1'
+				));
+			$idangsuran = $this->db->insert_id();
+			if ($queryinsert == true) {
+				for ($i=0; $i < 10; $i++) {
+					$cicilan = array(
+						'tipe_cicil'=>'1',
+						'id_angsuran'=>$queryinsert,
+						'angsuran'=>$i,
+						'jumlah_bayar'=>round($row->besar_persetujuan_pinjaman/10),
+						'jasa'=>round(($row->besar_persetujuan_pinjaman*$jasa)/(10)),
+						'tgl_tempo'=>date('Y-m'.'-6',strtotime('+'.($i + 1).' month')),
+						'status'=>'0',
+						'created_at'=>date('Y-m-d H:i:s')
+					);
+					$cicil = $this->mc->insert($cicilan);
+			}
+		}else{
+				$q = $this->failedRespone();
+			}
+		}else{
+			for ($i=0; $i < 10; $i++) {
+					$cicilan = array(
+						'tipe_cicil'=>'1',
+						'id_angsuran'=>$queryinsert,
+						'angsuran'=>$i,
+						'jumlah_bayar'=>round($row->besar_persetujuan_pinjaman/10),
+						'jasa'=>round(($row->besar_persetujuan_pinjaman*$jasa)/(10)),
+						'tgl_tempo'=>date('Y-m'.'-6',strtotime('+'.($i + 1).' month')),
+						'status'=>'0',
+						'created_at'=>date('Y-m-d H:i:s')
+					);
+					$cicil = $this->mc->insert($cicilan);
+			}
+		}
+		
 	}
 }
 
