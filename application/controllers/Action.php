@@ -39,6 +39,18 @@ class Action extends CI_Controller {
 			$this->load->view('utama',$data);
 		}
 	}
+	public function pinjamanadmin()
+	{
+		if ($this->session->userdata('id')==null) {
+			redirect('login');
+		}else{
+			$data['title'] = 'Pinjaman Manual - Selamat Datang di Koperasi Simpan Pinjam';
+			$data['link_view'] = 'pages/admin/pinjamanmanual';
+			$data['kelompok'] = $this->mm->getKelompok();
+			$data['namakelompok'] = $this->mm->getNamaKelompok();
+			$this->load->view('utama',$data);
+		}
+	}
 	public function ulangpinjaman()
 	{
 		if ($this->session->userdata('id')==null) {

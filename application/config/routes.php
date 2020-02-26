@@ -54,6 +54,7 @@ $route['404_override'] = 'page_not_found';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['pinjaman'] = 'action/pinjaman';
+$route['pinjammanual'] = 'action/pinjamanadmin';
 $route['kirim/ulangpinjaman/(:any)'] = 'action/ulangpinjaman';
 $route['setoran'] = 'action/setoran';
 $route['login'] = 'action/login';

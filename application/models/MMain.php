@@ -447,6 +447,8 @@ class MMain extends CI_Model {
 		$cek = $this->db->get_where('anggota', array('nik'=>$this->input->post('no_ktp')));
 		if ($cek->num_rows() > 0) {
 			$val = array('success'=>false,'msg'=>'Data Sama');
+		}else if ($this->input->post('rek_dki') == 'Belum Punya') {
+			$val = array('success'=>false,'msg'=>'Harus Punya Bank DKI, Silakan Datang ke Gedung PKK Koperasi Melati Jaya');
 		}else{
 			$nama = $this->input->post('nama_lengkap');
 			$tmp = $this->input->post('tempat_lahir');
@@ -477,6 +479,10 @@ class MMain extends CI_Model {
 			$nokartu = $this->input->post('no_kartu');
 			$norek = $this->input->post('no_rek');
 			$namabank = $this->input->post('nama_bank');
+
+			$idkota = $this->input->post('kota');
+			$idkec = $this->input->post('kecamatan');
+			$idkel = $this->input->post('kelurahan');
 
 			$tgl_lahir = date('Y-m-d',strtotime(date($thn.'-'.$bln.'-'.$tgl)));
 
@@ -514,6 +520,9 @@ class MMain extends CI_Model {
 				'no_rek'=>$norek,
 				'bank'=>$namabank,
 				'password'=>password_hash('123456', PASSWORD_DEFAULT),
+				'idkota'=>$idkota,
+				'idkecamatan'=>$idkec,
+				'idkelurahan'=>$idkel,
 			));
 			$id_anggota = $this->db->insert_id();
 			if ($query == true) {
@@ -529,7 +538,7 @@ class MMain extends CI_Model {
 					'tipe_transaksi'=>'1',
 					'id_jenis_setoran'=>'2',
 					'jumlah_transaksi'=>$simpanwajib,
-					'saldo_akhir'=>'0',
+					'saldo_akhir'=>$simpanwajib,
 					'tgl_transaksi'=>date('Y-m-d'),
 					'sistem_bayar'=>'1',
 					'metode_bayar'=>$methode,

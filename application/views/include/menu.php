@@ -15,7 +15,10 @@
                             <li class="<?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                                 <a data-toggle="collapse" data-target="#demoevent" href="#">Pinjaman</a>
                                 <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
+                            <?php if ($this->session->userdata('username') != null): ?>
+                                    <li><a href="<?php echo site_url('pinjammanual'); ?>">Permohonan Pinjaman Manual</a></li>
+                            <?php endif ?>
+                                    <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
                                     <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
                                 </ul>
                             </li>
@@ -38,7 +41,6 @@
                                         <li><a href="<?php echo site_url('report/user'); ?>">Rekap Daftar Anggota Baru Perbulan</a></li>
                                     </ul>
                                 </li>
-
                             <?php endif ?>
                         </ul>
                     </nav>
@@ -75,6 +77,9 @@
                 <div class="tab-content custom-menu-content">
                     <div id="pinjaman" class="tab-pane notika-tab-menu-bg animated flipInX <?php if($this->uri->segment(1)=="pinjaman"){echo "active";}else if($this->uri->segment(1)=="bayar"){echo "active";} ?>">
                         <ul class="notika-main-menu-dropdown">
+                            <?php if ($this->session->userdata('username') != null): ?>
+                                    <li><a href="<?php echo site_url('pinjammanual'); ?>">Permohonan Pinjaman Manual</a></li>
+                            <?php endif ?>
                             <li><a href="<?php echo site_url('pinjaman'); ?>">Permohonan Pinjaman</a></li>
                             <li><a href="<?php echo site_url('bayar/pinjaman'); ?>">Data Pinjaman</a></li>
                         </ul>
