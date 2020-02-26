@@ -77,7 +77,7 @@ function __construct() {
 	}
 	public function UpdateCicilan()
 	{
-		$this->db->where_not_in('status_pinjaman', ['3']);
+		$this->db->where('status_pinjaman','2');
 		$this->db->group_by('id_anggota');
 		$query = $this->db->get('anggota_pinjaman');
 		$row = $query->row();
@@ -115,7 +115,7 @@ function __construct() {
 			for ($i=0; $i < 10; $i++) {
 					$cicilan = array(
 						'tipe_cicil'=>'1',
-						'id_angsuran'=>$idangsuran,
+						'id_angsuran'=>$cek->id,
 						'angsuran'=>$i,
 						'jumlah_bayar'=>round($row->besar_persetujuan_pinjaman/10),
 						'jasa'=>round(($row->besar_persetujuan_pinjaman*$jasa)/(10)),
