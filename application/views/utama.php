@@ -121,142 +121,142 @@
         });
     </script>
     <script type="text/javascript">
-    function rekdki(select){
-        if(select.value == "Sudah Punya"){
-            document.getElementById('punya_rek').style.display = "block";
-            $(".modal_rek").removeClass("in");
-        }else if (select.value == "Belum Punya") {
-            document.getElementById('punya_rek').style.display = "none";
-            $("#rekening").modal({backdrop:'static',keyboard: false});
-        }
-    } 
+        function rekdki(select){
+            if(select.value == "Sudah Punya"){
+                document.getElementById('punya_rek').style.display = "block";
+                $(".modal_rek").removeClass("in");
+            }else if (select.value == "Belum Punya") {
+                document.getElementById('punya_rek').style.display = "none";
+                $("#rekening").modal({backdrop:'static',keyboard: false});
+            }
+        } 
     </script>
     <script type="text/javascript">
-         $(function () {
-           
-            $('#awalUser,#akhirUser').datetimepicker({
-                format: 'YYYY-MM',
-                minDate: moment()
-            });
-            $('#awalSimpan,#akhirSimpan').datetimepicker({
-                format: 'YYYY-MM',
-                minDate: moment()
-            });
+       $(function () {
 
+        $('#awalUser,#akhirUser').datetimepicker({
+            format: 'YYYY-MM',
+            minDate: moment()
         });
-        $(function() {
-            $('#input-lainnya').hide(); 
-            $('#pekerjaan').change(function(){
-                if($('#pekerjaan').val() == 'lainnya') {
-                    $('#input-lainnya').show(); 
-                } else {
-                    $('#input-lainnya').hide(); 
-                } 
-            });
+        $('#awalSimpan,#akhirSimpan').datetimepicker({
+            format: 'YYYY-MM',
+            minDate: moment()
         });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#resetPass").modal({backdrop:'static',keyboard: false});
+
+    });
+       $(function() {
+        $('#input-lainnya').hide(); 
+        $('#pekerjaan').change(function(){
+            if($('#pekerjaan').val() == 'lainnya') {
+                $('#input-lainnya').show(); 
+            } else {
+                $('#input-lainnya').hide(); 
+            } 
         });
-        $(document).ready(function() {    
-            var readURL = function(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('.avatar').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#resetPass").modal({backdrop:'static',keyboard: false});
+    });
+    $(document).ready(function() {    
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
                 }
+                reader.readAsDataURL(input.files[0]);
             }
+        }
 
-            $(".file-upload").on('change', function(){
-                readURL(this);
-            });
+        $(".file-upload").on('change', function(){
+            readURL(this);
         });
-    </script>
-    <script type="text/javascript">
-        document.getElementById("next").disabled = true;
-        function cekPass() {
-            var katasandi = document.getElementById("katasandi").value;
-            var confirmPassword = document.getElementById("ulangsandi").value;
-            if (katasandi != confirmPassword) {
-                document.getElementById("next").disabled = true;
-                $('.pesan').html('<h5 class="text-danger"> Password tidak sesuai ! </h5>');
-                return false;
-            }else{
-                document.getElementById("next").disabled = false;
-                $('.pesan').html('<h5 class="text-success"> Password sesuai ! </h5>');
-                return true;
-            }
+    });
+</script>
+<script type="text/javascript">
+    document.getElementById("next").disabled = true;
+    function cekPass() {
+        var katasandi = document.getElementById("katasandi").value;
+        var confirmPassword = document.getElementById("ulangsandi").value;
+        if (katasandi != confirmPassword) {
+            document.getElementById("next").disabled = true;
+            $('.pesan').html('<h5 class="text-danger"> Password tidak sesuai ! </h5>');
+            return false;
+        }else{
+            document.getElementById("next").disabled = false;
+            $('.pesan').html('<h5 class="text-success"> Password sesuai ! </h5>');
+            return true;
         }
-    </script>
-    <script type="text/javascript">
-        const form = document.querySelector('.step-form')
-        const steps = form.querySelectorAll('.step-form__step')
-        const progress = form.querySelectorAll('.step-form__progress-step')
+    }
+</script>
+<script type="text/javascript">
+    const form = document.querySelector('.step-form')
+    const steps = form.querySelectorAll('.step-form__step')
+    const progress = form.querySelectorAll('.step-form__progress-step')
 
-        const next = form.querySelector('[data-action="next"]')
-        const prev = form.querySelector('[data-action="prev"]')
-        const submit = form.querySelector('[data-action="submit"]')
+    const next = form.querySelector('[data-action="next"]')
+    const prev = form.querySelector('[data-action="prev"]')
+    const submit = form.querySelector('[data-action="submit"]')
 
-        let currentStep = 0, totalSteps = steps.length
+    let currentStep = 0, totalSteps = steps.length
 
-        function showStep (index) {
-          steps[index].classList.add('step-form__step--active')
+    function showStep (index) {
+      steps[index].classList.add('step-form__step--active')
 
-          if (index !== 0){ 
-            prev.classList.add('step-form__button--active')
-            prev.setAttribute('aria-hidden', 'false')
-        } else {
-            prev.classList.remove('step-form__button--active')
-            prev.setAttribute('aria-hidden', 'true')
-        }
-
-        if (index === totalSteps - 1) {
-            next.classList.remove('step-form__button--active')
-            next.setAttribute('aria-hidden', 'true')
-            submit.classList.add('step-form__button--active')
-            submit.setAttribute('aria-hidden', 'false')
-            submit.addEventListener('click', stepInputValidation)
-        } else {
-            next.classList.add('step-form__button--active')
-            next.setAttribute('aria-hidden', 'false')
-            submit.classList.remove('step-form__button--active')
-            submit.setAttribute('aria-hidden', 'true')
-            submit.removeEventListener('click', stepInputValidation)
-        }
-
-        stepSetProgress(index)
+      if (index !== 0){ 
+        prev.classList.add('step-form__button--active')
+        prev.setAttribute('aria-hidden', 'false')
+    } else {
+        prev.classList.remove('step-form__button--active')
+        prev.setAttribute('aria-hidden', 'true')
     }
 
-    function stepActionHandler (index) {
-      if (index === 1 && ! stepInputValidation()) return false
+    if (index === totalSteps - 1) {
+        next.classList.remove('step-form__button--active')
+        next.setAttribute('aria-hidden', 'true')
+        submit.classList.add('step-form__button--active')
+        submit.setAttribute('aria-hidden', 'false')
+        submit.addEventListener('click', stepInputValidation)
+    } else {
+        next.classList.add('step-form__button--active')
+        next.setAttribute('aria-hidden', 'false')
+        submit.classList.remove('step-form__button--active')
+        submit.setAttribute('aria-hidden', 'true')
+        submit.removeEventListener('click', stepInputValidation)
+    }
 
-          steps[currentStep].classList.remove('step-form__step--active')
+    stepSetProgress(index)
+}
 
-      currentStep = currentStep + index
+function stepActionHandler (index) {
+  if (index === 1 && ! stepInputValidation()) return false
 
-      showStep(currentStep)
+      steps[currentStep].classList.remove('step-form__step--active')
+
+  currentStep = currentStep + index
+
+  showStep(currentStep)
+}
+
+function stepInputHandler (element) {
+  const input = element.querySelector('.step-form__input')
+
+  const focusHandler = event => {
+    if (event.type === 'blur') {
+      if (input.value === '')
+          element.classList.remove('step-form__step--focused')
   }
 
-  function stepInputHandler (element) {
-      const input = element.querySelector('.step-form__input')
-
-      const focusHandler = event => {
-        if (event.type === 'blur') {
-          if (input.value === '')
-              element.classList.remove('step-form__step--focused')
-      }
-
-      if (event.type === 'focus') {
-          if (input.value === '')
-              element.classList.add('step-form__step--focused')
-      }
+  if (event.type === 'focus') {
+      if (input.value === '')
+          element.classList.add('step-form__step--focused')
   }
+}
 
-  input.addEventListener('blur', focusHandler)
-  input.addEventListener('focus', focusHandler)
+input.addEventListener('blur', focusHandler)
+input.addEventListener('focus', focusHandler)
 }
 
 function stepInputValidation () {
@@ -338,7 +338,6 @@ prev.addEventListener('click', () => stepActionHandler(-1))
 <script type="text/javascript">
     $(document).ready(function() {
         $("#besar_pinjam").keyup(function() {
-            var x = document.getElementById('suratPer');
             if($(this).val() >= 20000000) {
                 $("#suratPer").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan' required></div></div></div></div>");
             } else {
@@ -353,11 +352,11 @@ prev.addEventListener('click', () => stepActionHandler(-1))
                 $("#suratPerUlang").html("");
             }
         });
-            if ($("#besar_pinjam_ulang").val() >= 20000000) {
-               $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
-            } else {
-                $("#suratPerUlang").html("");
-            }
+        if ($("#besar_pinjam_ulang").val() >= 20000000) {
+            $("#suratPerUlang").html("<div class='form-group'><div class='row'><div class='col-lg-2 col-md-3 col-sm-3 col-xs-12'><label class='hrzn-fm'>Surat Pernyataan :</label></div><div class='col-lg-8 col-md-7 col-sm-7 col-xs-12'><div class='nk-int-st'><input type='file' name='surat_pernyataan_ulang' required></div></div></div></div>");
+        } else {
+            $("#suratPerUlang").html("");
+        }
     });
 </script>
 <script type="text/javascript">
@@ -365,17 +364,17 @@ prev.addEventListener('click', () => stepActionHandler(-1))
         $("#datatransaksi").dataTable();
         $("#datapinjaman").dataTable();
         $("#datareport").dataTable({dom: 'Bfrtip',
-                buttons: [
-                'excel'
-                ]});
+            buttons: [
+            'excel'
+            ]});
         $("#datareportuser").dataTable({dom: 'Bfrtip',
-                buttons: [
-                'excel'
-                ]});
+            buttons: [
+            'excel'
+            ]});
         $("#datareportsimpan").dataTable({dom: 'Bfrtip',
-                buttons: [
-                'excel'
-                ]});
+            buttons: [
+            'excel'
+            ]});
 
     });
     function pilihsimpan() {
@@ -479,7 +478,7 @@ prev.addEventListener('click', () => stepActionHandler(-1))
     });
 </script>
 <script type="text/javascript">
-        $("#frmCustomSimpan").submit(function (event) {
+    $("#frmCustomSimpan").submit(function (event) {
         var data = new FormData($(this)[0]);
         $.ajax({
             url: BASE_URL + 'action/actReportSimpan', 
@@ -508,21 +507,21 @@ prev.addEventListener('click', () => stepActionHandler(-1))
         return false;
     });
     function loopDataSimpan(table,type) {
-            var array_data = [],
+        var array_data = [],
+        temp_array = [];
+        $(table).each(function(key,val) {
             temp_array = [];
-            $(table).each(function(key,val) {
-                temp_array = [];
-                var link;
-                temp_array = [
-                    val.nama,
-                    val.tgl_transaksi,
-                    '<?=date('F',strtotime('val.tgl_transaksi'))?>',
-                    val.total,
-                    ];
-                array_data[array_data.length] = temp_array;
-            });
-            return array_data;
-        }
+            var link;
+            temp_array = [
+            val.nama,
+            val.tgl_transaksi,
+            '<?=date('F',strtotime('val.tgl_transaksi'))?>',
+            val.total,
+            ];
+            array_data[array_data.length] = temp_array;
+        });
+        return array_data;
+    }
     $("#frmCustomUser").submit(function (event) {
         var data = new FormData($(this)[0]);
         $.ajax({
@@ -549,26 +548,26 @@ prev.addEventListener('click', () => stepActionHandler(-1))
         return false;
     });
     function loopDataUser(table,type) {
-            var array_data = [],
+        var array_data = [],
+        temp_array = [];
+        var no=1;
+        $(table).each(function(key,val) {
             temp_array = [];
-            var no=1;
-            $(table).each(function(key,val) {
-                temp_array = [];
-                var link;
-                temp_array = [
-                    val.nama,
-                    val.nik,
-                    val.alamat,
-                    val.no_hp,
-                    val.tgl_masuk,
-                    '<?=date('F',strtotime('val.tgl_masuk'))?>',
-                    ];
+            var link;
+            temp_array = [
+            val.nama,
+            val.nik,
+            val.alamat,
+            val.no_hp,
+            val.tgl_masuk,
+            '<?=date('F',strtotime('val.tgl_masuk'))?>',
+            ];
 
-                no = no+1;
-                array_data[array_data.length] = temp_array;
-            });
-            return array_data;
-        }
+            no = no+1;
+            array_data[array_data.length] = temp_array;
+        });
+        return array_data;
+    }
 </script>
 </body>
 </html>
