@@ -27,6 +27,14 @@ function __construct() {
 		);
 		echo json_encode($respone);
 	}
+	public function costumeRespone()
+	{
+		$respone = array(
+			'success'=>True,
+			'msg'=>'bisa',
+		);
+		echo json_encode($respone);
+	}
 	public function failedRespone()
 	{
 		$respone = array(
@@ -109,7 +117,7 @@ function __construct() {
 					$cicil = $this->mc->insert($cicilan);
 			}
 
-			$q = $this->resultRespone($queryinsert);
+			$q = $this->costumeRespone();
 		}else{
 				$q = $this->failedRespone();
 			}
@@ -127,7 +135,7 @@ function __construct() {
 					);
 				$cicil = $this->mc->insert($cicilan);
 			}
-			$q = $this->resultRespone($cicil);
+			$q = $this->costumeRespone();
 		}
 		
 	}
