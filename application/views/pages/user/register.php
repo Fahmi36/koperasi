@@ -60,13 +60,57 @@
                     <label for="pekerjaan" class="form-label required">Pekerjaan</label>
                     <div class="form-date-group">
                         <div class="form-date-item" style="width: 100%;">
-                            <select id="pekerjaan" name="pekerjaan" id="pekerjaan" style="width: 100%;">
+                            <select id="pekerjaan" name="pekerjaan" style="width: 100%;">
                                 <option value="PKK">PKK (Pemberdayaan & Kesejahteraan Keluarga)</option>
                                 <option value="Pengelola RPTRA">Pengelola RPTRA</option>
                                 <option value="PLJP">PJLP (Penyedia Jasa Lainnya Orang Perorangan)</option>
                                 <option value="ASN">ASN (Aparatur Sipil Negara)</option>
                                 <option value="PKT">PKT (Pengembangan Kawasan Terpadu)</option>
                                 <option value="lainnya">Lainnya (Pengembangan Kawasan Terpadu)</option>
+                            </select>
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kota / Kabupaten</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kota" name="kota" onchange="getKota()" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KOTA / KABUPATEN --</option>
+                                <option value="" disabled></option>
+                                <?php foreach ($wal as $key): ?>
+                                    <option value="<?= $key->id; ?>"><?= $key->name; ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kecamatan</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kec" name="kecamatan" onchange="getKec()" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KECAMATAN TERLEBIH DAHULU --</option>
+                                <option value="" disabled></option>
+                                
+                            </select>
+                            <input type="hidden" id="namaKec" name="kecamatan">
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kelurahan</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kel" name="kelurahan" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KELURAHAN TERLEBIH DAHULU --</option>
+                                <option value="" disabled></option>
                             </select>
                             <span class="select-icon"><i class="ti-angle-down"></i></span>
                         </div>

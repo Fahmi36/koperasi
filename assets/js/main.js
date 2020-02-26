@@ -1107,3 +1107,35 @@
 
 
 	})(jQuery); 
+
+	function getKota() {
+		$.ajax({
+			url: BASE_URL + 'action/jsonWal',
+			type: 'get',
+			dataType: 'html',
+			data: {id: $('#kota').val()},
+		})
+		.done(function(x) {
+			$('#kec').html(x);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	}
+
+	function getKec() {
+		$.ajax({
+			url: BASE_URL + 'action/jsonKec',
+			type: 'get',
+			dataType: 'html',
+			data: {id: $('#kec').val()},
+		})
+		.done(function(x) {
+			$('#kel').html(x);
+		})
+		.fail(function() {
+			console.log("error");
+	})
+  
+}

@@ -135,9 +135,32 @@ class Action extends CI_Controller {
 		}else{
 			$data['title'] = 'Daftar - Selamat Datang di Koperasi Simpan Pinjam';
 			$data['link_view'] = 'pages/user/register';
+			$data['kec'] = $this->mm->getKecamatan();
+			$data['wal'] = $this->mm->getWal();
 			$this->load->view('utama',$data);
 		}
 	}
+
+	public function jsonWal()
+	{
+		echo "<option value='' >-- SILAHKAN PILIH KECAMATAN --</option>";
+		echo "<option value=''  disabled></option>";
+		$x = $this->mm->jsonWal();
+		foreach ($x as $v) {
+			echo '<option value='.$v->id.'>'.$v->name.'</option>';
+		}
+	}
+
+	public function jsonKec()
+	{
+		echo "<option value=''>-- SILAHKAN PILIH KELURAHAN --</option>";
+		echo "<option value='' disabled></option>";
+		$x = $this->mm->jsonKec();
+		foreach ($x as $v) {
+			echo '<option value='.$v->id.'>'.$v->name.'</option>';
+		}
+	}
+
 	public function profile()
 	{
 		if ($this->session->userdata('id')==null) {
