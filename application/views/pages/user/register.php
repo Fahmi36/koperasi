@@ -60,13 +60,57 @@
                     <label for="pekerjaan" class="form-label required">Pekerjaan</label>
                     <div class="form-date-group">
                         <div class="form-date-item" style="width: 100%;">
-                            <select id="pekerjaan" name="pekerjaan" id="pekerjaan" style="width: 100%;">
+                            <select id="pekerjaan" name="pekerjaan" style="width: 100%;">
                                 <option value="PKK">PKK (Pemberdayaan & Kesejahteraan Keluarga)</option>
                                 <option value="Pengelola RPTRA">Pengelola RPTRA</option>
                                 <option value="PLJP">PJLP (Penyedia Jasa Lainnya Orang Perorangan)</option>
                                 <option value="ASN">ASN (Aparatur Sipil Negara)</option>
                                 <option value="PKT">PKT (Pengembangan Kawasan Terpadu)</option>
                                 <option value="lainnya">Lainnya (Pengembangan Kawasan Terpadu)</option>
+                            </select>
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kota / Kabupaten</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kota" name="kota" onchange="getKota()" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KOTA / KABUPATEN --</option>
+                                <option value="" disabled></option>
+                                <?php foreach ($wal as $key): ?>
+                                    <option value="<?= $key->id; ?>"><?= $key->name; ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kecamatan</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kec" name="kecamatan" onchange="getKec()" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KECAMATAN TERLEBIH DAHULU --</option>
+                                <option value="" disabled></option>
+                                
+                            </select>
+                            <input type="hidden" id="namaKec" name="kecamatan">
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan" class="form-label required">Kelurahan</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="kel" name="kelurahan" style="width: 100%;">
+                                <option value="" >-- SILAHKAN PILIH KELURAHAN TERLEBIH DAHULU --</option>
+                                <option value="" disabled></option>
                             </select>
                             <span class="select-icon"><i class="ti-angle-down"></i></span>
                         </div>
@@ -119,6 +163,7 @@
                     <input type="number" name="no_ktp" id="no_ktp" />
                 </div>
 
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="no_rumah" class="form-label">No Telpon (Rumah)</label>
@@ -132,23 +177,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="no_rek" class="form-label required">Nomor Rekening (DKI)</label>
-                    <input type="number" name="no_rek" id="no_rek" />
+                    <label for="rek_dki" class="form-label required">Sudah Memiliki Nomor Rekening (DKI) ?</label>
+                    <div class="form-date-group">
+                        <div class="form-date-item" style="width: 100%;">
+                            <select id="rek_dki" name="rek_dki" onchange="rekdki(this)" style="width: 100%;">
+                                <option option value='-' readonly='' selected>Pilih Salah Satu</option>
+                                <option value="Sudah Punya">Sudah Punya</option>
+                                <option value="Belum Punya">Belum Punya</option>
+                            </select>
+                            <span class="select-icon"><i class="ti-angle-down"></i></span>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="no_kartu" class="form-label required">Nomor Kartu (DKI)</label>
-                        <input type="number" name="no_kartu" id="no_kartu" onKeyPress="if(this.value.length==16) return false;" />
+                <div style="display: none;" id="punya_rek">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="no_rek" class="form-label">Nomor Rekening (DKI)</label>
+                            <input type="number" name="no_rek" id="no_rek" />
+                        </div>
+                        <div class="form-group">
+                            <label for="no_kartu" class="form-label">Nomor Kartu (DKI)</label>
+                            <input type="number" name="no_kartu" id="no_kartu" onKeyPress="if(this.value.length==16) return false;" />
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="cvv" class="form-label">Nama Bank</label>
+                            <input type="text" name="nama_bank" />
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <label for="cvv" class="form-label required">CVV</label>
+                            <input type="number" name="cvv" id="cvv" onKeyPress="if(this.value.length==3) return false;" />
+                        </div> -->
                     </div>
-                    <div class="form-group">
-                        <label for="cvv" class="form-label required">Nama Bank</label>
-                        <input type="text" name="nama_bank" />
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="cvv" class="form-label required">CVV</label>
-                        <input type="number" name="cvv" id="cvv" onKeyPress="if(this.value.length==3) return false;" />
-                    </div> -->
                 </div>
             </fieldset>
 
@@ -185,7 +244,7 @@
                     <label for="department" class="form-label">- Simpanan Pokok : Rp 1.000.000 (dibayar 1x selama menjadi anggota)</label>
                     <label for="department" class="form-label">- Simpanan Wajib : Rp 25.000 (dibayar perbulan)</label>
                     <label for="department" class="form-label">- Simpanan Sukarela : ...... (dibayar perbulan minimal Rp 10.000)</label>
-                    <input type="number" name="sim_sukarela" id="sim_sukarela" placeholder="Jumlah Simpanan Sukarela yang ingin dibayarkan" />
+                    <input type="text" name="sim_sukarela" id="sim_sukarela" class="rupiah" placeholder="Jumlah Simpanan Sukarela yang ingin dibayarkan" data-a-sign="Rp. " data-a-dec="," data-a-sep="."/>
                 </div>
                 <div class="form-group">
                     <label for="pembayaran" class="form-label required">Yang sudah dibayarkan secara :</label>
@@ -216,13 +275,33 @@
                             <input type="file" name="foto_tf" id="foto_tf" />
                         </div>
                     </div>
-                    <input type="number" name="sebesar" id="sebesar" placeholder="Sebesar" />
+                    <input type="text" name="sebesar" id="sebesar" class="rupiah" placeholder="Sebesar" data-a-sign="Rp. " data-a-dec="," data-a-sep="."/>
                 </div>
             </fieldset>
         </form>
     </div>
-
 </div>
+
+<div class="modal fade in" role="dialog" id="rekening" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modals-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h4 style="margin-bottom: 30px;">Silahkan ke PKK Melati Jaya untuk pembuatan nomor rekening Bank DKI</h4>
+                    <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank1.jpeg'); ?>" style="margin-bottom: 20px;">
+                    <img class="img-thumbnail" src="<?php echo base_url('assets/img/bank/bank2.jpeg'); ?>">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default waves-effect btn-block" data-dismiss="modal" style="margin-top: 20px;">TUTUP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="footer">
 
 </div>

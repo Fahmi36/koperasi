@@ -585,11 +585,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {  
+				if (result.value) {  
 					$.ajax({
 						url: BASE_URL + 'PinjamController/BuktiBayarPinjaman',
 						type: "POST",
@@ -632,11 +632,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {
+				if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'Action/UbahPassword',
 						type: "POST",
@@ -677,11 +677,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) { 
+				if (result.value) { 
 					$.ajax({
 						url: BASE_URL + 'Action/Ubahprofile',
 						type: "POST",
@@ -722,11 +722,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {
+				if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'PinjamController/pinjamUang',
 						type: "POST",
@@ -776,11 +776,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {
+				if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'PinjamController/ubahPinjam',
 						type: "POST",
@@ -854,11 +854,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {
+				if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'SimpanController/Simpanan',
 						type: "POST",
@@ -926,11 +926,11 @@
 				text: "Klik Ya",
 				type: 'success',
 				confirmButtonText: "Iya",
-                cancelButtonText: "Belum",
-                showCancelButton: true,
-            })
+				cancelButtonText: "Belum",
+				showCancelButton: true,
+			})
 			.then((result) => {
-                if (result.value) {
+				if (result.value) {
 					$.ajax({
 						url: BASE_URL + 'action/tambahRek',
 						type: "POST",
@@ -1107,3 +1107,35 @@
 
 
 	})(jQuery); 
+
+	function getKota() {
+		$.ajax({
+			url: BASE_URL + 'action/jsonWal',
+			type: 'get',
+			dataType: 'html',
+			data: {id: $('#kota').val()},
+		})
+		.done(function(x) {
+			$('#kec').html(x);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	}
+
+	function getKec() {
+		$.ajax({
+			url: BASE_URL + 'action/jsonKec',
+			type: 'get',
+			dataType: 'html',
+			data: {id: $('#kec').val()},
+		})
+		.done(function(x) {
+			$('#kel').html(x);
+		})
+		.fail(function() {
+			console.log("error");
+	})
+  
+}

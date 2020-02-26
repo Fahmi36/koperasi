@@ -41,7 +41,7 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Nama Petugas:</label>
+									<label class="hrzn-fm">Nama Anggota:</label>
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
@@ -136,7 +136,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_pokok" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Pokok">
+										<input type="text" name="jumlah_pokok" class="form-control input-sm rupiah" data-a-sign="Rp. " data-a-dec="," data-a-sep="." placeholder="Masukkan Jumlah Simpanan Pokok">
 									</div>
 								</div>
 							</div>
@@ -150,7 +150,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_wajib" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Wajib">
+										<input type="text" name="jumlah_wajib" class="form-control input-sm rupiah" data-a-sign="Rp. " data-a-dec="," data-a-sep="." placeholder="Masukkan Jumlah Simpanan Wajib">
 									</div>
 								</div>
 							</div>
@@ -164,7 +164,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah_suka" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
+										<input type="text" name="jumlah_suka" class="form-control input-sm rupiah" data-a-sign="Rp. " data-a-dec="," data-a-sep="." placeholder="Masukkan Jumlah Simpanan Sukarela">
 									</div>
 								</div>
 							</div>
@@ -178,7 +178,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<input type="number" name="jumlah" class="form-control input-sm" placeholder="Masukkan Jumlah Simpanan Sukarela">
+										<input type="text" name="jumlah" class="form-control input-sm rupiah" data-a-sign="Rp. " data-a-dec="," data-a-sep="." placeholder="Masukkan Jumlah Simpanan Sukarela">
 									</div>
 								</div>
 							</div>
@@ -214,7 +214,7 @@
 								</div>
 								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 									<div class="nk-int-st">
-										<select id="nama_petugas" name="nama_petugas" class="form-control"></select>
+										<select id="nama_petugas" name="nama_petugas" class="form-control" style="width: 100%;"></select>
                     					<input type="hidden" id="idpetugas" name="idpetugas">
                     					<input type="hidden" id="namapetugas" name="namapetugas">
 									</div>

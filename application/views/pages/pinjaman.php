@@ -92,7 +92,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="number" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required="" autocomplete="off">
+											<input type="text" id="besar_pinjam" name="nominal" class="form-control input-sm" placeholder="Masukkan Besar Pinjaman" required="" autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -156,7 +156,7 @@
 									</div>
 									<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
 										<div class="nk-int-st">
-											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" required="" autocomplete="off">
+											<input type="text" name="keperluan" class="form-control input-sm" placeholder="Masukkan Keperluan" autocomplete="off">
 										</div>
 									</div>
 								</div>

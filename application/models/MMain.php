@@ -872,6 +872,47 @@ class MMain extends CI_Model {
             $this->email->message($msg);
             return $this->email->send();
     }
+    function getKecamatan(){
+		$q = $this->db->query("SELECT 
+			d.id,d.name AS kecName, r.name AS kabName, p.name AS provName 
+			FROM districts d 
+			INNER JOIN regencies r ON r.id = d.regency_id 
+			INNER JOIN provinces p ON p.id=r.province_id
+			WHERE p.id=31");
+		return $q->result();
+	}
+	public function getKelurahan()
+	{
+		$q = $this->db->query("SELECT 
+			v.id,v.name AS kelName, d.name as kecName ,r.name AS kabName, p.name AS provName 
+			FROM districts d 
+			INNER JOIN regencies r ON r.id = d.regency_id 
+			INNER JOIN provinces p ON p.id=r.province_id
+			INNER JOIN villages v ON v.district_id=d.id
+			WHERE p.id=31");
+		return $q->result();
+	}
+	function getWal(){
+		$q = $this->db->query("SELECT * FROM `regencies` WHERE regencies.`province_id` = '31' ");
+		if ($q->num_rows() > 0) {
+			$x = $q->result();
+		}else{
+			$x = $q->num_rows();
+		}
+		return $x;
+	}
+
+	public function jsonWal()
+	{
+		$id = $this->input->get('id');
+		return $this->db->query("SELECT * FROM `districts` WHERE regency_id = $id")->result();
+	}
+
+	public function jsonKec()
+	{
+		$id = $this->input->get('id');
+		return $this->db->query("SELECT * FROM `villages` WHERE district_id = $id")->result();
+	}
 }
 
 /* End of file MMain.php */

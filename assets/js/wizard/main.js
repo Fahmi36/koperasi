@@ -24,15 +24,15 @@
         no_hp : {
             required: true,
         },
-        no_rek : {
-            required: true,
-        },
-        no_kartu : {
-            required: true,
-        },
-        cvv : {
-            required: true,
-        },
+        // no_rek : {
+        //     required: true,
+        // },
+        // no_kartu : {
+        //     required: true,
+        // },
+        // cvv : {
+        //     required: true,
+        // },
         pekerjaan : {
             required: true,
         },

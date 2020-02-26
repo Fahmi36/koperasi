@@ -7,7 +7,7 @@
 	<title><?=$title;?></title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="<?=base_url('/')?>assets/img/logo/icon.png">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
 	<link rel="stylesheet" href="<?=base_url('/')?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url('/')?>assets/css/font-awesome.min.css">
@@ -35,15 +35,22 @@
 <body onload="print();">
 	<style type="text/css">
 		.heading-h2 h2{
-			margin-bottom: 5px !important;
+			margin-bottom: 10px !important;
 			text-transform: uppercase;
+		}
+		p{
+			font-size: 12px !important;
 		}
 	</style>
 	<div class="form-example-wrap">
-		<div class="cmp-tb-hd cmp-int-hd text-center heading-h2">
+		<div class="cmp-tb-hd cmp-int-hd text-center heading-h2" style="text-transform: uppercase;">
+			<img src="<?=base_url('/')?>assets/img/logo/koperasi.png" style="width: 90px;height: 90px;float: left;">
+			<img src="<?=base_url('/')?>assets/img/logo/icon.png" style="width: 90px;height: 90px;float: right;">
 			<h2>Koperasi PKK Melati Jaya</h2>
-			<h2>Jl. Kebagusan Raya No. 42 Pasar Minggu</h2>
-			<h2>Jakarta Selatan</h2>
+			<h2>DKI Jakarta Selatan</h2>
+			<p>Sekretariat: Gedung PKK Melati Jaya</p>
+			<p>Raya Kebagusan No 42, Pasar Minggu, Jakarta Selatan 12520. Telp 021-78838466</p>
+			<p>www.koperasipkkmelatijaya.co.id, email: koperasi.pkkmj@gmail.com</p>
 		</div>
 		<hr> 
 		<br>
@@ -153,10 +160,9 @@
 				</div>
 				<?php if ($simpan->metode_bayar==1): ?>
 					<div class="form-group">
-							<div class="row">
-								<div class="col-md-12">
-									<label><?= $this->mm->getNamaPetugas($simpan->id_petugas)?></label>
-								</div>
+						<div class="row">
+							<div class="col-md-12">
+								<label><?= $this->mm->getNamaPetugas($simpan->id_petugas)?></label>
 							</div>
 						</div>
 					<?php elseif ($simpan->metode_bayar==2): ?>
