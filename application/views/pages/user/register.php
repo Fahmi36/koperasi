@@ -132,17 +132,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="no_rek" class="form-label required">Nomor Rekening (DKI)</label>
+                    <label for="no_rek" class="form-label">Nomor Rekening (DKI)</label>
                     <input type="number" name="no_rek" id="no_rek" />
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="no_kartu" class="form-label required">Nomor Kartu (DKI)</label>
+                        <label for="no_kartu" class="form-label">Nomor Kartu (DKI)</label>
                         <input type="number" name="no_kartu" id="no_kartu" onKeyPress="if(this.value.length==16) return false;" />
                     </div>
                     <div class="form-group">
-                        <label for="cvv" class="form-label required">Nama Bank</label>
+                        <label for="cvv" class="form-label">Nama Bank</label>
                         <input type="text" name="nama_bank" />
                     </div>
                     <!-- <div class="form-group">
