@@ -83,6 +83,8 @@ function __construct() {
 		$row = $query->row();
 
 		$cek = $this->db->get_where('anggota_pinjaman_angsuran',array('id_pinjaman'=>$row->id));
+		$bunga = $this->db->get_where('bunga',array('status'=>'1'))->row();
+		$jasa = $bunga->bunga/100;
 		if ($cek->num_rows() == 0) {
 			$queryinsert = $this->db->insert('anggota_pinjaman_angsuran', array(
 				'id_pinjaman'=>$row->id,
@@ -113,7 +115,7 @@ function __construct() {
 			for ($i=0; $i < 10; $i++) {
 					$cicilan = array(
 						'tipe_cicil'=>'1',
-						'id_angsuran'=>$queryinsert,
+						'id_angsuran'=>$idangsuran,
 						'angsuran'=>$i,
 						'jumlah_bayar'=>round($row->besar_persetujuan_pinjaman/10),
 						'jasa'=>round(($row->besar_persetujuan_pinjaman*$jasa)/(10)),
