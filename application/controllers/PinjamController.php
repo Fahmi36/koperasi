@@ -196,7 +196,7 @@ class PinjamController extends CI_Controller {
 					$row = $cek->row();
 
 
-					$this->db->where('created_at <', month('Y-m-d'));
+					$this->db->where('created_at <', date('Y-m-d',strtotime('-1 month')));
 					$this->db->where('status', '2');
 					$this->db->where_in('id_jenis_setoran', ['2','3']);
 					$this->db->where('id_anggota', $this->session->userdata('id'));
@@ -472,12 +472,12 @@ class PinjamController extends CI_Controller {
 	function sendmail($msg)
     {
  
-            $config = array(
+        $config = array(
              'protocol'  => 'mail',
-             'smtp_host' => 'mail.perizinan.pkkmart.com',
+             'smtp_host' => 'mail.koperasipkkmelatijaya.co.id',
              'smtp_port' => 587,
-             'smtp_user' => 'cs@perizinan.pkkmart.com',
-             'smtp_pass' => 'goodgame001',
+             'smtp_user' => 'cs@koperasipkkmelatijaya.co.id',
+             'smtp_pass' => 'jO#K@8?17)rQ',
              'mailtype'  => 'html',
              'wordwrap'  => TRUE,
              'charset'   => 'utf-8',
@@ -489,12 +489,11 @@ class PinjamController extends CI_Controller {
             $this->email->set_newline("\r\n");
             // $mesg = $this->load->view('pages/mail', $data, true);
             $this->email->to('koperasi.pkkmj@gmail.com');
-            $this->email->from('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
-            $this->email->reply_to('cs@Koperasi.pkkmart.com', 'Koperasi DKI');
+            $this->email->from('cs@koperasipkkmelatijaya.co.id', 'Koperasi PKK Melati Jaya');
+            $this->email->reply_to('cs@koperasipkkmelatijaya.co.id', 'Koperasi PKK Melati Jaya');
 
             $this->email->subject('Koperasi');
             $this->email->message($msg);
-            
             return $this->email->send();
     }
 }
