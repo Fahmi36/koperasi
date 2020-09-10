@@ -37,20 +37,6 @@
 					<h4 style="text-transform: uppercase;text-decoration: underline;text-align: center;margin-bottom: 40px;">Formulir Simpanan</h4>
 					<form method="post" action="javascript:void(0)" id="formsimpan" enctype="multipart/form-data" accept-charset="utf-8">
 					<?php if ($this->session->userdata('username') != null): ?>
-					<div class="form-example-int form-horizental">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-									<label class="hrzn-fm">Nama Anggota:</label>
-								</div>
-								<div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-									<div class="nk-int-st">
-										<input type="text" name="nama" value="<?= $this->session->userdata('nama'); ?>" readonly class="form-control input-sm" placeholder="Masukkan Nama">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 						<div class="form-example-int form-horizental">
 							<div class="form-group">
 								<div class="row">
